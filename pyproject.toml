@@ -5,7 +5,7 @@ build-backend = 'setuptools.build_meta'
 [project]
 name = 'cellnet'
 version = '0.1.5'
-description = 'CellNet: gene-identity-aware single-cell foundation model'
+description = 'CellNet: panoramic modelling of single-cell transcriptomes at scale'
 readme = 'README.md'
 requires-python = '>=3.10'
 license = 'Apache-2.0'
