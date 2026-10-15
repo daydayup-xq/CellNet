@@ -1,0 +1,11 @@
+{
+  "study": "Tabula Sapiens 2.0",
+  "official_link": "https://figshare.com/articles/dataset/Tabula_Sapiens_v2/27921984",
+  "cells": 192,
+  "genes": 59556,
+  "source_genes": 60606,
+  "source_X": "log1p values retained exactly; supported stable IDs only",
+  "selection": "2 tissues x 3 donors x 4 shared labels x 8 cells, seed 42, selected before inference",
+  "protocol": "Within-tissue leave-one-donor-out; fold mean then tissue mean",
+  "purpose": "Representative protocol validation; not full figure metrics"
+}

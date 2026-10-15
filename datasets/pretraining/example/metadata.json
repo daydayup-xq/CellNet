@@ -1,0 +1,30 @@
+{
+  "format": "cellnet-pretraining-npz-v1",
+  "status": "example",
+  "samples": 24,
+  "image_size": [
+    384,
+    384
+  ],
+  "shards": [
+    {
+      "path": "shards/shard-00000.npz",
+      "samples": 24,
+      "sha256": "21dff57c51e47245f03d1cab31adee09d5e39995a43017eaff04f768efcf637d"
+    }
+  ],
+  "cells": "cells.csv",
+  "gene_id_convention": "release vocabulary index + 1; zero means unmeasured",
+  "expression_scale": "production float16 log1p-normalized clipped expression / 6, in [0,1]",
+  "shared_vocabulary": "../../../assets/gene_vocab.json",
+  "shared_layouts": "../../../assets/species_layouts.npz",
+  "species": [
+    "Mouse",
+    "Zebrafish",
+    "Fruit_fly"
+  ],
+  "selection": "first four complete records in sorted shards of six fixed source storage classes; selected before inspecting model outputs",
+  "source_sample_pool_cells": 100000,
+  "source_label_note": "Source annotations retained; cell labels are not independently revalidated.",
+  "third_party_data_license": "Upstream terms apply; per-dataset license review remains pending."
+}

@@ -1,0 +1,16 @@
+{
+  "task": "gene_association",
+  "cells": 96,
+  "genes": 64,
+  "contexts": [
+    "B Naive",
+    "CD14+ Mono",
+    "NK Cell",
+    "T Naive"
+  ],
+  "aggregation": "Mean hidden states over cells, center across panel genes, L2 normalize, cosine",
+  "max_cells_per_context": 100,
+  "query_genes_visible": true,
+  "panel_scope": "64-gene demonstration panel; centering depends on panel composition",
+  "scope": "Undirected similarity demonstration; no causal or regulatory validation"
+}

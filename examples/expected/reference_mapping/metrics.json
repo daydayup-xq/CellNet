@@ -1,0 +1,49 @@
+{
+  "task": "reference_mapping",
+  "readout": "raw CLS layer8",
+  "classifier": "reference-fitted StandardScaler + cosine distance KNN",
+  "k": 10,
+  "prior_gamma": 0.25,
+  "query_fraction": 0.2,
+  "self_neighbors_allowed": false,
+  "folds": [
+    {
+      "seed": 42,
+      "reference_cells": 76,
+      "query_cells": 20,
+      "accuracy": 1.0,
+      "macro_f1": 1.0
+    },
+    {
+      "seed": 123,
+      "reference_cells": 76,
+      "query_cells": 20,
+      "accuracy": 1.0,
+      "macro_f1": 1.0
+    },
+    {
+      "seed": 2024,
+      "reference_cells": 76,
+      "query_cells": 20,
+      "accuracy": 1.0,
+      "macro_f1": 1.0
+    },
+    {
+      "seed": 2025,
+      "reference_cells": 76,
+      "query_cells": 20,
+      "accuracy": 1.0,
+      "macro_f1": 1.0
+    },
+    {
+      "seed": 20261008,
+      "reference_cells": 76,
+      "query_cells": 20,
+      "accuracy": 1.0,
+      "macro_f1": 1.0
+    }
+  ],
+  "accuracy": 1.0,
+  "macro_f1": 1.0,
+  "scope": "Five-seed within-species protocol on 96 PBMC cells; not full Fig2 cohorts or cross-species mapping"
+}

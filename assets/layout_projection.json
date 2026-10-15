@@ -1,0 +1,27 @@
+{
+  "embedding_l2_normalize": true,
+  "pixel_size": [
+    384,
+    384
+  ],
+  "neighbor_metric": "cosine",
+  "reference_genes": 1015163,
+  "neighbor_dimensions": 64,
+  "perplexities": 30.0,
+  "gradient_descent": {
+    "learning_rate": "auto",
+    "momentum": 0.8,
+    "theta": 0.5,
+    "max_grad_norm": null,
+    "max_step_norm": 5,
+    "n_jobs": 4,
+    "verbose": false,
+    "callbacks": null,
+    "callbacks_every_iters": 50,
+    "negative_gradient_method": "auto",
+    "n_interpolation_points": 3,
+    "min_num_intervals": 50,
+    "ints_in_interval": 1,
+    "dof": 1
+  }
+}

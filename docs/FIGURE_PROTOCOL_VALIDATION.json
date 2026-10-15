@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "release_version": "0.1.3",
+  "dataset_source_entries": 15,
+  "tests_passed": 15,
+  "tests_skipped": 1,
+  "skipped_test": "Large fitted out-of-sample projection; enable CELLNET_TEST_PROJECTION=1 to run",
+  "real_tasks_completed": [
+    "cell_type_annotation",
+    "reference_mapping",
+    "batch_integration",
+    "gene_completion",
+    "gene_association",
+    "denoising"
+  ],
+  "scope": "Representative actual-data execution; not all linked datasets were downloaded or loaded, and full publication cohorts were not rerun",
+  "annotation": {
+    "cells": 192,
+    "tissues": 2,
+    "donor_folds": 6,
+    "accuracy": 0.765625,
+    "macro_f1": 0.7474641779788839
+  },
+  "completion": {
+    "cells": 8,
+    "folds": 5,
+    "hidden_gene_union": 36499,
+    "physical_target_absence_verified": true,
+    "mean_gene_pcc": 0.26585188216348404
+  },
+  "embedding_cli": {
+    "status": "passed",
+    "cells": 2,
+    "readouts": [
+      "layer8",
+      "layer6",
+      "layer8_normalized"
+    ],
+    "max_abs_difference": 0.0,
+    "stable_gene_column_selection_verified": true
+  },
+  "wheel_validation": {
+    "status": "passed",
+    "version": "0.1.3",
+    "real_tabula_cells": 2,
+    "native_features_max_abs": 0.0,
+    "isolated_import_verified": true
+  }
+}

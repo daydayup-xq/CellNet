@@ -1,0 +1,193 @@
+cell_id,tissue,held_out_donor,truth,prediction
+tabula_example_000,blood,TSP21,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_001,blood,TSP21,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_002,blood,TSP21,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_003,blood,TSP21,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_004,blood,TSP21,"CD8-positive, alpha-beta T cell",natural killer cell
+tabula_example_005,blood,TSP21,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_006,blood,TSP21,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_007,blood,TSP21,"CD8-positive, alpha-beta T cell",natural killer cell
+tabula_example_008,blood,TSP21,classical monocyte,classical monocyte
+tabula_example_009,blood,TSP21,classical monocyte,classical monocyte
+tabula_example_010,blood,TSP21,classical monocyte,classical monocyte
+tabula_example_011,blood,TSP21,classical monocyte,classical monocyte
+tabula_example_012,blood,TSP21,classical monocyte,classical monocyte
+tabula_example_013,blood,TSP21,classical monocyte,classical monocyte
+tabula_example_014,blood,TSP21,classical monocyte,classical monocyte
+tabula_example_015,blood,TSP21,classical monocyte,classical monocyte
+tabula_example_016,blood,TSP21,natural killer cell,natural killer cell
+tabula_example_017,blood,TSP21,natural killer cell,natural killer cell
+tabula_example_018,blood,TSP21,natural killer cell,"CD8-positive, alpha-beta T cell"
+tabula_example_019,blood,TSP21,natural killer cell,natural killer cell
+tabula_example_020,blood,TSP21,natural killer cell,natural killer cell
+tabula_example_021,blood,TSP21,natural killer cell,"CD8-positive, alpha-beta T cell"
+tabula_example_022,blood,TSP21,natural killer cell,natural killer cell
+tabula_example_023,blood,TSP21,natural killer cell,"CD8-positive, alpha-beta T cell"
+tabula_example_024,blood,TSP21,neutrophil,neutrophil
+tabula_example_025,blood,TSP21,neutrophil,neutrophil
+tabula_example_026,blood,TSP21,neutrophil,neutrophil
+tabula_example_027,blood,TSP21,neutrophil,neutrophil
+tabula_example_028,blood,TSP21,neutrophil,neutrophil
+tabula_example_029,blood,TSP21,neutrophil,neutrophil
+tabula_example_030,blood,TSP21,neutrophil,neutrophil
+tabula_example_031,blood,TSP21,neutrophil,neutrophil
+tabula_example_032,blood,TSP25,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_033,blood,TSP25,"CD8-positive, alpha-beta T cell",natural killer cell
+tabula_example_034,blood,TSP25,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_035,blood,TSP25,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_036,blood,TSP25,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_037,blood,TSP25,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_038,blood,TSP25,"CD8-positive, alpha-beta T cell",natural killer cell
+tabula_example_039,blood,TSP25,"CD8-positive, alpha-beta T cell",natural killer cell
+tabula_example_040,blood,TSP25,classical monocyte,neutrophil
+tabula_example_041,blood,TSP25,classical monocyte,classical monocyte
+tabula_example_042,blood,TSP25,classical monocyte,classical monocyte
+tabula_example_043,blood,TSP25,classical monocyte,classical monocyte
+tabula_example_044,blood,TSP25,classical monocyte,classical monocyte
+tabula_example_045,blood,TSP25,classical monocyte,classical monocyte
+tabula_example_046,blood,TSP25,classical monocyte,classical monocyte
+tabula_example_047,blood,TSP25,classical monocyte,classical monocyte
+tabula_example_048,blood,TSP25,natural killer cell,natural killer cell
+tabula_example_049,blood,TSP25,natural killer cell,"CD8-positive, alpha-beta T cell"
+tabula_example_050,blood,TSP25,natural killer cell,"CD8-positive, alpha-beta T cell"
+tabula_example_051,blood,TSP25,natural killer cell,"CD8-positive, alpha-beta T cell"
+tabula_example_052,blood,TSP25,natural killer cell,natural killer cell
+tabula_example_053,blood,TSP25,natural killer cell,natural killer cell
+tabula_example_054,blood,TSP25,natural killer cell,natural killer cell
+tabula_example_055,blood,TSP25,natural killer cell,natural killer cell
+tabula_example_056,blood,TSP25,neutrophil,neutrophil
+tabula_example_057,blood,TSP25,neutrophil,neutrophil
+tabula_example_058,blood,TSP25,neutrophil,neutrophil
+tabula_example_059,blood,TSP25,neutrophil,neutrophil
+tabula_example_060,blood,TSP25,neutrophil,neutrophil
+tabula_example_061,blood,TSP25,neutrophil,neutrophil
+tabula_example_062,blood,TSP25,neutrophil,neutrophil
+tabula_example_063,blood,TSP25,neutrophil,neutrophil
+tabula_example_064,blood,TSP27,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_065,blood,TSP27,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_066,blood,TSP27,"CD8-positive, alpha-beta T cell",natural killer cell
+tabula_example_067,blood,TSP27,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_068,blood,TSP27,"CD8-positive, alpha-beta T cell",natural killer cell
+tabula_example_069,blood,TSP27,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_070,blood,TSP27,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_071,blood,TSP27,"CD8-positive, alpha-beta T cell",natural killer cell
+tabula_example_072,blood,TSP27,classical monocyte,classical monocyte
+tabula_example_073,blood,TSP27,classical monocyte,classical monocyte
+tabula_example_074,blood,TSP27,classical monocyte,classical monocyte
+tabula_example_075,blood,TSP27,classical monocyte,classical monocyte
+tabula_example_076,blood,TSP27,classical monocyte,classical monocyte
+tabula_example_077,blood,TSP27,classical monocyte,classical monocyte
+tabula_example_078,blood,TSP27,classical monocyte,classical monocyte
+tabula_example_079,blood,TSP27,classical monocyte,classical monocyte
+tabula_example_080,blood,TSP27,natural killer cell,"CD8-positive, alpha-beta T cell"
+tabula_example_081,blood,TSP27,natural killer cell,natural killer cell
+tabula_example_082,blood,TSP27,natural killer cell,natural killer cell
+tabula_example_083,blood,TSP27,natural killer cell,natural killer cell
+tabula_example_084,blood,TSP27,natural killer cell,natural killer cell
+tabula_example_085,blood,TSP27,natural killer cell,natural killer cell
+tabula_example_086,blood,TSP27,natural killer cell,"CD8-positive, alpha-beta T cell"
+tabula_example_087,blood,TSP27,natural killer cell,natural killer cell
+tabula_example_088,blood,TSP27,neutrophil,neutrophil
+tabula_example_089,blood,TSP27,neutrophil,neutrophil
+tabula_example_090,blood,TSP27,neutrophil,neutrophil
+tabula_example_091,blood,TSP27,neutrophil,neutrophil
+tabula_example_092,blood,TSP27,neutrophil,neutrophil
+tabula_example_093,blood,TSP27,neutrophil,neutrophil
+tabula_example_094,blood,TSP27,neutrophil,neutrophil
+tabula_example_095,blood,TSP27,neutrophil,neutrophil
+tabula_example_096,bone marrow,TSP21,B cell,B cell
+tabula_example_097,bone marrow,TSP21,B cell,B cell
+tabula_example_098,bone marrow,TSP21,B cell,B cell
+tabula_example_099,bone marrow,TSP21,B cell,B cell
+tabula_example_100,bone marrow,TSP21,B cell,B cell
+tabula_example_101,bone marrow,TSP21,B cell,B cell
+tabula_example_102,bone marrow,TSP21,B cell,B cell
+tabula_example_103,bone marrow,TSP21,B cell,B cell
+tabula_example_104,bone marrow,TSP21,"CD4-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_105,bone marrow,TSP21,"CD4-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_106,bone marrow,TSP21,"CD4-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_107,bone marrow,TSP21,"CD4-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_108,bone marrow,TSP21,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_109,bone marrow,TSP21,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_110,bone marrow,TSP21,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_111,bone marrow,TSP21,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_112,bone marrow,TSP21,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_113,bone marrow,TSP21,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_114,bone marrow,TSP21,"CD8-positive, alpha-beta T cell",B cell
+tabula_example_115,bone marrow,TSP21,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_116,bone marrow,TSP21,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_117,bone marrow,TSP21,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_118,bone marrow,TSP21,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_119,bone marrow,TSP21,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_120,bone marrow,TSP21,common myeloid progenitor,common myeloid progenitor
+tabula_example_121,bone marrow,TSP21,common myeloid progenitor,common myeloid progenitor
+tabula_example_122,bone marrow,TSP21,common myeloid progenitor,common myeloid progenitor
+tabula_example_123,bone marrow,TSP21,common myeloid progenitor,common myeloid progenitor
+tabula_example_124,bone marrow,TSP21,common myeloid progenitor,common myeloid progenitor
+tabula_example_125,bone marrow,TSP21,common myeloid progenitor,common myeloid progenitor
+tabula_example_126,bone marrow,TSP21,common myeloid progenitor,common myeloid progenitor
+tabula_example_127,bone marrow,TSP21,common myeloid progenitor,common myeloid progenitor
+tabula_example_128,bone marrow,TSP25,B cell,B cell
+tabula_example_129,bone marrow,TSP25,B cell,B cell
+tabula_example_130,bone marrow,TSP25,B cell,B cell
+tabula_example_131,bone marrow,TSP25,B cell,B cell
+tabula_example_132,bone marrow,TSP25,B cell,B cell
+tabula_example_133,bone marrow,TSP25,B cell,B cell
+tabula_example_134,bone marrow,TSP25,B cell,B cell
+tabula_example_135,bone marrow,TSP25,B cell,B cell
+tabula_example_136,bone marrow,TSP25,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_137,bone marrow,TSP25,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_138,bone marrow,TSP25,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_139,bone marrow,TSP25,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_140,bone marrow,TSP25,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_141,bone marrow,TSP25,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_142,bone marrow,TSP25,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_143,bone marrow,TSP25,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_144,bone marrow,TSP25,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_145,bone marrow,TSP25,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_146,bone marrow,TSP25,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_147,bone marrow,TSP25,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_148,bone marrow,TSP25,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_149,bone marrow,TSP25,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_150,bone marrow,TSP25,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_151,bone marrow,TSP25,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_152,bone marrow,TSP25,common myeloid progenitor,common myeloid progenitor
+tabula_example_153,bone marrow,TSP25,common myeloid progenitor,common myeloid progenitor
+tabula_example_154,bone marrow,TSP25,common myeloid progenitor,common myeloid progenitor
+tabula_example_155,bone marrow,TSP25,common myeloid progenitor,common myeloid progenitor
+tabula_example_156,bone marrow,TSP25,common myeloid progenitor,common myeloid progenitor
+tabula_example_157,bone marrow,TSP25,common myeloid progenitor,common myeloid progenitor
+tabula_example_158,bone marrow,TSP25,common myeloid progenitor,common myeloid progenitor
+tabula_example_159,bone marrow,TSP25,common myeloid progenitor,common myeloid progenitor
+tabula_example_160,bone marrow,TSP27,B cell,B cell
+tabula_example_161,bone marrow,TSP27,B cell,B cell
+tabula_example_162,bone marrow,TSP27,B cell,B cell
+tabula_example_163,bone marrow,TSP27,B cell,B cell
+tabula_example_164,bone marrow,TSP27,B cell,B cell
+tabula_example_165,bone marrow,TSP27,B cell,B cell
+tabula_example_166,bone marrow,TSP27,B cell,B cell
+tabula_example_167,bone marrow,TSP27,B cell,B cell
+tabula_example_168,bone marrow,TSP27,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_169,bone marrow,TSP27,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_170,bone marrow,TSP27,"CD4-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_171,bone marrow,TSP27,"CD4-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_172,bone marrow,TSP27,"CD4-positive, alpha-beta T cell",B cell
+tabula_example_173,bone marrow,TSP27,"CD4-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_174,bone marrow,TSP27,"CD4-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_175,bone marrow,TSP27,"CD4-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_176,bone marrow,TSP27,"CD8-positive, alpha-beta T cell","CD8-positive, alpha-beta T cell"
+tabula_example_177,bone marrow,TSP27,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_178,bone marrow,TSP27,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_179,bone marrow,TSP27,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_180,bone marrow,TSP27,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_181,bone marrow,TSP27,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_182,bone marrow,TSP27,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_183,bone marrow,TSP27,"CD8-positive, alpha-beta T cell","CD4-positive, alpha-beta T cell"
+tabula_example_184,bone marrow,TSP27,common myeloid progenitor,common myeloid progenitor
+tabula_example_185,bone marrow,TSP27,common myeloid progenitor,common myeloid progenitor
+tabula_example_186,bone marrow,TSP27,common myeloid progenitor,common myeloid progenitor
+tabula_example_187,bone marrow,TSP27,common myeloid progenitor,common myeloid progenitor
+tabula_example_188,bone marrow,TSP27,common myeloid progenitor,common myeloid progenitor
+tabula_example_189,bone marrow,TSP27,common myeloid progenitor,common myeloid progenitor
+tabula_example_190,bone marrow,TSP27,common myeloid progenitor,common myeloid progenitor
+tabula_example_191,bone marrow,TSP27,common myeloid progenitor,common myeloid progenitor

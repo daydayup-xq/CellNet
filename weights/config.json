@@ -1,0 +1,21 @@
+{
+  "model_name": "CellNet",
+  "image_size": [
+    384,
+    384
+  ],
+  "patch_size": 16,
+  "embedding_dim": 768,
+  "depth": 12,
+  "attention_heads": 12,
+  "vocabulary_size": 1015163,
+  "tokens_per_cell": 2026,
+  "readout_layers": 8,
+  "drop_path_rate": 0.1,
+  "zero_expression_floor": 0.02,
+  "decoder_hidden_dim": 512,
+  "decoder_depth": 3,
+  "decoder_context_tokens": 32,
+  "decoder_heads": 8,
+  "expression_max": 6.0
+}

@@ -1,0 +1,7 @@
+weights/*.pt filter=lfs diff=lfs merge=lfs -text
+assets/*.npz filter=lfs diff=lfs merge=lfs -text
+examples/data/*.h5ad filter=lfs diff=lfs merge=lfs -text
+examples/data/*.npz filter=lfs diff=lfs merge=lfs -text
+
+datasets/pretraining/**/*.npz filter=lfs diff=lfs merge=lfs -text
+assets/*.ann filter=lfs diff=lfs merge=lfs -text

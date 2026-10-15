@@ -1,0 +1,37 @@
+{
+  "cells": 8,
+  "genes": 64,
+  "finite_pcc_genes": 48,
+  "mean_gene_pcc": 0.3103719527179815,
+  "mae_log1p": 0.411155069100289,
+  "rmse_log1p": 0.6678725603672572,
+  "task": "denoising",
+  "noisy_baseline": {
+    "cells": 8,
+    "genes": 64,
+    "finite_pcc_genes": 37,
+    "mean_gene_pcc": 0.8329322612634391,
+    "mae_log1p": 0.19767745770138784,
+    "rmse_log1p": 0.5524819036027105
+  },
+  "scope": "50% count thinning of eight real PBMC cells; not the OpenProblems protocol",
+  "common_finite_pcc_targets": {
+    "genes": 37,
+    "CellNet": {
+      "cells": 8,
+      "genes": 37,
+      "finite_pcc_genes": 37,
+      "mean_gene_pcc": 0.3458948205206516,
+      "mae_log1p": 0.550699590101234,
+      "rmse_log1p": 0.7981863311284603
+    },
+    "noisy_input": {
+      "cells": 8,
+      "genes": 37,
+      "finite_pcc_genes": 37,
+      "mean_gene_pcc": 0.8329322612634393,
+      "mae_log1p": 0.2627983894637646,
+      "rmse_log1p": 0.627991177660694
+    }
+  }
+}

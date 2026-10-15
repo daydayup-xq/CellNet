@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "release_version": "0.1.4",
+  "tests_passed": 19,
+  "tests_skipped": 1,
+  "initialization": {
+    "status": "passed",
+    "loaded_backbone_tensors": 160,
+    "source_format": "Meta Hugging Face safetensors; existing external file",
+    "qkv_and_layerscale_exact": true,
+    "cls_register_norm_exact": true,
+    "frozen_gene_identity_exact": true,
+    "fresh_stem_decoder_projector": true,
+    "real_training_cells": 2,
+    "independent_views": 2,
+    "finite_loss_and_gradients": true,
+    "optimizer_updated_dinov3_backbone": true,
+    "losses": {
+      "alignment": 0.06628145277500153,
+      "regularization": 1.2344169616699219,
+      "loss": 0.12468823045492172
+    },
+    "external_checkpoint_in_project": false
+  },
+  "training_cli": {
+    "status": "passed",
+    "steps": 1,
+    "real_cells": 2,
+    "views": 2,
+    "finite_reported_losses": {
+      "alignment": 0.070514,
+      "regularization": 1.202793,
+      "loss": 0.127128
+    },
+    "pure_weight_export_files": [
+      "cellnet.pt",
+      "projector.pt",
+      "config.json"
+    ],
+    "export_archive_integrity": "passed"
+  },
+  "wheel": {
+    "status": "passed",
+    "version": "0.1.4",
+    "packaged_python_files_equal_to_tested_source": 13,
+    "dinov3_initialization_module_included": true
+  },
+  "external_dinov3_checkpoint_bundled": false,
+  "download_note": "Hugging Face commands documented; no remote model download was performed. Actual initialization was validated using an existing external checkpoint.",
+  "inference_note": "CellNet inference uses the provided model weights and fitted gene layouts."
+}

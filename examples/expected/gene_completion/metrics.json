@@ -1,0 +1,68 @@
+{
+  "task": "gene_completion",
+  "n_splits": 5,
+  "seed": 42,
+  "folds": [
+    {
+      "cells": 8,
+      "genes": 7300,
+      "finite_pcc_genes": 935,
+      "mean_gene_pcc": 0.2769917367245538,
+      "mae_log1p": 0.07714064972388926,
+      "rmse_log1p": 0.279222863305289,
+      "fold": 1,
+      "observed_genes": 29199,
+      "hidden_targets_in_query": 0
+    },
+    {
+      "cells": 8,
+      "genes": 7300,
+      "finite_pcc_genes": 1039,
+      "mean_gene_pcc": 0.2780369674457815,
+      "mae_log1p": 0.08389452002498897,
+      "rmse_log1p": 0.29591500023359646,
+      "fold": 2,
+      "observed_genes": 29199,
+      "hidden_targets_in_query": 0
+    },
+    {
+      "cells": 8,
+      "genes": 7300,
+      "finite_pcc_genes": 982,
+      "mean_gene_pcc": 0.24522619713503918,
+      "mae_log1p": 0.08159381078134822,
+      "rmse_log1p": 0.28895989518934595,
+      "fold": 3,
+      "observed_genes": 29199,
+      "hidden_targets_in_query": 0
+    },
+    {
+      "cells": 8,
+      "genes": 7300,
+      "finite_pcc_genes": 1019,
+      "mean_gene_pcc": 0.252038672707624,
+      "mae_log1p": 0.08306018242744118,
+      "rmse_log1p": 0.295381168996041,
+      "fold": 4,
+      "observed_genes": 29199,
+      "hidden_targets_in_query": 0
+    },
+    {
+      "cells": 8,
+      "genes": 7299,
+      "finite_pcc_genes": 1080,
+      "mean_gene_pcc": 0.27627226689547174,
+      "mae_log1p": 0.08659711966640234,
+      "rmse_log1p": 0.3022219831880901,
+      "fold": 5,
+      "observed_genes": 29200,
+      "hidden_targets_in_query": 0
+    }
+  ],
+  "genes_hidden_exactly_once": 36499,
+  "finite_pcc_genes": 5055,
+  "mean_gene_pcc": 0.26585188216348404,
+  "prediction": "native expected expression p*M",
+  "normalization": "Observed-only query library; separate scorer truth uses full measured supported-gene library",
+  "scope": "Eight real PBMC cells, complete five-fold gene-axis split; not full Fig3 metrics. Positive-cell PCC requiring 20 cells is not estimated."
+}

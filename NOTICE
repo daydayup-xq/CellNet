@@ -1,0 +1,13 @@
+CellNet
+
+CellNet model code is distributed under the Apache License 2.0 included in LICENSE.
+
+The rotary positional embedding utility is imported from timm. PyTorch, timm,
+NumPy, SciPy and optional AnnData remain external dependencies governed by
+their respective licenses. DINOv3 initialization weights are downloaded separately from Hugging Face and
+are governed by the upstream DINOv3 license:
+https://ai.meta.com/resources/models-and-libraries/dinov3-license. The frozen gene identity table is part of the selected
+CellNet checkpoint and retains its original values and precision.
+
+Release file checksums are listed in SHA256SUMS.
+Training-only state and machine-specific paths are excluded from the release.

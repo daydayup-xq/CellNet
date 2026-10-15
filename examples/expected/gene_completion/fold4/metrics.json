@@ -1,0 +1,11 @@
+{
+  "cells": 8,
+  "genes": 7300,
+  "finite_pcc_genes": 1019,
+  "mean_gene_pcc": 0.252038672707624,
+  "mae_log1p": 0.08306018242744118,
+  "rmse_log1p": 0.295381168996041,
+  "fold": 4,
+  "observed_genes": 29199,
+  "hidden_targets_in_query": 0
+}

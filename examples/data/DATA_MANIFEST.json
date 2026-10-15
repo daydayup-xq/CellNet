@@ -1,0 +1,101 @@
+{
+  "dataset": "Representative Tabula Sapiens and TotalX PBMC examples",
+  "files": {
+    "COMPLETION_FIVEFOLD.json": {
+      "bytes": 891,
+      "sha256": "042beeeb19cb1f1165cacabb5dec42b6c6515433ce0137ff11759b4311380843"
+    },
+    "PROVENANCE.json": {
+      "bytes": 1514,
+      "sha256": "ce98d886a295fdafbeeee3c77bf5c93dd8ffaf68716e78c08430700c919bef54"
+    },
+    "README.md": {
+      "bytes": 2283,
+      "sha256": "8f1f20e82ad604d39ec30b38584e70b4bf3053659438ac7a6d7ae04aa85b8e90"
+    },
+    "TABULA_PROVENANCE.json": {
+      "bytes": 514,
+      "sha256": "dc6629cccd4e84d933f0d2c541f94b6cf81fc0ed12d06d21afee2a605bcc6e68"
+    },
+    "completion_fivefold/fold1_query.h5ad": {
+      "bytes": 1997217,
+      "sha256": "44108c60cd5fc6f344ab28211142b6112d5a8eec190bf624f30bed30c9ff72ac"
+    },
+    "completion_fivefold/fold1_targets.json": {
+      "bytes": 138701,
+      "sha256": "00a702d16f7b26c063f5bd34851b8ee223fd0551597071fcd0923cb623a1bded"
+    },
+    "completion_fivefold/fold1_truth.npz": {
+      "bytes": 41663,
+      "sha256": "7e201095fca7f2e1cb757b0411866f5ed51972afa1a0ba741cbedebf644528d2"
+    },
+    "completion_fivefold/fold2_query.h5ad": {
+      "bytes": 1996875,
+      "sha256": "353866b01e202998a4edbe4ec875570ca5f6c6f66972ff729e00d195ccfa0af6"
+    },
+    "completion_fivefold/fold2_targets.json": {
+      "bytes": 138701,
+      "sha256": "c9058d0a971d22685c17213ecad48af624f216e0af10808b5425fb7e440bfb5b"
+    },
+    "completion_fivefold/fold2_truth.npz": {
+      "bytes": 42104,
+      "sha256": "d43e138199d10a8bffbfccdaa32d1f5489c440cc9e9cfde4b20226e60ed3af5d"
+    },
+    "completion_fivefold/fold3_query.h5ad": {
+      "bytes": 1997076,
+      "sha256": "8e94e3659f694132c93f3848b7d3680e7a3c6f61a40262ec640a6b618219e917"
+    },
+    "completion_fivefold/fold3_targets.json": {
+      "bytes": 138701,
+      "sha256": "ade1503a4c5dbdd8a5f1ae28f13be53c0f6bd61844581809614e3364734f486b"
+    },
+    "completion_fivefold/fold3_truth.npz": {
+      "bytes": 41655,
+      "sha256": "9b4430dc4ca8f61f35f757a12f72f354e15b480b6d51b94d17958a532affb163"
+    },
+    "completion_fivefold/fold4_query.h5ad": {
+      "bytes": 1997177,
+      "sha256": "e22a3919e52cf75a3c8b6e9a992c39707fe452adb853dd49fa513103eb55a718"
+    },
+    "completion_fivefold/fold4_targets.json": {
+      "bytes": 138701,
+      "sha256": "6f8c87985ee873a7b1cc89d6001adcfc292fbc00d1e7496659bd07bf5b3a18c1"
+    },
+    "completion_fivefold/fold4_truth.npz": {
+      "bytes": 41965,
+      "sha256": "266d0797bff878f3b2558af5f96e763001f9db5c023a9eaac57dd329b01f05eb"
+    },
+    "completion_fivefold/fold5_query.h5ad": {
+      "bytes": 1996728,
+      "sha256": "f8a7c1614b25248a8b2529bf7d0647585c1736b29dcc0cdcf26a0901ae3e6787"
+    },
+    "completion_fivefold/fold5_targets.json": {
+      "bytes": 138682,
+      "sha256": "612d8d68611372b4733663564c026f9f7cb8e7bb1808897e9522f92e3d783fc0"
+    },
+    "completion_fivefold/fold5_truth.npz": {
+      "bytes": 42103,
+      "sha256": "a9aa802c6a995e1b6d38da6f64df883ce78c6a297a3261ca4eb08b2e6683453f"
+    },
+    "denoising_noisy.h5ad": {
+      "bytes": 2475413,
+      "sha256": "a498d75fe466bae9a15144120e4f4f51b8b6360dc424cc3201435f5be43f92a9"
+    },
+    "denoising_truth.npz": {
+      "bytes": 1357,
+      "sha256": "ce7c88ad2234e633eadef21f0e3be2fbaf555506243010ff1cfc2001826ca9f2"
+    },
+    "tabula_sapiens_192.h5ad": {
+      "bytes": 3306844,
+      "sha256": "8f8d8318f848cceea9b572359eb43fcddb98fc9c05b0012f12e2a6268bd72855"
+    },
+    "target_panel.csv": {
+      "bytes": 3139,
+      "sha256": "94e71c0a12e0362adf6b8913fdb23003c1aabe93f7c959570c8f5bcb2c69da2e"
+    },
+    "totalx_pbmc_96.h5ad": {
+      "bytes": 3129271,
+      "sha256": "3e4ca711009ab5cb20769387a5b082ce4a69819b9e9d1ef8db8657e5357d403f"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "dataset": "TotalX human PBMC",
+  "source_article": "https://www.nature.com/articles/s41587-026-03068-6",
+  "source_data_doi": "https://doi.org/10.6084/m9.figshare.29803628",
+  "sample_cells": 96,
+  "sample_genes": 36499,
+  "source_genes": 37228,
+  "unmapped_genes_excluded": 729,
+  "cell_types": [
+    "B Naive",
+    "T Naive",
+    "CD14+ Mono",
+    "NK Cell"
+  ],
+  "assay_batches": [
+    "10X-dUTSO",
+    "SSTX",
+    "SSTX-pA+"
+  ],
+  "seed": 20261015,
+  "selection": "8 cells per cell type x assay; fixed random seed, before any model inference",
+  "reference_cells": 48,
+  "query_cells": 48,
+  "target_selection": "48 coding and 16 lncRNA genes, random from reference-only detection>=10% and nonconstant expression",
+  "input_scale": "Source X retained, already log1p; counts stored separately; no recomputation of X",
+  "source_cell_identifiers": "Anonymous example cell IDs",
+  "purpose": "Representative real-data task examples",
+  "completion": {
+    "query_cells": 8,
+    "gene_axis_folds": 5,
+    "hidden_gene_union": 36499,
+    "target_columns_present_in_query": 0,
+    "normalization": "Observed counts only for inputs; full supported measured-gene library for separate scorer truth",
+    "details": "COMPLETION_FIVEFOLD.json"
+  },
+  "denoising": {
+    "cells": 8,
+    "mechanism": "Binomial thinning of actual counts, retain probability 0.5",
+    "seed": 20261016,
+    "truth": "Separate clean-count normalized log1p array",
+    "scope": "Native-noise API demo; not OpenProblems benchmark"
+  }
+}

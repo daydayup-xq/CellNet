@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "release_version": "0.1.2",
+  "tests_passed": 11,
+  "tests_skipped": 1,
+  "tests_failed": 0,
+  "real_samples": 24,
+  "representative_native_converter_and_encoder": [
+    {
+      "species": "Mouse",
+      "rendered_image_max_abs": 0.0,
+      "gene_ids_exact": true,
+      "embedding_shape": [
+        1,
+        768
+      ],
+      "embedding_finite": true
+    },
+    {
+      "species": "Zebrafish",
+      "rendered_image_max_abs": 0.0,
+      "gene_ids_exact": true,
+      "embedding_shape": [
+        1,
+        768
+      ],
+      "embedding_finite": true
+    },
+    {
+      "species": "Fruit_fly",
+      "rendered_image_max_abs": 0.0,
+      "gene_ids_exact": true,
+      "embedding_shape": [
+        1,
+        768
+      ],
+      "embedding_finite": true
+    }
+  ],
+  "prepared_batch_tensor_only": true,
+  "prepared_batch_shapes": {
+    "image": [
+      2,
+      2,
+      2,
+      384,
+      384
+    ],
+    "gene_ids": [
+      2,
+      2,
+      384,
+      384
+    ]
+  },
+  "full_training_launched": false,
+  "figure_review": "Both PNGs visually inspected: labels and legends readable, no clipping; SVG and source CSV included",
+  "model_weights": "Unchanged from the already validated inference release",
+  "portable_exporter": {
+    "status": "passed",
+    "public_exporter_samples": 24,
+    "output_shards": 3,
+    "images_bitwise_equal": true,
+    "masks_bitwise_equal": true,
+    "gene_ids_exact": true,
+    "sample_ids_species_labels_and_sources_equal": true,
+    "csv_metadata_streamed": true
+  },
+  "source_expression_integrity": "All 24 stored expression arrays retain source values bitwise; gene layouts and measurement masks verified",
+  "isolated_wheel_import_verified": true
+}

@@ -1,0 +1,265 @@
+{
+  "release_version": "0.1.3",
+  "tasks": {
+    "cell_type_annotation": {
+      "task": "cell_type_annotation",
+      "cells": 192,
+      "readout": "native: LayerNorm(sum of last 8 raw CLS tokens)",
+      "classifier": "StandardScaler(train only) + LDA(lsqr, shrinkage=auto)",
+      "protocol": "Within-tissue leave-one-donor-out; fold mean then equal tissue mean",
+      "folds": [
+        {
+          "tissue": "blood",
+          "held_out_donor": "TSP21",
+          "reference_cells": 64,
+          "query_cells": 32,
+          "accuracy": 0.84375,
+          "macro_f1": 0.8431372549019608
+        },
+        {
+          "tissue": "blood",
+          "held_out_donor": "TSP25",
+          "reference_cells": 64,
+          "query_cells": 32,
+          "accuracy": 0.78125,
+          "macro_f1": 0.7811274509803923
+        },
+        {
+          "tissue": "blood",
+          "held_out_donor": "TSP27",
+          "reference_cells": 64,
+          "query_cells": 32,
+          "accuracy": 0.84375,
+          "macro_f1": 0.8431372549019608
+        },
+        {
+          "tissue": "bone marrow",
+          "held_out_donor": "TSP21",
+          "reference_cells": 64,
+          "query_cells": 32,
+          "accuracy": 0.75,
+          "macro_f1": 0.7436274509803922
+        },
+        {
+          "tissue": "bone marrow",
+          "held_out_donor": "TSP25",
+          "reference_cells": 64,
+          "query_cells": 32,
+          "accuracy": 0.75,
+          "macro_f1": 0.6666666666666666
+        },
+        {
+          "tissue": "bone marrow",
+          "held_out_donor": "TSP27",
+          "reference_cells": 64,
+          "query_cells": 32,
+          "accuracy": 0.625,
+          "macro_f1": 0.6070889894419306
+        }
+      ],
+      "tissues": [
+        {
+          "tissue": "blood",
+          "accuracy": 0.8229166666666666,
+          "macro_f1": 0.822467320261438
+        },
+        {
+          "tissue": "bone marrow",
+          "accuracy": 0.7083333333333334,
+          "macro_f1": 0.6724610356963298
+        }
+      ],
+      "accuracy": 0.765625,
+      "macro_f1": 0.7474641779788839,
+      "scope": "192 real Tabula Sapiens cells; same estimator and split protocol, reduced cohort"
+    },
+    "reference_mapping": {
+      "task": "reference_mapping",
+      "readout": "raw CLS layer8",
+      "classifier": "reference-fitted StandardScaler + cosine distance KNN",
+      "k": 10,
+      "prior_gamma": 0.25,
+      "query_fraction": 0.2,
+      "self_neighbors_allowed": false,
+      "folds": [
+        {
+          "seed": 42,
+          "reference_cells": 76,
+          "query_cells": 20,
+          "accuracy": 1.0,
+          "macro_f1": 1.0
+        },
+        {
+          "seed": 123,
+          "reference_cells": 76,
+          "query_cells": 20,
+          "accuracy": 1.0,
+          "macro_f1": 1.0
+        },
+        {
+          "seed": 2024,
+          "reference_cells": 76,
+          "query_cells": 20,
+          "accuracy": 1.0,
+          "macro_f1": 1.0
+        },
+        {
+          "seed": 2025,
+          "reference_cells": 76,
+          "query_cells": 20,
+          "accuracy": 1.0,
+          "macro_f1": 1.0
+        },
+        {
+          "seed": 20261008,
+          "reference_cells": 76,
+          "query_cells": 20,
+          "accuracy": 1.0,
+          "macro_f1": 1.0
+        }
+      ],
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "scope": "Five-seed within-species protocol on 96 PBMC cells; not full Fig2 cohorts or cross-species mapping"
+    },
+    "batch_integration": {
+      "task": "batch_integration",
+      "cells": 96,
+      "readout": "raw CLS layer6",
+      "n_neighbors": 90,
+      "metric": "euclidean",
+      "leiden_resolution": 0.05,
+      "seed": 0,
+      "nmi": 0.0,
+      "ari": 0.0,
+      "cell_type_asw_scaled": 0.7202304005622864,
+      "batch_asw_scaled": 0.8497378826141357,
+      "graph_connectivity": 1.0,
+      "avg_bio": 0.2400768001874288,
+      "avg_batch": 0.9248689413070679,
+      "scope": "One 96-cell PBMC cohort; full Fig2 aggregates metrics equally across tissues"
+    },
+    "gene_completion": {
+      "task": "gene_completion",
+      "n_splits": 5,
+      "seed": 42,
+      "folds": [
+        {
+          "cells": 8,
+          "genes": 7300,
+          "finite_pcc_genes": 935,
+          "mean_gene_pcc": 0.2769917367245538,
+          "mae_log1p": 0.07714064972388926,
+          "rmse_log1p": 0.279222863305289,
+          "fold": 1,
+          "observed_genes": 29199,
+          "hidden_targets_in_query": 0
+        },
+        {
+          "cells": 8,
+          "genes": 7300,
+          "finite_pcc_genes": 1039,
+          "mean_gene_pcc": 0.2780369674457815,
+          "mae_log1p": 0.08389452002498897,
+          "rmse_log1p": 0.29591500023359646,
+          "fold": 2,
+          "observed_genes": 29199,
+          "hidden_targets_in_query": 0
+        },
+        {
+          "cells": 8,
+          "genes": 7300,
+          "finite_pcc_genes": 982,
+          "mean_gene_pcc": 0.24522619713503918,
+          "mae_log1p": 0.08159381078134822,
+          "rmse_log1p": 0.28895989518934595,
+          "fold": 3,
+          "observed_genes": 29199,
+          "hidden_targets_in_query": 0
+        },
+        {
+          "cells": 8,
+          "genes": 7300,
+          "finite_pcc_genes": 1019,
+          "mean_gene_pcc": 0.252038672707624,
+          "mae_log1p": 0.08306018242744118,
+          "rmse_log1p": 0.295381168996041,
+          "fold": 4,
+          "observed_genes": 29199,
+          "hidden_targets_in_query": 0
+        },
+        {
+          "cells": 8,
+          "genes": 7299,
+          "finite_pcc_genes": 1080,
+          "mean_gene_pcc": 0.27627226689547174,
+          "mae_log1p": 0.08659711966640234,
+          "rmse_log1p": 0.3022219831880901,
+          "fold": 5,
+          "observed_genes": 29200,
+          "hidden_targets_in_query": 0
+        }
+      ],
+      "genes_hidden_exactly_once": 36499,
+      "finite_pcc_genes": 5055,
+      "mean_gene_pcc": 0.26585188216348404,
+      "prediction": "native expected expression p*M",
+      "normalization": "Observed-only query library; separate scorer truth uses full measured supported-gene library",
+      "scope": "Eight real PBMC cells, complete five-fold gene-axis split; not full Fig3 metrics. Positive-cell PCC requiring 20 cells is not estimated."
+    },
+    "gene_association": {
+      "task": "gene_association",
+      "cells": 96,
+      "genes": 64,
+      "contexts": [
+        "B Naive",
+        "CD14+ Mono",
+        "NK Cell",
+        "T Naive"
+      ],
+      "aggregation": "Mean hidden states over cells, center across panel genes, L2 normalize, cosine",
+      "max_cells_per_context": 100,
+      "query_genes_visible": true,
+      "panel_scope": "64-gene demonstration panel; centering depends on panel composition",
+      "scope": "Undirected similarity demonstration; no causal or regulatory validation"
+    },
+    "denoising": {
+      "cells": 8,
+      "genes": 64,
+      "finite_pcc_genes": 48,
+      "mean_gene_pcc": 0.3103719527179815,
+      "mae_log1p": 0.411155069100289,
+      "rmse_log1p": 0.6678725603672572,
+      "task": "denoising",
+      "noisy_baseline": {
+        "cells": 8,
+        "genes": 64,
+        "finite_pcc_genes": 37,
+        "mean_gene_pcc": 0.8329322612634391,
+        "mae_log1p": 0.19767745770138784,
+        "rmse_log1p": 0.5524819036027105
+      },
+      "scope": "50% count thinning of eight real PBMC cells; not the OpenProblems protocol",
+      "common_finite_pcc_targets": {
+        "genes": 37,
+        "CellNet": {
+          "cells": 8,
+          "genes": 37,
+          "finite_pcc_genes": 37,
+          "mean_gene_pcc": 0.3458948205206516,
+          "mae_log1p": 0.550699590101234,
+          "rmse_log1p": 0.7981863311284603
+        },
+        "noisy_input": {
+          "cells": 8,
+          "genes": 37,
+          "finite_pcc_genes": 37,
+          "mean_gene_pcc": 0.8329322612634393,
+          "mae_log1p": 0.2627983894637646,
+          "rmse_log1p": 0.627991177660694
+        }
+      }
+    }
+  },
+  "scope": "Representative real cohorts; full Figure 2-5 data are linked in README, not all downloaded or rerun"
+}

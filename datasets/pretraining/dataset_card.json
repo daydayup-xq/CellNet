@@ -1,0 +1,16 @@
+{
+  "name": "CellNet pretraining data",
+  "full_release_status": "not_included",
+  "example_status": "available",
+  "example_cells": 24,
+  "species": [
+    "Mouse",
+    "Zebrafish",
+    "Fruit_fly"
+  ],
+  "source": "100000-cell pretraining sample; public sample IDs anonymized",
+  "data_kind": "Rendered expression images and dataset-specific measured-gene masks, not raw count matrices",
+  "assets": "Fitted layouts and gene vocabulary are provided in assets/",
+  "upstream_terms": "Original datasets retain their respective terms and attribution. Apache-2.0 applies to software, not automatically to third-party data. Dataset identifiers are provided per cell; licenses have not been individually verified.",
+  "biological_limits": "Small deterministic demonstration of file format and loading; no representativeness, biological validation, donor independence or performance claim."
+}

@@ -1,0 +1,17 @@
+{
+  "task": "batch_integration",
+  "cells": 96,
+  "readout": "raw CLS layer6",
+  "n_neighbors": 90,
+  "metric": "euclidean",
+  "leiden_resolution": 0.05,
+  "seed": 0,
+  "nmi": 0.0,
+  "ari": 0.0,
+  "cell_type_asw_scaled": 0.7202304005622864,
+  "batch_asw_scaled": 0.8497378826141357,
+  "graph_connectivity": 1.0,
+  "avg_bio": 0.2400768001874288,
+  "avg_batch": 0.9248689413070679,
+  "scope": "One 96-cell PBMC cohort; full Fig2 aggregates metrics equally across tissues"
+}

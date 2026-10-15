@@ -1,0 +1,17 @@
+{
+  "samples": 24,
+  "species_counts": {
+    "Mouse": 8,
+    "Zebrafish": 8,
+    "Fruit_fly": 8
+  },
+  "measured_genes_range": [
+    6689,
+    16743
+  ],
+  "nonzero_genes_range": [
+    318,
+    8528
+  ],
+  "scope": "Stored images and measurement masks; not raw counts, UMAP, model quality or biological validation"
+}

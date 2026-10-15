@@ -1,0 +1,72 @@
+{
+  "task": "cell_type_annotation",
+  "cells": 192,
+  "readout": "native: LayerNorm(sum of last 8 raw CLS tokens)",
+  "classifier": "StandardScaler(train only) + LDA(lsqr, shrinkage=auto)",
+  "protocol": "Within-tissue leave-one-donor-out; fold mean then equal tissue mean",
+  "folds": [
+    {
+      "tissue": "blood",
+      "held_out_donor": "TSP21",
+      "reference_cells": 64,
+      "query_cells": 32,
+      "accuracy": 0.84375,
+      "macro_f1": 0.8431372549019608
+    },
+    {
+      "tissue": "blood",
+      "held_out_donor": "TSP25",
+      "reference_cells": 64,
+      "query_cells": 32,
+      "accuracy": 0.78125,
+      "macro_f1": 0.7811274509803923
+    },
+    {
+      "tissue": "blood",
+      "held_out_donor": "TSP27",
+      "reference_cells": 64,
+      "query_cells": 32,
+      "accuracy": 0.84375,
+      "macro_f1": 0.8431372549019608
+    },
+    {
+      "tissue": "bone marrow",
+      "held_out_donor": "TSP21",
+      "reference_cells": 64,
+      "query_cells": 32,
+      "accuracy": 0.75,
+      "macro_f1": 0.7436274509803922
+    },
+    {
+      "tissue": "bone marrow",
+      "held_out_donor": "TSP25",
+      "reference_cells": 64,
+      "query_cells": 32,
+      "accuracy": 0.75,
+      "macro_f1": 0.6666666666666666
+    },
+    {
+      "tissue": "bone marrow",
+      "held_out_donor": "TSP27",
+      "reference_cells": 64,
+      "query_cells": 32,
+      "accuracy": 0.625,
+      "macro_f1": 0.6070889894419306
+    }
+  ],
+  "tissues": [
+    {
+      "tissue": "blood",
+      "accuracy": 0.8229166666666666,
+      "macro_f1": 0.822467320261438
+    },
+    {
+      "tissue": "bone marrow",
+      "accuracy": 0.7083333333333334,
+      "macro_f1": 0.6724610356963298
+    }
+  ],
+  "accuracy": 0.765625,
+  "macro_f1": 0.7474641779788839,
+  "scope": "192 real Tabula Sapiens cells; same estimator and split protocol, reduced cohort"
+}

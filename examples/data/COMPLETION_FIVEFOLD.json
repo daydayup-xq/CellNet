@@ -1,0 +1,37 @@
+{
+  "n_splits": 5,
+  "seed": 42,
+  "cells": 8,
+  "gene_universe": 36499,
+  "folds": [
+    {
+      "fold": 1,
+      "observed_genes": 29199,
+      "hidden_genes": 7300
+    },
+    {
+      "fold": 2,
+      "observed_genes": 29199,
+      "hidden_genes": 7300
+    },
+    {
+      "fold": 3,
+      "observed_genes": 29199,
+      "hidden_genes": 7300
+    },
+    {
+      "fold": 4,
+      "observed_genes": 29199,
+      "hidden_genes": 7300
+    },
+    {
+      "fold": 5,
+      "observed_genes": 29200,
+      "hidden_genes": 7299
+    }
+  ],
+  "partition": "numpy default_rng(seed).permutation + array_split",
+  "input": "Each complete fold physically absent; observed-count-only library normalization",
+  "truth": "Separate scorer-only log1p normalized using all measured supported genes, clipped to [0,6]",
+  "scope": "Full gene-axis split on an eight-cell PBMC subset; not the 5000-cell benchmark"
+}
