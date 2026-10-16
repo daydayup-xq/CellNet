@@ -1,0 +1,677 @@
+{
+  "format": "cellnet-web-gallery-v1",
+  "cells": [
+    {
+      "id": "pretrain_0000",
+      "image": "assets/cells/pretrain_0000.webp",
+      "linear_image": "assets/cells/pretrain_0000_linear.webp",
+      "mask_image": "assets/cells/pretrain_0000_mask.webp",
+      "species": "Mouse",
+      "cell_type": "interneuron",
+      "source_dataset": "36411e4cfd4f8a6fca16fc2959a32c7a",
+      "measured_genes": 12805,
+      "detected_genes": 2381,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0001",
+      "image": "assets/cells/pretrain_0001.webp",
+      "linear_image": "assets/cells/pretrain_0001_linear.webp",
+      "mask_image": "assets/cells/pretrain_0001_mask.webp",
+      "species": "Mouse",
+      "cell_type": "interneuron",
+      "source_dataset": "36411e4cfd4f8a6fca16fc2959a32c7a",
+      "measured_genes": 12805,
+      "detected_genes": 2852,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0002",
+      "image": "assets/cells/pretrain_0002.webp",
+      "linear_image": "assets/cells/pretrain_0002_linear.webp",
+      "mask_image": "assets/cells/pretrain_0002_mask.webp",
+      "species": "Mouse",
+      "cell_type": "interneuron",
+      "source_dataset": "36411e4cfd4f8a6fca16fc2959a32c7a",
+      "measured_genes": 12805,
+      "detected_genes": 2387,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0003",
+      "image": "assets/cells/pretrain_0003.webp",
+      "linear_image": "assets/cells/pretrain_0003_linear.webp",
+      "mask_image": "assets/cells/pretrain_0003_mask.webp",
+      "species": "Mouse",
+      "cell_type": "interneuron",
+      "source_dataset": "36411e4cfd4f8a6fca16fc2959a32c7a",
+      "measured_genes": 12805,
+      "detected_genes": 3539,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0004",
+      "image": "assets/cells/pretrain_0004.webp",
+      "linear_image": "assets/cells/pretrain_0004_linear.webp",
+      "mask_image": "assets/cells/pretrain_0004_mask.webp",
+      "species": "Mouse",
+      "cell_type": "glutamatergic neuron",
+      "source_dataset": "7134a5bd27ec7567014bdda2cb3c56db",
+      "measured_genes": 16743,
+      "detected_genes": 5880,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0005",
+      "image": "assets/cells/pretrain_0005.webp",
+      "linear_image": "assets/cells/pretrain_0005_linear.webp",
+      "mask_image": "assets/cells/pretrain_0005_mask.webp",
+      "species": "Mouse",
+      "cell_type": "glutamatergic neuron",
+      "source_dataset": "7134a5bd27ec7567014bdda2cb3c56db",
+      "measured_genes": 16743,
+      "detected_genes": 5919,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0006",
+      "image": "assets/cells/pretrain_0006.webp",
+      "linear_image": "assets/cells/pretrain_0006_linear.webp",
+      "mask_image": "assets/cells/pretrain_0006_mask.webp",
+      "species": "Mouse",
+      "cell_type": "glutamatergic neuron",
+      "source_dataset": "7134a5bd27ec7567014bdda2cb3c56db",
+      "measured_genes": 16743,
+      "detected_genes": 5703,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0007",
+      "image": "assets/cells/pretrain_0007.webp",
+      "linear_image": "assets/cells/pretrain_0007_linear.webp",
+      "mask_image": "assets/cells/pretrain_0007_mask.webp",
+      "species": "Mouse",
+      "cell_type": "glutamatergic neuron",
+      "source_dataset": "7134a5bd27ec7567014bdda2cb3c56db",
+      "measured_genes": 16743,
+      "detected_genes": 8528,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0008",
+      "image": "assets/cells/pretrain_0008.webp",
+      "linear_image": "assets/cells/pretrain_0008_linear.webp",
+      "mask_image": "assets/cells/pretrain_0008_mask.webp",
+      "species": "Zebrafish",
+      "cell_type": "natural killer cell",
+      "source_dataset": "9ec5c064e9ccfb6cb1516ecb9e699d92",
+      "measured_genes": 13232,
+      "detected_genes": 1383,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0009",
+      "image": "assets/cells/pretrain_0009.webp",
+      "linear_image": "assets/cells/pretrain_0009_linear.webp",
+      "mask_image": "assets/cells/pretrain_0009_mask.webp",
+      "species": "Zebrafish",
+      "cell_type": "natural killer cell",
+      "source_dataset": "9ec5c064e9ccfb6cb1516ecb9e699d92",
+      "measured_genes": 13232,
+      "detected_genes": 318,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0010",
+      "image": "assets/cells/pretrain_0010.webp",
+      "linear_image": "assets/cells/pretrain_0010_linear.webp",
+      "mask_image": "assets/cells/pretrain_0010_mask.webp",
+      "species": "Zebrafish",
+      "cell_type": "natural killer cell",
+      "source_dataset": "9ec5c064e9ccfb6cb1516ecb9e699d92",
+      "measured_genes": 13232,
+      "detected_genes": 368,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0011",
+      "image": "assets/cells/pretrain_0011.webp",
+      "linear_image": "assets/cells/pretrain_0011_linear.webp",
+      "mask_image": "assets/cells/pretrain_0011_mask.webp",
+      "species": "Zebrafish",
+      "cell_type": "natural killer cell",
+      "source_dataset": "9ec5c064e9ccfb6cb1516ecb9e699d92",
+      "measured_genes": 13232,
+      "detected_genes": 1184,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0012",
+      "image": "assets/cells/pretrain_0012.webp",
+      "linear_image": "assets/cells/pretrain_0012_linear.webp",
+      "mask_image": "assets/cells/pretrain_0012_mask.webp",
+      "species": "Zebrafish",
+      "cell_type": "mast cell",
+      "source_dataset": "24fc7a89ac6d43355353b280b51c7ff0",
+      "measured_genes": 11618,
+      "detected_genes": 941,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0013",
+      "image": "assets/cells/pretrain_0013.webp",
+      "linear_image": "assets/cells/pretrain_0013_linear.webp",
+      "mask_image": "assets/cells/pretrain_0013_mask.webp",
+      "species": "Zebrafish",
+      "cell_type": "mast cell",
+      "source_dataset": "24fc7a89ac6d43355353b280b51c7ff0",
+      "measured_genes": 11618,
+      "detected_genes": 557,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0014",
+      "image": "assets/cells/pretrain_0014.webp",
+      "linear_image": "assets/cells/pretrain_0014_linear.webp",
+      "mask_image": "assets/cells/pretrain_0014_mask.webp",
+      "species": "Zebrafish",
+      "cell_type": "mast cell",
+      "source_dataset": "24fc7a89ac6d43355353b280b51c7ff0",
+      "measured_genes": 11618,
+      "detected_genes": 1740,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0015",
+      "image": "assets/cells/pretrain_0015.webp",
+      "linear_image": "assets/cells/pretrain_0015_linear.webp",
+      "mask_image": "assets/cells/pretrain_0015_mask.webp",
+      "species": "Zebrafish",
+      "cell_type": "mast cell",
+      "source_dataset": "24fc7a89ac6d43355353b280b51c7ff0",
+      "measured_genes": 11618,
+      "detected_genes": 727,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0016",
+      "image": "assets/cells/pretrain_0016.webp",
+      "linear_image": "assets/cells/pretrain_0016_linear.webp",
+      "mask_image": "assets/cells/pretrain_0016_mask.webp",
+      "species": "Fruit_fly",
+      "cell_type": "enterocyte",
+      "source_dataset": "fd8c6bd3c86187872db262c454c981b9",
+      "measured_genes": 7513,
+      "detected_genes": 1230,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0017",
+      "image": "assets/cells/pretrain_0017.webp",
+      "linear_image": "assets/cells/pretrain_0017_linear.webp",
+      "mask_image": "assets/cells/pretrain_0017_mask.webp",
+      "species": "Fruit_fly",
+      "cell_type": "enterocyte",
+      "source_dataset": "fd8c6bd3c86187872db262c454c981b9",
+      "measured_genes": 7513,
+      "detected_genes": 1119,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0018",
+      "image": "assets/cells/pretrain_0018.webp",
+      "linear_image": "assets/cells/pretrain_0018_linear.webp",
+      "mask_image": "assets/cells/pretrain_0018_mask.webp",
+      "species": "Fruit_fly",
+      "cell_type": "enterocyte",
+      "source_dataset": "fd8c6bd3c86187872db262c454c981b9",
+      "measured_genes": 7513,
+      "detected_genes": 1581,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0019",
+      "image": "assets/cells/pretrain_0019.webp",
+      "linear_image": "assets/cells/pretrain_0019_linear.webp",
+      "mask_image": "assets/cells/pretrain_0019_mask.webp",
+      "species": "Fruit_fly",
+      "cell_type": "enterocyte",
+      "source_dataset": "fd8c6bd3c86187872db262c454c981b9",
+      "measured_genes": 7513,
+      "detected_genes": 494,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0020",
+      "image": "assets/cells/pretrain_0020.webp",
+      "linear_image": "assets/cells/pretrain_0020_linear.webp",
+      "mask_image": "assets/cells/pretrain_0020_mask.webp",
+      "species": "Fruit_fly",
+      "cell_type": "glutamatergic neuron",
+      "source_dataset": "d292bbf2b0367501d094ada4b6fcff3f",
+      "measured_genes": 6689,
+      "detected_genes": 1323,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0021",
+      "image": "assets/cells/pretrain_0021.webp",
+      "linear_image": "assets/cells/pretrain_0021_linear.webp",
+      "mask_image": "assets/cells/pretrain_0021_mask.webp",
+      "species": "Fruit_fly",
+      "cell_type": "glutamatergic neuron",
+      "source_dataset": "d292bbf2b0367501d094ada4b6fcff3f",
+      "measured_genes": 6689,
+      "detected_genes": 873,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0022",
+      "image": "assets/cells/pretrain_0022.webp",
+      "linear_image": "assets/cells/pretrain_0022_linear.webp",
+      "mask_image": "assets/cells/pretrain_0022_mask.webp",
+      "species": "Fruit_fly",
+      "cell_type": "glutamatergic neuron",
+      "source_dataset": "d292bbf2b0367501d094ada4b6fcff3f",
+      "measured_genes": 6689,
+      "detected_genes": 521,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    },
+    {
+      "id": "pretrain_0023",
+      "image": "assets/cells/pretrain_0023.webp",
+      "linear_image": "assets/cells/pretrain_0023_linear.webp",
+      "mask_image": "assets/cells/pretrain_0023_mask.webp",
+      "species": "Fruit_fly",
+      "cell_type": "glutamatergic neuron",
+      "source_dataset": "d292bbf2b0367501d094ada4b6fcff3f",
+      "measured_genes": 6689,
+      "detected_genes": 584,
+      "width": 384,
+      "height": 384,
+      "source": "CellNet/datasets/pretraining/example",
+      "kind": "Real single-cell transcriptome image",
+      "normalization": "Stored clip(log1p(normalize_total(counts, 10000)), 0, 6)/6; no renormalization",
+      "display": {
+        "colormap": "magma",
+        "gamma": 0.25,
+        "range": [
+          0,
+          1
+        ],
+        "unmeasured": "#121114",
+        "measured_zero": "#000004",
+        "geometry": "Unmodified 384x384 native pixel positions",
+        "mask_measured": "#f0cd94"
+      }
+    }
+  ]
+}

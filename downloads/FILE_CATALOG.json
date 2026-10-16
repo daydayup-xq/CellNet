@@ -1,0 +1,78 @@
+{
+  "release": "CellNet starter data 2026-10-16",
+  "archive": "CellNet_pretraining_example_24cells.zip",
+  "archive_members": [
+    {
+      "path": "CellNet/datasets/pretraining/example/metadata.json",
+      "bytes": 1060,
+      "sha256": "694aee58c38d60256309fc506f9e9db215878234f29301cb467ad55870815996"
+    },
+    {
+      "path": "CellNet/datasets/pretraining/example/cells.csv",
+      "bytes": 2636,
+      "sha256": "2d7b0398dc09a9fa9a2d064249ebd978c89b26abdc260c5bb5b1bbe52bc491c2"
+    },
+    {
+      "path": "CellNet/datasets/pretraining/example/shards/shard-00000.npz",
+      "bytes": 387013,
+      "sha256": "21dff57c51e47245f03d1cab31adee09d5e39995a43017eaff04f768efcf637d"
+    },
+    {
+      "path": "CellNet/datasets/pretraining/FORMAT.md",
+      "bytes": 3451,
+      "sha256": "eb06bb46b611f8ba32e3babdf0454ebc170915abd3f37e45c6ac8ab9d76389db"
+    },
+    {
+      "path": "CellNet/datasets/pretraining/dataset_card.json",
+      "bytes": 887,
+      "sha256": "1f93d4c476e6340362c93639a4ee038f7c2aa10d658fd7bba145fb7a5a814ae3"
+    },
+    {
+      "path": "CellNet/datasets/pretraining/figures/expression_and_masks.png",
+      "bytes": 219594,
+      "sha256": "a8272e6a51cb758dfd51f37f78431321fe882846e8d21dba472bdd9eb74619f5"
+    },
+    {
+      "path": "CellNet/datasets/pretraining/figures/sample_summary.png",
+      "bytes": 123670,
+      "sha256": "d984ccdad029e5f0070a97625e50cc80062ad830730f2228d060bbf471c1ab7f"
+    },
+    {
+      "path": "CellNet/assets/gene_vocab.json",
+      "bytes": 42273906,
+      "sha256": "44a59603c671bf6ac8a7b8bc7e58d86c6b5785bc428993abcb467ac3650a8663"
+    },
+    {
+      "path": "CellNet/assets/species_layouts.npz",
+      "bytes": 4405936,
+      "sha256": "297c026fff6456249b136f1b206de439bbdb8d61f04c76c985682e5243b7dd28"
+    }
+  ],
+  "files": [
+    {
+      "path": "CellNet_pretraining_example_24cells.zip",
+      "bytes": 9159677,
+      "sha256": "4c5ee919cb956465166b1d225581f9cb21f9242f0c69d39033e0db7a3c83b41d"
+    },
+    {
+      "path": "DATASET_CARD.json",
+      "bytes": 1489,
+      "sha256": "479ddcd6d1e93828cd2a2af971a9821812e981719ce31f88cbc24175b35d845c"
+    },
+    {
+      "path": "FULL_DATA_STATUS.json",
+      "bytes": 459,
+      "sha256": "4402a2c8348bc05aef0538e2ef6e31cb5c637e778d83f52989be44abdab40765"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2053,
+      "sha256": "b84070dc7ca5329ec1220998af68e49e2dfed84a22ee6008d6eb9dd8c6b3aad8"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "bytes": 1367,
+      "sha256": "ac6f5c01be45422f4991c390aad10cad970d438c8d42da4c4f093e4617814084"
+    }
+  ]
+}

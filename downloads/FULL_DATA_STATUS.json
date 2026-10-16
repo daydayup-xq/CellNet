@@ -1,0 +1,12 @@
+{
+  "name": "Image atlas",
+  "status": "coming_soon",
+  "availability": "Coming soon / 敬请期待",
+  "completeness_verified": false,
+  "downloadable_samples_verified": null,
+  "source_manifest_samples": 231190557,
+  "source_manifest_datasets": 26467,
+  "source_manifest_genes": 1015163,
+  "source_vocabulary_species": 40,
+  "population_note": "Source-manifest totals describe the atlas population; the full collection is not yet available for download."
+}

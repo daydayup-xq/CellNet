@@ -1,0 +1,36 @@
+{
+  "name": "CellNet Image atlas",
+  "release_date": "2026-10-16",
+  "example": {
+    "status": "available",
+    "samples": 24,
+    "species_counts": {
+      "Fruit_fly": 8,
+      "Mouse": 8,
+      "Zebrafish": 8
+    },
+    "archive": "CellNet_pretraining_example_24cells.zip",
+    "image_size": [
+      384,
+      384
+    ],
+    "format": "cellnet-pretraining-npz-v1",
+    "data_kind": "Rendered expression, dataset-specific measurement masks, native gene IDs",
+    "source": "Existing 100000-cell pretraining sample; anonymous public sample IDs",
+    "normalization": "Stored float16 normalized expression in [0,1]; do not normalize again"
+  },
+  "full_data": {
+    "name": "Image atlas",
+    "status": "coming_soon",
+    "availability": "Coming soon / 敬请期待",
+    "completeness_verified": false,
+    "downloadable_samples_verified": null,
+    "source_manifest_samples": 231190557,
+    "source_manifest_datasets": 26467,
+    "source_manifest_genes": 1015163,
+    "source_vocabulary_species": 40,
+    "population_note": "Source-manifest totals describe the atlas population; the full collection is not yet available for download."
+  },
+  "terms": "Original datasets retain their respective terms and attribution. Apache-2.0 covers software only. Per-source data license verification remains pending, as documented in the source repository.",
+  "scope": "The 24 real pretraining examples support exploring the CellNet data format, transcriptome images and data-reading workflow."
+}
