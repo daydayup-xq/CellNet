@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fafbf8">
+  <title>CellNet — A panoramic view of the cell · The film</title>
+  <meta name="description" content="A one-minute research film introducing CellNet: DNA-informed transcriptome images, panoramic learning, and cellular and molecular capabilities.">
+  <link rel="canonical" href="https://daydayup-xq.github.io/CellNet/film/">
+  <meta property="og:title" content="CellNet: A panoramic view of the cell — The film">
+  <meta property="og:type" content="video.other">
+  <meta property="og:image" content="https://daydayup-xq.github.io/CellNet/film/poster.jpg">
+  <link rel="icon" href="../assets/cellnet-logo.png">
+  <link rel="stylesheet" href="film.css">
+  <script type="module" src="player.js"></script>
+</head>
+<body>
+  <a class="skip" href="#film" data-en="Skip to film" data-zh="跳至短片">Skip to film</a>
+  <header class="film-header">
+    <a class="brand" href="../" aria-label="CellNet home"><img src="../assets/cellnet-logo.png" alt="CellNet" width="1942" height="809"></a>
+    <a class="back" href="../" data-en="← Back to the research" data-zh="← 返回研究主页">← Back to the research</a>
+    <button class="language" id="language" type="button" aria-label="Switch to Chinese">中文</button>
+  </header>
+  <main>
+    <div class="film-intro"><p class="eyebrow" data-en="A RESEARCH FILM · 60 SECONDS" data-zh="研究短片 · 60 秒">A RESEARCH FILM · 60 SECONDS</p><h1 data-en="Panoramic transcriptome modelling" data-zh="转录组的全景建模">Panoramic transcriptome modelling</h1></div>
+    <section class="player" id="film" aria-label="CellNet research film">
+      <div class="screen" id="screen" tabindex="0" role="group" aria-label="Film canvas. Space to play or pause; left and right arrows to seek.">
+        <canvas id="film-canvas" width="1920" height="1080" role="img" aria-label="CellNet research film. A full text transcript is available below."></canvas>
+        <div class="loading" id="loading" role="status" data-en="Preparing the film…" data-zh="正在加载短片…">Preparing the film…</div>
+        <button class="start" id="start" type="button" aria-label="Play the film" hidden><span class="play-symbol" aria-hidden="true">▶</span><span data-en="Play film" data-zh="播放短片">Play film</span><small>01:00</small></button>
+      </div>
+      <div class="controls" id="controls">
+        <button class="control play" id="play" type="button" disabled aria-label="Play"><span id="play-icon" aria-hidden="true">▶</span></button>
+        <button class="control replay" id="replay" type="button" disabled aria-label="Replay"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg></button>
+        <output id="time" class="time" aria-label="Playback time">00:00 / 01:00</output>
+        <label class="seek-label" for="seek"><span class="sr-only" data-en="Film position in seconds" data-zh="短片进度（秒）">Film position in seconds</span><input id="seek" type="range" min="0" max="60" step="0.1" value="0" disabled aria-valuetext="0 seconds of 60 seconds"></label>
+        <span class="chapter-label" id="chapter-label"></span>
+        <button class="control" id="fullscreen" type="button" aria-label="Enter fullscreen"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 9V4h5m6 0h5v5m0 6v5h-5m-6 0H4v-5"/></svg></button>
+      </div>
+      <p class="sr-only" id="scene-announcement" aria-live="polite"></p>
+    </section>
+    <div class="film-meta"><span data-en="DNA-informed images. Cellular context. Molecular detail." data-zh="DNA 引导的图像，细胞全景，分子细节。">DNA-informed images. Cellular context. Molecular detail.</span><a id="video-download" href="cellnet-film-en.mp4" download data-en="Download film · MP4 ↓" data-zh="下载短片 · MP4 ↓">Download film · MP4 ↓</a></div>
+    <nav class="chapters" id="chapters" aria-label="Film chapters"></nav>
+    <details class="transcript" id="transcript"><summary><span data-en="Read the story" data-zh="阅读完整解说">Read the story</span><span aria-hidden="true">+</span></summary><ol id="transcript-list"></ol></details>
+    <footer class="film-footer"><p data-en="Explore the work behind the film." data-zh="继续探索短片背后的研究。">Explore the work behind the film.</p><div><a href="../#method" data-en="The method ↗" data-zh="方法 ↗">The method ↗</a><a href="../#gallery">Image Atlas ↗</a><a href="https://github.com/daydayup-xq/CellNet" target="_blank" rel="noopener noreferrer" data-en="Code & model ↗" data-zh="代码与模型 ↗">Code & model ↗</a></div></footer>
+    <noscript><p>This film uses JavaScript for playback. <a href="cellnet-film-en.mp4">Watch the MP4 version</a>.</p></noscript>
+  </main>
+</body>
+</html>
