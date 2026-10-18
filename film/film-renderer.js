@@ -1,246 +1,143 @@
-/** CellNet research film. Deterministic conceptual motion, 1920 × 1080.
- * Animated mosaics, cells and molecular modules are explanatory graphics.
- * The small dark image planes are unmodified examples from the Image Atlas.
- * Playback UI, accessible transcript and reduced-motion controls live outside
- * this renderer. No measured result plots or numerical scores are synthesized.
+/** CellNet — a continuous, deterministic 40-second research film.
+ * A persistent set of schematic gene tokens is followed from identity/expression
+ * to a panorama, encoding, cellular context, querying and molecular programmes.
+ * There are no scene-level opacity transitions, cuts or synthesized data plots.
+ * Scientific diagrams are conceptual; image textures are actual Image Atlas cells.
  */
-export const DURATION = 60;
-export const SCENES = [
-  {id:'panorama',start:0,end:6,title:{en:'Panoramic transcriptome modelling',zh:'转录组的全景建模'},subtitle:{en:'Coding and non-coding RNA in one cellular context.',zh:'将编码与非编码 RNA 纳入共同的细胞语境。'}},
-  {id:'representation',start:6,end:15,title:{en:'DNA identity meets RNA expression',zh:'DNA 身份与 RNA 表达相遇'},subtitle:{en:'DNA-derived gene identities organize measured RNA expression into a fixed, species-specific image.',zh:'DNA 衍生的基因身份组织实测 RNA 表达，形成物种内固定的图像布局。'}},
-  {id:'learning',start:15,end:24,title:{en:'Cell context. Gene detail.',zh:'细胞全景，基因细节'},subtitle:{en:'Masked views learn consistent cellular context; gene-conditioned decoding preserves molecular information.',zh:'掩码视图学习一致的细胞表征，基因条件解码保留分子层面的信息。'}},
-  {id:'scale',start:24,end:30,title:{en:'Learning across species',zh:'跨物种学习'},subtitle:{en:'A diverse collection of transcriptome images trains a shared foundation model.',zh:'多样的转录组图像共同训练共享的基础模型。'}},
-  {id:'cells',start:30,end:38,title:{en:'Cell identity. Cell state.',zh:'细胞身份与细胞状态'},subtitle:{en:'Preserves cell identities and resolves rare populations and condition-associated states in evaluated cohorts.',zh:'在评估队列中保留细胞身份，识别稀有群体与条件相关状态。'}},
-  {id:'prediction',start:38,end:47,title:{en:'Predict gene expression',zh:'预测基因表达'},subtitle:{en:'Observed context supports withheld coding and selected non-coding targets, with extensions across species and spatial measurements.',zh:'已观测语境支持留出的编码及部分非编码靶标预测，并拓展至跨物种与空间测量。'}},
-  {id:'programmes',start:47,end:55,title:{en:'Molecular programmes',zh:'分子程序'},subtitle:{en:'Cell-contextual gene representations retrieve known modules and developmental or neural programmes, including from sparse non-coding RNA queries.',zh:'细胞语境中的基因表征可检索已知模块及发育、神经相关程序，也支持低检出率非编码 RNA 查询。'}},
-  {id:'closing',start:55,end:60,title:{en:'CellNet: A panoramic view of the cell',zh:'CellNet：细胞的全景视角'},subtitle:{en:'Connecting cellular diversity with molecular detail.',zh:'连接细胞多样性与分子细节。'}},
+export const DURATION=40;
+export const SCENES=[
+ {id:'panorama',start:0,end:4,title:{en:'Panoramic transcriptome modelling',zh:'转录组的全景建模'},subtitle:{en:'CellNet brings coding and non-coding RNA into one cellular context.',zh:'CellNet 将编码与非编码 RNA 纳入共同的细胞语境。'}},
+ {id:'representation',start:4,end:12,title:{en:'DNA identity meets RNA expression',zh:'DNA 身份与 RNA 表达相遇'},subtitle:{en:'DNA-derived identities organize measured RNA expression into a fixed, species-specific image.',zh:'DNA 衍生的基因身份组织实测 RNA 表达，形成物种内固定的图像布局。'}},
+ {id:'learning',start:12,end:18,title:{en:'Learn the cell. Across species.',zh:'学习细胞，跨越物种'},subtitle:{en:'Full-extent masked views learn consistent cellular context. Diverse transcriptome images train a shared foundation model.',zh:'保持全图范围的掩码视图学习一致的细胞语境，多样的转录组图像共同训练共享基础模型。'}},
+ {id:'cells',start:18,end:22,title:{en:'Cell identity. Cell state.',zh:'细胞身份与细胞状态'},subtitle:{en:'CellNet preserves identities and resolves rare populations and condition-associated states in evaluated cohorts.',zh:'CellNet 在评估队列中保留细胞身份，识别稀有群体与条件相关状态。'}},
+ {id:'prediction',start:22,end:30,title:{en:'Query a gene',zh:'查询基因'},subtitle:{en:'Observed context supports withheld coding and selected non-coding targets, with extensions across species and spatial measurements.',zh:'已观测语境支持留出的编码及部分非编码靶标预测，并拓展至跨物种与空间测量。'}},
+ {id:'programmes',start:30,end:36,title:{en:'Molecular programmes',zh:'分子程序'},subtitle:{en:'Cell-contextual gene representations retrieve known modules and developmental or neural programmes, including from sparse non-coding RNA queries.',zh:'细胞语境中的基因表征可检索已知模块及发育、神经相关程序，也支持低检出率非编码 RNA 查询。'}},
+ {id:'closing',start:36,end:40,title:{en:'CellNet: A panoramic view of the cell',zh:'CellNet：细胞的全景视角'},subtitle:{en:'Connecting cellular diversity with molecular detail.',zh:'连接细胞多样性与分子细节。'}},
 ];
-const C={paper:'#fafbf8',ink:'#14333b',teal:'#287e7b',muted:'#69817f',line:'#d8e5de',white:'#ffffff',sage:'#eaf1eb',coral:'#ca8877',gold:'#bda474'};
 const W=1920,H=1080,TAU=Math.PI*2;
+const C={paper:'#fafbf8',ink:'#14333b',teal:'#287e7b',muted:'#6b817e',line:'#d6e3db',coral:'#c98673',white:'#ffffff'};
+const palette=['#cfe3d7','#a9cebc','#7fb39f','#559b8c','#318177','#1d6266','#c8b184'];
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 const lerp=(a,b,t)=>a+(b-a)*t;
-const smooth=x=>{x=clamp(x);return x*x*(3-2*x)};
-const ease=(t,start=0,duration=1)=>smooth((t-start)/duration);
+const smoother=x=>{x=clamp(x);return x*x*x*(x*(x*6-15)+10)};
+const phase=(t,a,b)=>smoother((t-a)/(b-a));
 const frac=x=>x-Math.floor(x);
-const rand=(x,y=0)=>frac(Math.sin(x*127.1+y*311.7)*43758.5453);
-const palette=['#d5e7dd','#b5d5c7','#8fbdae','#5e9f94','#35867f','#1d6468','#c7b38a'];
-const ZH=lang=>lang==='zh'||lang==='zh-CN';
+const random=(x,y=0)=>frac(Math.sin(x*127.1+y*311.7)*43758.5453);
+const zh=lang=>lang==='zh'||lang==='zh-CN';
+const target=i=>random(i+63,17)>.79;
+const COLS=30,ROWS=24,N=COLS*ROWS;
+const genes=Array.from({length:N},(_,id)=>({id,col:id%COLS,row:Math.floor(id/COLS),color:palette[Math.floor(random(id,14)*palette.length)],target:target(id)}));
+const stops=[0,4.1,8.8,11.2,13.6,15.6,18.1,21.5,24.5,29.0,32.3,35.3,38.0,40];
+const stageNames=['hook','ribbons','panorama','panorama','views','encoded','cell','cell','observed','observed','modules','modules','closing','closing'];
 function load(path){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(new Error(`Cannot load film asset: ${path}`));im.src=new URL(`../assets/${path}`,import.meta.url).href})}
+function interpolateStops(t,values){let i=0;while(i<stops.length-2&&t>stops[i+1])i++;return{a:values[i],b:values[i+1],p:phase(t,stops[i],stops[i+1]),i}}
+function mixPose(a,b,p){return{x:lerp(a.x,b.x,p),y:lerp(a.y,b.y,p),size:lerp(a.size,b.size,p),round:lerp(a.round||1,b.round||1,p)}}
 
 export async function createFilm(canvas){
-  const ctx=canvas.getContext('2d',{alpha:false});
-  if(!ctx)throw new Error('Canvas 2D is unavailable.');
-  const assets=Object.fromEntries(await Promise.all(Object.entries({logo:'cellnet-logo.png',mouse:'cells/pretrain_0004.webp',fish:'cells/pretrain_0010.webp',fly:'cells/pretrain_0020.webp'}).map(async([key,path])=>[key,await load(path)])));
-  const images=[assets.mouse,assets.fish,assets.fly];
-  let language='en';
-  const l=(en,zh)=>ZH(language)?zh:en;
-  const family=serif=>ZH(language)?'"Noto Sans SC", "Microsoft YaHei", sans-serif':serif?'"Instrument Serif", Georgia, serif':'"DM Sans", Arial, sans-serif';
-  function text(s,x,y,size=40,color=C.ink,weight=400,{align='left',serif=false,max=Infinity}={}){ctx.save();ctx.font=`${weight} ${size}px ${family(serif)}`;const width=ctx.measureText(s).width;if(width>max)ctx.font=`${weight} ${size*max/width}px ${family(serif)}`;ctx.fillStyle=color;ctx.textBaseline='alphabetic';ctx.textAlign=align;ctx.fillText(s,x,y);ctx.restore()}
-  function alpha(a,draw){ctx.save();ctx.globalAlpha*=clamp(a);draw();ctx.restore()}
-  function rect(x,y,w,h,fill,r=0,stroke=null,lineWidth=1){ctx.beginPath();r?ctx.roundRect(x,y,w,h,r):ctx.rect(x,y,w,h);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lineWidth;ctx.stroke()}}
-  function line(x1,y1,x2,y2,color=C.line,width=2){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke()}
-  function circle(x,y,r,fill,stroke=null,width=1){ctx.beginPath();ctx.arc(x,y,r,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.stroke()}}
-  function shadow(draw){ctx.save();ctx.shadowColor='rgba(29,63,52,.10)';ctx.shadowBlur=32;ctx.shadowOffsetY=16;draw();ctx.restore()}
-  function base(t){const gradient=ctx.createLinearGradient(0,0,W,H);gradient.addColorStop(0,C.paper);gradient.addColorStop(.65,'#f8faf6');gradient.addColorStop(1,'#eaf2eb');rect(0,0,W,H,gradient);alpha(.22,()=>{for(let i=0;i<7;i++){ctx.beginPath();ctx.moveTo(1100+i*120,-50);ctx.bezierCurveTo(900+i*132,300,1600+i*90,700,1450+i*118,1150);ctx.strokeStyle='#dce8df';ctx.lineWidth=1;ctx.stroke()}})}
-  function headline(s,sub='',{x=100,y=158,size=82}={}){text(s,x,y,size,C.ink,500,{max:1720});if(sub)text(sub,x,y+76,37,C.muted,400,{max:1680})}
-  function label(s,x,y,{color=C.teal,align='left',size=31}={}){text(s,x,y,size,color,500,{align,max:780})}
-  function imagePlane(im,x,y,size,rotation=0,opacity=1){alpha(opacity,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(rotation);shadow(()=>rect(-size/2-6,-size/2-6,size+12,size+12,'#fff',8));ctx.save();ctx.beginPath();ctx.roundRect(-size/2,-size/2,size,size,4);ctx.clip();ctx.drawImage(im,-size/2,-size/2,size,size);ctx.restore();ctx.restore()})}
-  function bezierPoint(points,p){const q=1-p,[a,b,c,d]=points;return{x:q*q*q*a.x+3*q*q*p*b.x+3*q*p*p*c.x+p*p*p*d.x,y:q*q*q*a.y+3*q*q*p*b.y+3*q*p*p*c.y+p*p*p*d.y}}
-  function path(points,{color=C.line,width=2,alphaValue=1}={}){alpha(alphaValue,()=>{ctx.beginPath();ctx.moveTo(points[0].x,points[0].y);ctx.bezierCurveTo(points[1].x,points[1].y,points[2].x,points[2].y,points[3].x,points[3].y);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke()})}
-  function stream(points,t,{color=C.teal,count=5,speed=.13,offset=0,size=9,lineOpacity=.65}={}){path(points,{alphaValue:lineOpacity});for(let i=0;i<count;i++){const p=frac(t*speed+i/count+offset),q=bezierPoint(points,p),a=Math.sin(p*Math.PI);alpha(a*.8,()=>rect(q.x-size/2,q.y-size/2,size,size,color,2))}}
-  function mosaic(x,y,w,h,t,{cols=30,rows=24,rotation=0,curve=0,assembly=1,origin=null,mask=0,maskPhase=0,light=.2,layer=false,outline=false,observed=false,predict=0}={}){
-    ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(rotation);ctx.translate(-w/2,-h/2);
-    const dx=w/cols,dy=h/rows,gap=Math.max(1.1,dx*.09);
-    if(layer){shadow(()=>rect(-10,-10,w+20,h+20,'rgba(255,255,255,.76)',5));}
-    for(let row=0;row<rows;row++)for(let col=0;col<cols;col++){
-      const u=(col+.5)/cols,v=(row+.5)/rows,identity=rand(col+8,row+11),patch=rand(Math.floor(col/4)+maskPhase,Math.floor(row/4)+2);
-      const isTarget=rand(col+63,row+17)>.78;
-      const hidden=observed?isTarget:patch<mask;
-      const settle=smooth(clamp(assembly*1.7-(u*.55+v*.15)));
-      const wave=Math.max(0,Math.cos((u*.8+v*.25-t*.095)*TAU));
-      const colorIndex=Math.floor(identity*(palette.length-.001));
-      let xx=col*dx,yy=row*dy+curve*Math.sin(u*Math.PI);
-      if(origin&&settle<1){xx=lerp(origin.x-x,xx,settle);yy=lerp(origin.y-y,yy,settle);}
-      const predicted=isTarget&&predict>rand(col*3,row*7);
-      const visible=hidden&&!predicted?.48:lerp(.58,.95,clamp(identity*.5+wave*light));
-      const fill=hidden&&!predicted?'#e5ebe5':predicted?C.coral:palette[colorIndex];
-      alpha(visible*lerp(.3,1,settle),()=>{rect(xx,yy,dx-gap,dy-gap,fill,Math.min(1.5,dx*.07));});
-      if(predicted&&outline)rect(xx,yy,dx-gap,dy-gap,null,1,C.coral,1.5);
-    }
-    ctx.restore();
+ const ctx=canvas.getContext('2d',{alpha:false});if(!ctx)throw new Error('Canvas 2D is unavailable.');
+ const assets=Object.fromEntries(await Promise.all(Object.entries({logo:'cellnet-logo.png',mouse:'cells/pretrain_0004.webp',fish:'cells/pretrain_0010.webp',fly:'cells/pretrain_0020.webp'}).map(async([k,p])=>[k,await load(p)])));
+ const images=[assets.mouse,assets.fish,assets.fly];let language='en';
+ const l=(en,cn)=>zh(language)?cn:en;
+ const family=serif=>zh(language)?'"Noto Sans SC", "Microsoft YaHei", sans-serif':serif?'"Instrument Serif", Georgia, serif':'"DM Sans", Arial, sans-serif';
+ function text(s,x,y,size=40,color=C.ink,weight=500,{align='left',serif=false,max=Infinity}={}){ctx.save();ctx.font=`${weight} ${size}px ${family(serif)}`;const w=ctx.measureText(s).width;if(w>max)ctx.font=`${weight} ${size*max/w}px ${family(serif)}`;ctx.textAlign=align;ctx.textBaseline='alphabetic';ctx.fillStyle=color;ctx.fillText(s,x,y);ctx.restore()}
+ function rect(x,y,w,h,fill,r=0,stroke=null,width=1){if(w<=0||h<=0)return;ctx.beginPath();r?ctx.roundRect(x,y,w,h,Math.min(r,w/2,h/2)):ctx.rect(x,y,w,h);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.stroke()}}
+ function circle(x,y,r,fill,stroke=null,width=1){if(r<=0)return;ctx.beginPath();ctx.arc(x,y,r,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.stroke()}}
+ function line(a,b,color=C.line,width=2){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke()}
+ function shadow(draw){ctx.save();ctx.shadowColor='rgba(25,62,49,.10)';ctx.shadowBlur=24;ctx.shadowOffsetY=12;draw();ctx.restore()}
+ function pathPoint(points,p){const q=1-p,[a,b,c,d]=points;return{x:q*q*q*a.x+3*q*q*p*b.x+3*q*p*p*c.x+p*p*p*d.x,y:q*q*q*a.y+3*q*q*p*b.y+3*q*p*p*c.y+p*p*p*d.y}}
+ function path(points,color=C.line,width=2,progress=1){ctx.beginPath();let p=pathPoint(points,0);ctx.moveTo(p.x,p.y);for(let j=1;j<=32;j++){p=pathPoint(points,progress*j/32);ctx.lineTo(p.x,p.y)}ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke()}
+ function flow(points,t,{color=C.teal,count=6,speed=.25,size=9,progress=1}={}){path(points,C.line,1.7,progress);for(let j=0;j<count;j++){const q=frac(t*speed+j/count);if(q>progress)continue;const p=pathPoint(points,q);rect(p.x-size/2,p.y-size/2,size,size,color,2)}}
+ function background(){const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#fcfcfa');g.addColorStop(1,'#edf4ed');rect(0,0,W,H,g)}
+ function camera(t){const k=[{t:0,x:960,y:540,z:1},{t:3.7,x:1010,y:540,z:1.04},{t:8.8,x:970,y:540,z:1},{t:11.2,x:1000,y:565,z:1.035},{t:15.6,x:990,y:540,z:.99},{t:18.1,x:960,y:540,z:1},{t:21.5,x:910,y:560,z:1.025},{t:24.5,x:960,y:540,z:1},{t:29,x:1000,y:540,z:1.035},{t:32.3,x:960,y:540,z:1},{t:35.3,x:1000,y:565,z:1.025},{t:36,x:960,y:540,z:1},{t:40,x:960,y:540,z:1}];let i=0;while(i<k.length-2&&t>k[i+1].t)i++;const p=phase(t,k[i].t,k[i+1].t);return{x:lerp(k[i].x,k[i+1].x,p),y:lerp(k[i].y,k[i+1].y,p),z:lerp(k[i].z,k[i+1].z,p)}}
+ function tileInGrid(g,x,y,w,h,{rotation=0,curve=0}={}){const px=(g.col+.5)/COLS*w-w/2,py=(g.row+.5)/ROWS*h-h/2+curve*Math.sin(g.col/(COLS-1)*Math.PI);return{x:x+w/2+px*Math.cos(rotation)-py*Math.sin(rotation),y:y+h/2+px*Math.sin(rotation)+py*Math.cos(rotation),size:Math.min(w/COLS,h/ROWS)*.87,round:1.2}}
+ function pose(g,name){
+  if(name==='hook'){const p=tileInGrid(g,1115,280,590,590,{rotation:-.10,curve:45});p.x+=Math.sin(g.row*.24)*35;return p}
+  if(name==='ribbons'){const lane=g.row<12?0:1;return{x:1090+g.col*20,y:lane?725+(g.row-12)*10:335+g.row*10+28*Math.sin(g.col*.13),size:lane?8+random(g.id)*10:13,round:2}}
+  if(name==='panorama')return tileInGrid(g,1135,335,610,550);
+  if(name==='views')return tileInGrid(g,190,430,390,350,{rotation:-.025});
+  if(name==='encoded')return{x:1190+(g.col%10)*15+(g.row%4)*11,y:452+Math.floor(g.row/4)*28+(g.col%3)*3,size:5.8,round:1};
+  if(name==='cell')return tileInGrid(g,541,598,38,35);
+  if(name==='observed')return tileInGrid(g,145,390,555,480);
+  if(name==='modules'){const group=g.id%3,n=Math.floor(g.id/3),r=25+Math.sqrt(n/240)*(group===1?190:160),a=n*2.39996;const centers=[{x:1050,y:470},{x:1512,y:613},{x:1097,y:838}];return{x:centers[group].x+Math.cos(a)*r,y:centers[group].y+Math.sin(a)*r,size:g.id%5===0?10:3.6,round:2}}
+  return tileInGrid(g,1230,355,458,428,{rotation:-.045,curve:20});
+ }
+ function tokenPose(g,t){const st=interpolateStops(t,stageNames);const a=pose(g,st.a),b=pose(g,st.b);let p=st.p;if(st.a==='ribbons'&&st.b==='panorama')p=smoother(clamp(st.p*1.34-(g.col/COLS)*.25-(g.row/ROWS)*.09));return mixPose(a,b,p)}
+ function mainTokens(t){
+  const maskWindow=phase(t,11.5,12.6)*(1-phase(t,14.7,15.6));
+  const observed=phase(t,21.8,23.3)*(1-phase(t,29.3,31.2));
+  for(const g of genes){const p=tokenPose(g,t);let fill=g.color;
+   const hidden=(observed>.25&&g.target)||(maskWindow>.25&&random(Math.floor(g.col/4)+Math.floor(t*1.4),Math.floor(g.row/4))<.34);
+   if(hidden)fill='#e3ebe3';
+   // Fixed identity colors remain stable. Expression is an in-place overlay.
+   rect(p.x-p.size/2,p.y-p.size/2,p.size,p.size,fill,p.round);
+   if(!hidden&&t<12&&g.id%19===0){const q=.55+.45*Math.sin(t*2.3-g.row*.22);rect(p.x-p.size/2,p.y+p.size/2-p.size*q,p.size,p.size*q,g.id%2?C.coral:g.color,1)}
   }
-  function bands(x,y,width,t,{rows=4,color=C.teal,identity=false}={}){for(let r=0;r<rows;r++){line(x,y+r*35,x+width,y+r*35,C.line,1);for(let i=0;i<22;i++){const p=frac(i/22+t*.04),xx=x+p*width,h=identity?12:7+rand(i,r)*24;alpha(Math.sin(p*Math.PI)*.9,()=>rect(xx,y+r*35-h/2,width/32,h,identity?palette[(i+r)%6]:r%2?C.coral:color,2));}}}
-  function layerStack(x,y,w,h,t){for(let k=0;k<4;k++){const xx=x+k*34,yy=y-k*22;alpha(.55+.1*k,()=>{shadow(()=>rect(xx,yy,w,h,'#f3f8f3',9,C.line,1.5));for(let r=0;r<6;r++)for(let c=0;c<3;c++){const pulse=.35+.65*(.5+.5*Math.sin(t*1.8-r*.7-c*.6-k*.4));alpha(pulse,()=>rect(xx+24+c*34,yy+33+r*38,20,20,palette[(r+c+k)%6],3))}})}}
-  function cellGlyph(x,y,size,color,phase=0,filled=false){ctx.save();ctx.translate(x,y);ctx.scale(1+.025*Math.sin(phase),1-.025*Math.sin(phase));circle(0,0,size,filled?color:'#fbfcf9',color,1.8);circle(-size*.12,size*.08,size*.36,filled?'rgba(255,255,255,.7)':color);ctx.restore()}
-  function logo(x,y,w){ctx.save();ctx.globalCompositeOperation='multiply';ctx.drawImage(assets.logo,x,y,w,w*assets.logo.height/assets.logo.width);ctx.restore()}
-
-  function opening(t){
-    const q=t/6;
-    text('CellNet',100,157,59,C.ink,600);
-    text(l('Panoramic','转录组的'),100,390,103,C.ink,500,{max:1000});
-    text(l('transcriptome','全景建模'),100,513,103,C.ink,500,{max:1000});
-    if(!ZH(language))text('modelling',100,641,112,C.teal,400,{serif:true});
-    text(l('Coding and non-coding RNA','编码与非编码 RNA'),104,ZH(language)?650:760,40,C.muted,400,{max:850});
-    const px=1090-35*q,py=224-24*q;
-    for(let k=2;k>=0;k--)alpha(.22+k*.08,()=>mosaic(px+30*k,py+25*k,640,610,t+k,{rotation:-.055,curve:40,assembly:1,light:.5}));
-    mosaic(px,py,640,610,t,{rotation:-.055,curve:40,assembly:.74+.26*q,origin:{x:965,y:900},light:.85,layer:true});
-    const flow=[{x:520,y:902},{x:790,y:878},{x:906,y:904},{x:1100,y:770}];
-    stream(flow,t,{count:12,speed:.09,size:10,color:C.teal});
-    const warm=[{x:760,y:975},{x:900,y:925},{x:1030,y:1010},{x:1370,y:845}];
-    stream(warm,t,{count:7,speed:.1,size:8,color:C.coral});
+ }
+ function inputSignals(t){
+  if(t>=11.8)return;
+  const enter=phase(t,2.6,4.4),exit=phase(t,10.3,11.8),off=-710*(1-enter)-750*exit;
+  for(let lane=0;lane<2;lane++){
+   const y=lane?757:453;
+   for(let row=0;row<4;row++)for(let j=0;j<23;j++){const q=frac(j/23+t*.11),x=110+q*455+off;const h=lane?7+random(j,row)*24:12;rect(x,y+row*28-h/2,12,h,lane?(row%2?C.coral:C.teal):palette[(j+row)%6],2)}
+   const start={x:580+off,y:y+42},end={x:1090,y:lane?720:510};
+   if(enter>0&&exit<1)flow([start,{x:770+off*.6,y:y+42},{x:825,y:lane?685:542},end],t,{color:lane?C.coral:C.teal,count:7,size:9,speed:.26,progress:enter*(1-exit)});
   }
-
-  function representation(t){
-    headline(l('DNA identity meets RNA expression','DNA 身份与 RNA 表达相遇'),l('Coding and non-coding, in one image.','编码与非编码，共同构成一幅图像。'));
-    const grid={x:1160,y:350,w:570,h:520};
-    label(l('Identity','身份'),110,395);bands(110,440,425,t,{rows:4,identity:true});
-    label(l('Expression','表达'),110,709);bands(110,760,425,t,{rows:4,color:C.coral});
-    const origin={x:819,y:647};
-    const upper=[{x:570,y:490},{x:765,y:490},{x:750,y:615},origin];
-    const lower=[{x:570,y:802},{x:738,y:802},{x:748,y:647},origin];
-    stream(upper,t,{count:7,color:C.teal,size:12,speed:.13});stream(lower,t,{count:7,color:C.coral,size:10,speed:.13,offset:.5});
-    circle(origin.x,origin.y,56,'#f2f7f0',C.line,1.5);
-    for(let i=0;i<5;i++){const h=15+20*(.5+.5*Math.sin(t*1.1+i));rect(origin.x-31+i*14,origin.y-h/2,8,h,i%2?C.coral:C.teal,2)}
-    stream([origin,{x:950,y:647},{x:1010,y:610},{x:grid.x,y:610}],t,{count:8,size:12,speed:.14});
-    // Gene positions settle once and remain fixed; only expression/visibility changes.
-    mosaic(grid.x,grid.y,grid.w,grid.h,t,{assembly:.28+.72*t/9,origin,curve:0,light:.9,layer:true});
-    for(let i=0;i<3;i++){const phase=frac(t*.105+i*.29),x=1030+phase*560,y=958-100*Math.sin(phase*Math.PI);alpha(Math.sin(phase*Math.PI)*.65,()=>rect(x,y,12,12,i%2?C.coral:C.teal,2))}
-  }
-
-  function learning(t){
-    headline(l('Cell context. Gene detail.','细胞全景，基因细节'),l('Learn the cell. Query a gene.','学习细胞，查询基因。'));
-    const inputX=130,inputY=383,s=195;
-    for(let i=0;i<4;i++){
-      const xx=inputX+(i%2)*243,yy=inputY+Math.floor(i/2)*268;
-      const phase=Math.floor((t+i*.67)/2.6);
-      mosaic(xx,yy,s,s,t,{cols:16,rows:16,mask:i<2?.18:.48,maskPhase:phase*4+i,light:.55,layer:true});
-      const py=yy+s/2;
-      stream([{x:xx+s+14,y:py},{x:715,y:py},{x:660,y:574},{x:822,y:574}],t,{count:4,speed:.18,offset:i*.2,size:7});
-    }
-    layerStack(840,441,145,296,t);
-    // Parallel aligned streams represent latent agreement, not spatial crops.
-    for(let k=0;k<3;k++)stream([{x:1115,y:470+k*48},{x:1220,y:470+k*48},{x:1242,y:402},{x:1380,y:402}],t,{count:5,offset:k*.17,speed:.18,color:palette[3+k],size:9});
-    label(l('Cell context','细胞语境'),1388,337);
-    for(let i=0;i<14;i++){const h=34+34*(.5+.5*Math.sin(t*.8-i*.28));rect(1389+i*24,402-h/2,16,h,palette[i%6],3)}
-    label(l('Gene query','基因查询'),1301,918);
-    bands(1301,840,260,t,{rows:1,identity:true});
-    stream([{x:1570,y:840},{x:1690,y:840},{x:1653,y:676},{x:1590,y:653}],t,{count:5,speed:.17,color:C.coral,size:10});
-    stream([{x:1555,y:448},{x:1555,y:500},{x:1542,y:541},{x:1542,y:598}],t,{count:4,speed:.17,size:9});
-    for(let k=0;k<3;k++){rect(1435+k*25,589-k*16,151,106,'#eef5ed',5,C.line,1.5);for(let j=0;j<4;j++)alpha(.4+.5*Math.sin((t*.7+j)*Math.PI)**2,()=>rect(1455+k*25+j*25,620-k*16,12,42,palette[(j+k)%6],2))}
-    stream([{x:1640,y:653},{x:1740,y:653},{x:1740,y:567},{x:1797,y:567}],t,{count:4,speed:.17,color:C.coral,size:8});
-    for(let i=0;i<4;i++){const height=24+44*(.5+.5*Math.sin(t*1.1-i*.4));rect(1773+i*15,537-height/2,8,height,i%2?C.coral:C.teal,2)}
-  }
-
-  function scale(t){
-    headline(l('Learning across species','跨物种学习'),l('Diverse cells. Shared representations.','多样的细胞，共享的表征。'));
-    // These are actual Image Atlas image textures, repeated as a conceptual flow.
-    for(let row=0;row<4;row++)for(let i=0;i<7;i++){
-      const p=frac(i/7+t*.071+row*.061),startY=365+row*159;
-      const x=lerp(-80,1348,p),y=lerp(startY,608,smooth(Math.max(0,(p-.56)/.44)));
-      const size=lerp(84+rand(i,row)*75,40,smooth(Math.max(0,(p-.6)/.4)));
-      const opacity=Math.sin(p*Math.PI)*.81;
-      imagePlane(images[(i+row)%3],x,y,size,lerp(-.045,.025,rand(i,row)),opacity);
-    }
-    for(let j=0;j<4;j++)stream([{x:900,y:380+j*145},{x:1180,y:380+j*145},{x:1180,y:608},{x:1342,y:608}],t,{count:6,speed:.14,size:7,lineOpacity:.35,color:palette[j+1]});
-    mosaic(1357,422,361,361,t,{cols:22,rows:22,light:.85,layer:true});
-    rect(1409,553,257,99,'rgba(250,252,248,.94)',6);text('CellNet',1538,619,55,C.ink,500,{align:'center'});
-    label('Image Atlas',100,963,{size:34});label('Foundation Model',1538,904,{align:'center',size:34});
-  }
-
-  function cells(t){
-    headline(l('Cell identity. Cell state.','细胞身份与细胞状态'),l('From broad populations to fine differences.','从广泛群体，到细微状态差异。'));
-    const groups=[{x:489,y:591,n:38,r:205,c:'#4c9390'},{x:1115,y:557,n:30,r:193,c:'#83aaa8'},{x:1544,y:776,n:9,r:99,c:C.coral}];
-    for(let k=0;k<groups.length;k++){
-      const g=groups[k];
-      // Cell glyphs (membrane + nucleus), no plot axes or measured embeddings.
-      for(let i=0;i<g.n;i++){
-        const a=i*2.39996,rr=Math.sqrt((i+.5)/g.n)*g.r;
-        const initial={x:140+rand(i,k)*1570,y:385+rand(i+8,k+1)*490};
-        const form=smooth(clamp((t+.8-i*.055)/5.7));
-        const stateShift=k===1?46*Math.sin(t*.48+i*.25):k===0?19*Math.sin(t*.32+i*.2):8*Math.sin(t*.5+i);
-        const xx=lerp(initial.x,g.x+Math.cos(a)*rr,form)+stateShift;
-        const yy=lerp(initial.y,g.y+Math.sin(a)*rr,form)+8*Math.cos(t*.55+i*.7);
-        const activation=(.5+.5*Math.sin(t*.7-i*.2-k))>.82;
-        cellGlyph(xx,yy,13+rand(i,k)*9,g.c,t+i,activation);
-      }
-    }
-    // Fine-state changes are a coherent sweep through a community, not point jitter.
-    const sweep=frac(t*.13),sx=938+sweep*400;
-    alpha(.12,()=>{const g=ctx.createLinearGradient(sx-60,0,sx+60,0);g.addColorStop(0,'rgba(73,142,138,0)');g.addColorStop(.5,'rgba(73,142,138,.35)');g.addColorStop(1,'rgba(73,142,138,0)');rect(sx-60,330,120,460,g)});
-    label(l('Rare populations','稀有群体'),1544,968,{align:'center',color:C.coral});
-  }
-
-  function prediction(t){
-    headline(l('Predict gene expression','预测基因表达'),t<4.7?l('Coding and selected non-coding targets.','编码与部分非编码靶标。'):l('Across species and spatial measurements.','拓展至跨物种与空间测量。'));
-    const ox=110,oy=401,ow=549,oh=494;
-    mosaic(ox,oy,ow,oh,t,{cols:25,rows:23,observed:true,light:.6,layer:true});
-    label(l('Observed context','已观测语境'),110,354);
-    const queryY=886;
-    bands(820,queryY,250,t,{rows:1,identity:true});
-    label(l('Gene query','基因查询'),945,969,{align:'center'});
-    layerStack(807,465,111,236,t);
-    stream([{x:684,y:640},{x:734,y:640},{x:734,y:578},{x:791,y:578}],t,{count:6,speed:.2,size:10});
-    // The compact decoder is separate from the encoder: only it receives the query.
-    for(let k=0;k<3;k++){rect(1090+k*14,595-k*12,86,98,'#f1f6ef',5,C.line,1.4);for(let j=0;j<3;j++)rect(1103+k*14+j*22,622-k*12,11,33,palette[(j+k)%6],2)}
-    stream([{x:1030,y:578},{x:1065,y:578},{x:1057,y:638},{x:1082,y:638}],t,{count:4,speed:.2,size:8});
-    stream([{x:1069,y:queryY},{x:1148,y:queryY},{x:1148,y:745},{x:1148,y:702}],t,{count:6,speed:.18,size:10,color:C.coral});
-    stream([{x:1212,y:638},{x:1227,y:638},{x:1230,y:640},{x:1251,y:640}],t,{count:3,speed:.19,size:8,color:C.coral});
-    // Target slots are unobserved on the left; coral outlines identify predicted
-    // slots on the right. The query identity travels only into decoding.
-    mosaic(1283,401,537,494,t,{cols:25,rows:23,observed:true,predict:clamp((t+.2)/8.2),outline:true,light:.6,layer:true});
-    // Sequential target queries continue during the whole scene.
-    const col=Math.floor(frac(t*.19)*25),row=Math.floor(frac(t*.11+.17)*23),dx=537/25,dy=494/23;
-    rect(1283+col*dx-2,401+row*dy-2,dx+3,dy+3,null,2,C.coral,3);
-  }
-
-  function programmes(t){
-    headline(l('Molecular programmes','分子程序'),l('From sparse RNA queries to biological context.','从低检出率 RNA 查询，连接生物学语境。'));
-    const q={x:390,y:610};
-    const ring=62+11*Math.sin(t*.55);
-    circle(q.x,q.y,ring+18,null,'#d2e2d9',1.5);circle(q.x,q.y,ring,'#e1eee5',C.teal,2);
-    for(let i=0;i<5;i++){const hh=19+20*(.5+.5*Math.sin(t*.7+i));rect(q.x-30+i*14,q.y-hh/2,8,hh,i%2?C.coral:C.teal,2)}
-    label('SERTAD4-AS1',q.x,762,{align:'center',size:35});
-    const modules=[{x:1105,y:470,n:20,r:130},{x:1557,y:570,n:24,r:156},{x:1165,y:845,n:16,r:115}];
-    for(let k=0;k<modules.length;k++){
-      const m=modules[k];
-      const connector=[{x:q.x+ring+18,y:q.y},{x:750,y:q.y},{x:810,y:m.y},{x:m.x-m.r,y:m.y}];
-      // Plain lines indicate retrieval relations, never regulatory direction.
-      path(connector,{color:'#9ebeb0',width:2,alphaValue:.3+.7*ease(t,k*.65,2)});
-      for(let i=0;i<m.n;i++){
-        const phase=clamp((t-.2-k*.42-i*.14)/1.7),a=i*2.39996,rr=Math.sqrt((i+.5)/m.n)*m.r;
-        const end={x:m.x+Math.cos(a)*rr,y:m.y+Math.sin(a)*rr};
-        const move=smooth(phase),x=lerp(m.x-m.r,end.x,move),y=lerp(m.y,end.y,move);
-        alpha(.12+.88*move,()=>{if(i>0){const prev=(i-1)*2.39996,pr=Math.sqrt((i-.5)/m.n)*m.r;line(x,y,m.x+Math.cos(prev)*pr,m.y+Math.sin(prev)*pr,'#c7dad0',1.5)}const s=12+rand(i,k)*9;rect(x-s/2,y-s/2,s,s,palette[(i+k*2)%6],3);});
-      }
-      const phase=frac(t*.14+k*.21),p=bezierPoint(connector,phase);
-      alpha(Math.sin(phase*Math.PI)*.65,()=>circle(p.x,p.y,5,k===1?C.coral:C.teal));
-    }
-    label(l('Neural programme','神经程序'),1450,973,{align:'center',size:35});
-  }
-
-  function closing(t){
-    const q=t/5;
-    logo(80,60,405);
-    text('CellNet:',100,398,112,C.ink,500);
-    text(l('A panoramic view','细胞的'),100,528,103,C.ink,400,{max:1060});
-    text(l('of the cell','全景视角'),100,665,121,C.teal,400,{serif:!ZH(language)});
-    text('daydayup-xq.github.io/CellNet',105,828,38,C.ink,500,{max:1020});
-    const x=1220-24*q,y=310-22*q;
-    mosaic(x+31,y+24,507,486,t+55,{cols:26,rows:25,rotation:-.045,curve:23,light:.7});
-    mosaic(x,y,507,486,t+55,{cols:26,rows:25,rotation:-.045,curve:23,light:.7,layer:true});
-    const points=[{x:780,y:944},{x:1015,y:962},{x:1100,y:935},{x:1270,y:819}];
-    stream(points,t,{count:12,speed:.075,size:8,color:C.teal,lineOpacity:.4});
-  }
-
-  const draw=[opening,representation,learning,scale,cells,prediction,programmes,closing];
-  function render(time,lang='en'){
-    time=clamp(Number.isFinite(time)?time:0,0,DURATION);language=lang;
-    let i=SCENES.findIndex(s=>time>=s.start&&time<s.end);if(i<0)i=SCENES.length-1;
-    const scene=SCENES[i],t=time-scene.start;
-    ctx.save();ctx.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);base(time);
-    const a=i>0?ease(t,0,.65):1;
-    if(a<1)alpha(1-a,()=>draw[i-1](SCENES[i-1].end-SCENES[i-1].start+t));
-    alpha(a,()=>draw[i](t));ctx.restore();return{time,scene:scene.id,index:i};
-  }
-  render(0);return{render,assets};
+ }
+ function copyGrid(t,center,size,mask=0,rotation=0){ctx.save();ctx.translate(center.x,center.y);ctx.rotate(rotation);shadow(()=>rect(-size/2-6,-size*.45-6,size+12,size*.9+12,'#fff',5));for(const g of genes){const s=size/COLS*.87,x=-size/2+g.col*size/COLS,y=-size*.45+g.row*size*.9/ROWS;const hide=random(Math.floor(g.col/4)+Math.floor(t),Math.floor(g.row/4)+6)<mask;rect(x,y,s,s,hide?'#e3ebe3':g.color,1)}ctx.restore()}
+ function viewCopies(t){if(t<10.8||t>15.8)return;const unfold=phase(t,10.8,13.1),collapse=phase(t,13.8,15.8);for(let k=0;k<3;k++){const start={x:1440,y:610},fan=[{x:470,y:357},{x:700,y:650},{x:440,y:864}][k],model={x:1280,y:570};const x=lerp(lerp(start.x,fan.x,unfold),model.x,collapse),y=lerp(lerp(start.y,fan.y,unfold),model.y,collapse),size=lerp(lerp(0,230,unfold),18,collapse);copyGrid(t+k,{x,y},size,.2+k*.15,lerp(.015,k===1?.035:-.035,unfold));}}
+ function modelPose(t){if(t<10.8)return{x:1272,y:1460,s:1};if(t<15.8)return{x:1272,y:lerp(1460,586,phase(t,10.8,12.8)),s:1};if(t<21.8)return{x:lerp(1272,2160,phase(t,18.0,21.8)),y:586,s:1};if(t<24.0)return{x:2160,y:586,s:.88};return{x:lerp(2160,938,phase(t,24.0,25.7)),y:586,s:.88};}
+ function model(t){if(t<10.8||t>30.8)return;const p=modelPose(t),out=phase(t,29.5,30.8);ctx.save();ctx.translate(p.x+1100*out,p.y);ctx.scale(p.s,p.s);for(let k=0;k<4;k++){const x=-125+k*30,y=-170-k*17;shadow(()=>rect(x,y,172,325,'#f1f6f0',8,C.line,1.5));for(let row=0;row<6;row++)for(let col=0;col<3;col++){const h=15+15*(.5+.5*Math.sin(t*2.1-row*.6-k));rect(x+26+col*42,y+42+row*40,19,h,palette[(row+col+k)%6],2)}}ctx.restore();}
+ function speciesInputs(t){if(t<14.4||t>18.6)return;for(let lane=0;lane<3;lane++)for(let j=0;j<4;j++){const q=clamp((t-14.4-j*.22-lane*.13)/2.1),size=lerp(176,22,phase(q,.42,1)),x=lerp(-180,1320,q),y=lerp(355+lane*230,574,smoother(q));if(q===0||q===1)continue;ctx.save();ctx.translate(x,y);ctx.rotate((lane-1)*.025);shadow(()=>rect(-size/2-4,-size/2-4,size+8,size+8,'#fff',5));ctx.drawImage(images[(lane+j)%3],-size/2,-size/2,size,size);ctx.restore();}}
+ const communities=[{x:560,y:615,n:24,r:177,c:'#35867f'},{x:1160,y:550,n:30,r:180,c:'#77a9a0'},{x:1576,y:805,n:7,r:88,c:C.coral}];
+ function cells(t){if(t<17.2||t>25.1)return;const emerge=phase(t,17.2,20.0),zoom=phase(t,21.7,24.4),magnify=1+zoom*10,selected={x:560,y:615};for(let group=0;group<communities.length;group++){const g=communities[group];for(let j=0;j<g.n;j++){const a=j*2.39996,r=Math.sqrt((j+.5)/g.n)*g.r;let x=lerp(1280,g.x+Math.cos(a)*r,emerge),y=lerp(580,g.y+Math.sin(a)*r,emerge);x=selected.x+(x-selected.x)*magnify;y=selected.y+(y-selected.y)*magnify;const radius=(12+random(j,group)*7)*lerp(.4,1,emerge)*magnify;if(x<-200||x>W+200||y<-200||y>H+200)continue;circle(x,y,radius,C.paper,g.c,1.7);circle(x-radius*.1,y+radius*.08,radius*.33,g.c)}}
+  const radius=lerp(29,1400,zoom);circle(selected.x,selected.y,radius,C.paper,C.teal,2.2);
+  if(zoom<.03)circle(selected.x,selected.y,11,C.teal);
+ }
+ function prediction(t){if(t<23.2||t>31.2)return;const enter=phase(t,23.2,25.1),exit=phase(t,29.3,31.2),xout=1287+850*(1-enter)+1000*exit,yout=390;
+  shadow(()=>rect(xout-8,yout-8,565,496,'#fff',5));
+  const progress=phase(t,25.9,29.3);
+  for(const g of genes){const s=555/COLS*.87,x=xout+g.col*555/COLS,y=yout+g.row*480/ROWS;const predicted=g.target&&progress>random(g.id,31);rect(x,y,s,s,g.target?(predicted?C.coral:'#e3ebe3'):g.color,1);if(predicted)rect(x,y,s,s,null,1,C.coral,1.3)}
+  if(t<24.4)return;
+  const decoderX=1121+850*(1-phase(t,24.4,25.8))+1000*exit;
+  for(let k=0;k<3;k++){rect(decoderX+k*14,585-k*12,98,113,'#f0f5ed',5,C.line,1.4);for(let j=0;j<3;j++)rect(decoderX+17+k*14+j*24,614-k*12,12,42,palette[(j+k)%6],2)}
+  const qy=916+420*(1-phase(t,24.4,25.8));
+  for(let j=0;j<11;j++){const h=14+random(j,33)*23;rect(886+j*19+1000*exit,qy-h/2,12,h,palette[j%6],2)}
+  const mp=modelPose(t),decoder={x:decoderX+64,y:698};
+  flow([{x:718,y:630},{x:770,y:630},{x:780,y:575},{x:mp.x-142,y:575}],t,{count:5,speed:.34,size:8});
+  flow([{x:mp.x+125,y:575},{x:mp.x+170,y:575},{x:decoderX-40,y:632},{x:decoderX-8,y:632}],t,{count:5,speed:.35,size:8});
+  flow([{x:1098+1000*exit,y:qy},{x:decoder.x,y:qy},{x:decoder.x,y:780},decoder],t,{color:C.coral,count:6,speed:.34,size:9});
+  flow([{x:decoderX+133,y:630},{x:decoderX+170,y:630},{x:xout-50,y:630},{x:xout-10,y:630}],t,{color:C.coral,count:4,speed:.35,size:9});
+ }
+ function programmeEdges(t){if(t<29.4||t>37.5)return;const enter=phase(t,29.4,32.6),exit=phase(t,35.3,37.5),origin={x:lerp(1040,340,enter),y:lerp(920,621,enter)};const scale=1-exit;
+  circle(origin.x,origin.y,58*scale,'#e2eee5',C.teal,2);
+  for(let j=0;j<5;j++)rect(origin.x-31+j*14,origin.y-16,8,32*scale,j%2?C.coral:C.teal,2);
+  const cs=[{x:1050,y:470},{x:1512,y:613},{x:1097,y:838}];
+  for(let k=0;k<3;k++){const center=cs[k];const p=[{x:origin.x+58*scale,y:origin.y},{x:700,y:origin.y},{x:770,y:center.y},{x:center.x-120,y:center.y}];path(p,'#9cbdae',2,enter*scale);const travel=frac(t*.38+k*.23);if(travel<enter*scale){const mark=pathPoint(p,travel);rect(mark.x-4,mark.y-4,8,8,C.teal,2)}for(let j=k;j<N;j+=30){const a=tokenPose(genes[j],t),b=tokenPose(genes[(j+45)%N],t);if(enter>.1)line(a,{x:lerp(a.x,b.x,enter*scale),y:lerp(a.y,b.y,enter*scale)},'#c2d8cb',1.4)}}
+ }
+ function logoReveal(t){if(t<36)return;const p=phase(t,36.3,37.8);ctx.save();ctx.beginPath();ctx.rect(74,64,590*p,236);ctx.clip();ctx.globalCompositeOperation='multiply';ctx.drawImage(assets.logo,74,64,590,590*assets.logo.height/assets.logo.width);ctx.restore();}
+ function maskText(value,x,y,size,t,start,end,{color=C.ink,serif=false,max=1720}={}){const enter=phase(t,start,start+.42),leave=phase(t,end-.36,end);const width=max;ctx.save();ctx.beginPath();ctx.rect(x-4,y-size*1.03,width*(1-leave),size*1.33);ctx.clip();text(value,x+24*(1-enter),y+size*1.3*(1-enter),size,color,500,{serif,max});ctx.restore();}
+ function titles(t){
+  if(t<4.2){maskText('CellNet',98,270,144,t,-.5,4.2,{max:800});maskText(l('Panoramic transcriptome','转录组的全景建模'),103,404,zh(language)?75:73,t,-.4,4.2,{max:960});if(!zh(language))maskText('modelling',103,510,105,t,-.3,4.2,{color:C.teal,serif:true,max:900});}
+  if(t>=4&&t<8.3)maskText('DNA × RNA',100,187,128,t,4,8.3,{max:1100});
+  if(t>=7.95&&t<12.2)maskText(l('One panoramic image','一幅转录组全景图'),100,187,105,t,7.95,12.2,{max:1700});
+  if(t>=11.85&&t<15.25)maskText(l('Learn the cell','学习细胞'),100,187,119,t,11.85,15.25,{max:1700});
+  if(t>=14.9&&t<18.3)maskText(l('Across species','跨物种学习'),100,187,119,t,14.9,18.3,{max:1700});
+  if(t>=17.95&&t<22.2)maskText(l('Identity. State.','身份与状态'),100,187,119,t,17.95,22.2,{max:1700});
+  if(t>=21.85&&t<25.3)maskText(l('Observed context','已观测语境'),100,187,113,t,21.85,25.3,{max:1700});
+  if(t>=24.95&&t<30.3){maskText(l('Query a gene','查询基因'),100,187,122,t,24.95,30.3,{max:1700});maskText(l('From context to expression','从语境到表达'),105,264,36,t,25.25,30.3,{color:C.muted,max:1600});}
+  if(t>=29.95&&t<36.3){maskText(l('Molecular programmes','分子程序'),100,187,106,t,29.95,36.3,{max:1700});if(t>31.1)maskText('SERTAD4-AS1',217,771,37,t,31.1,36.3,{color:C.teal,max:430});}
+  if(t>=36){maskText('CellNet:',100,438,111,t,36,42,{max:1010});maskText(l('A panoramic view','细胞的'),100,564,103,t,36.15,42,{max:1050});maskText(l('of the cell','全景视角'),100,694,121,t,36.3,42,{color:C.teal,serif:!zh(language),max:1050});maskText('daydayup-xq.github.io/CellNet',104,861,38,t,36.8,42,{max:1030});}
+ }
+ function render(time,lang='en'){
+  time=clamp(Number.isFinite(time)?time:0,0,DURATION);language=lang;
+  let index=SCENES.findIndex(s=>time>=s.start&&time<s.end);if(index<0)index=SCENES.length-1;
+  ctx.save();ctx.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);background();
+  const cam=camera(time);ctx.save();ctx.translate(W/2,H/2);ctx.scale(cam.z,cam.z);ctx.translate(-cam.x,-cam.y);
+  // All objects use one absolute timeline. Changes are pose/geometry changes;
+  // no full-frame alpha compositing or swapping independent scene renderers.
+  inputSignals(time);viewCopies(time);speciesInputs(time);cells(time);programmeEdges(time);mainTokens(time);model(time);prediction(time);
+  ctx.restore();logoReveal(time);titles(time);ctx.restore();
+  return{time,scene:SCENES[index].id,index};
+ }
+ render(0);return{render,assets};
 }
