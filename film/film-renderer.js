@@ -1,20 +1,28 @@
-/** CellNet — 36 seconds at 120 BPM. One English-language visual master.
+/** CellNet — 44 seconds at 120 BPM. One English-language visual master.
  * Gene/cell diagrams are conceptual; atlas textures are actual CellNet images.
  * A complete panorama opens the film; no image splitting or whole-frame fades.
  */
-export const DURATION=36;
+export const DURATION=44;
 export const BPM=120;
-export const BEAT_MARKERS=Array.from({length:73},(_,i)=>i/2);
+export const BEAT_MARKERS=Array.from({length:89},(_,i)=>i/2);
 const scene=(id,start,end,title,subtitle)=>({id,start,end,title:{en:title,zh:title},subtitle:{en:subtitle,zh:subtitle}});
 export const SCENES=[
- scene('panorama',0,4,'Panoramic transcriptome modelling','CellNet brings coding and non-coding RNA into one panoramic cellular context.'),
- scene('representation',4,8,'DNA unlocks the gene vocabulary.','DNA-derived identities bring coding and non-coding genes into a fixed, species-specific expression image. One selected scRNA-seq cell row supplies the expression values; measured zeros and unmeasured genes remain distinct.'),
- scene('atlas',8,14,'An atlas for what comes next.','An open collection of transcriptome images, connecting diverse cells and species in a common visual representation.'),
- scene('learning',14,18,'Panoramic biology. Practical compute.','Image patches combine many genes into a bounded token grid, making panoramic transcriptome modelling practical at scale. Full-extent masked views preserve cellular context.'),
- scene('cells',18,22,'See the rare. Resolve the state.','CellNet preserves identities and resolves rare populations and condition-associated states in evaluated cohorts.'),
- scene('prediction',22,26,'Explore beyond measured genes.','From observed cellular context and separate DNA-derived gene queries, CellNet predicts withheld coding and selected non-coding expression, extending exploration across species and spatial measurement panels.'),
- scene('programmes',26,30,'Non-coding RNA. Functional connections.','Non-coding RNA queries retrieve associated molecular modules and developmental or neural gene programmes, including from sparsely detected queries.'),
- scene('closing',30,36,'Image Atlas + Foundation Model','A new foundation for biological discovery.'),
+ scene('panorama',0,4,'Panoramic transcriptome modelling, at scale.','CellNet brings coding and non-coding RNA into one panoramic cellular context.'),
+ scene('representation',4,10,'DNA unlocks the gene vocabulary.','DNA-derived identities bring coding and non-coding genes into a fixed, species-specific expression image. One selected scRNA-seq cell row supplies the expression values; measured zeros and unmeasured genes remain distinct.'),
+ scene('atlas',10,16,'An atlas for what comes next.','An open collection of transcriptome images, connecting diverse cells and species in a common visual representation.'),
+ scene('learning',16,22,'Panoramic biology. Practical compute.','Image patches combine many genes into a bounded token grid, making panoramic transcriptome modelling practical at scale. Full-extent masked views preserve cellular context.'),
+ scene('cells',22,26,'See the rare. Resolve the state.','CellNet preserves identities and resolves rare populations and condition-associated states in evaluated cohorts.'),
+ scene('prediction',26,32,'Explore beyond measured genes.','From observed cellular context and separate DNA-derived gene queries, CellNet predicts withheld coding and selected non-coding expression, extending exploration across species and spatial measurement panels.'),
+ scene('programmes',32,38,'Non-coding RNA. Functional connections.','Non-coding RNA queries retrieve associated molecular modules and developmental or neural gene programmes, including from sparsely detected queries.'),
+ scene('closing',38,44,'Image Atlas + Foundation Model','A new foundation for biological discovery.'),
+];
+// Extra reading time is inserted after each dense composition has settled.
+// Entrance speeds and the continuous Atlas camera remain unchanged.
+export const READING_HOLDS=[
+ {scene:'representation',start:7.7,end:9.7},
+ {scene:'learning',start:18.95,end:20.95},
+ {scene:'prediction',start:29.6,end:31.6},
+ {scene:'programmes',start:35.3,end:37.3},
 ];
 const W=1920,H=1080,TAU=Math.PI*2;
 const C={paper:'#fafbf8',ink:'#14333b',teal:'#287e7b',muted:'#708781',line:'#d6e3db',coral:'#c98673'};
@@ -22,6 +30,7 @@ const palette=['#d0e3d7','#aecdbd','#83b5a1','#599e8e','#318177','#1d6266','#c5b
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)),lerp=(a,b,p)=>a+(b-a)*p;
 const ease=v=>{v=clamp(v);return v*v*v*(v*(v*6-15)+10)};
 const phase=(t,a,b)=>ease((t-a)/(b-a)),frac=v=>v-Math.floor(v);
+const visualTime=t=>t-READING_HOLDS.reduce((held,h)=>held+clamp(t-h.start,0,h.end-h.start),0);
 const rand=(x,y=0)=>frac(Math.sin(x*127.1+y*311.7)*43758.5453);
 const COLS=30,ROWS=24;
 const genes=Array.from({length:COLS*ROWS},(_,id)=>({id,col:id%COLS,row:Math.floor(id/COLS),color:palette[Math.floor(rand(id,14)*palette.length)],hidden:rand(id+63,17)>.79}));
@@ -38,6 +47,7 @@ export async function createFilm(canvas){
  const entries=[['logo','cellnet-logo.png'],...Array.from({length:24},(_,i)=>[`cell${i}`,`cells/pretrain_${String(i).padStart(4,'0')}.webp`])];
  const assets=Object.fromEntries(await Promise.all(entries.map(async([key,path])=>[key,await load(path)])));
  const images=Array.from({length:24},(_,i)=>assets[`cell${i}`]);
+ let motionTime=0;
  function rect(x,y,w,h,fill,r=0,stroke=null,width=1){if(w<=0||h<=0)return;ctx.beginPath();r?ctx.roundRect(x,y,w,h,Math.min(r,w/2,h/2)):ctx.rect(x,y,w,h);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.stroke()}}
  function circle(x,y,r,fill,stroke=null,width=1){if(r<=0)return;ctx.beginPath();ctx.arc(x,y,r,0,TAU);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.stroke()}}
  function line(a,b,color=C.line,width=2){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke()}
@@ -45,7 +55,7 @@ export async function createFilm(canvas){
  function shadow(draw){ctx.save();ctx.shadowColor='rgba(24,62,48,.09)';ctx.shadowBlur=22;ctx.shadowOffsetY=10;draw();ctx.restore()}
  function pathPoint(p,t){const q=1-t,[a,b,c,d]=p;return{x:q*q*q*a.x+3*q*q*t*b.x+3*q*t*t*c.x+t*t*t*d.x,y:q*q*q*a.y+3*q*q*t*b.y+3*q*t*t*c.y+t*t*t*d.y}}
  function path(points,color=C.line,width=2,progress=1){const a=pathPoint(points,0);ctx.beginPath();ctx.moveTo(a.x,a.y);for(let k=1;k<=30;k++){const p=pathPoint(points,progress*k/30);ctx.lineTo(p.x,p.y)}ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke()}
- function flow(points,t,{color=C.teal,count=5,speed=.5,size=8,progress=1}={}){path(points,C.line,2,progress);for(let k=0;k<count;k++){const q=frac(t*speed+k/count);if(q>progress)continue;const p=pathPoint(points,q);rect(p.x-size/2,p.y-size/2,size,size,color,2)}}
+ function flow(points,t,{color=C.teal,count=5,speed=.5,size=8,progress=1}={}){path(points,C.line,2,progress);for(let k=0;k<count;k++){const q=frac(motionTime*speed+k/count);if(q>progress)continue;const p=pathPoint(points,q);rect(p.x-size/2,p.y-size/2,size,size,color,2)}}
  function background(){const g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,'#fdfdfb');g.addColorStop(1,'#edf3ec');rect(0,0,W,H,g)}
  function gridPose(g,cx,cy,size,rotation=0){const x=((g.col+.5)/COLS-.5)*size,y=((g.row+.5)/ROWS-.5)*size;return{x:cx+x*Math.cos(rotation)-y*Math.sin(rotation),y:cy+x*Math.sin(rotation)+y*Math.cos(rotation),size:size/COLS*.9}}
  function panorama(t){if(t>=8)return;const pull=phase(t,0,3.5),turn=phase(t,3.5,4.5),size=lerp(735,620,pull),x=lerp(1390,1320,pull),y=lerp(562,600,pull);ctx.save();ctx.translate(x,y);ctx.rotate(lerp(-.115,0,turn));shadow(()=>rect(-size/2-14,-size/2-14,size+28,size+28,'#f7faf4',10,C.line,1.2));
@@ -68,7 +78,9 @@ export async function createFilm(canvas){
   const reveal=phase(t,4,4.35),select=phase(t,4.5,4.8),tableX=104,tableY=596,tableW=694,tableH=248,rowY=696;
   ctx.save();ctx.beginPath();ctx.rect(tableX-8,tableY-8,tableW+16,(tableH+16)*reveal);ctx.clip();
   shadow(()=>rect(tableX,tableY,tableW,tableH,'#f9fbf7',10,C.line,1.3));
-  if(select>0)rect(tableX+10,rowY-21,tableW-20,42,'#e3eee4',6,C.teal,1.6*select);
+  // A quiet focus cue continues through the reading hold; expression stays fixed.
+  const focus=phase(motionTime,7.7,8)*(1-phase(motionTime,9.4,9.7));
+  if(select>0)rect(tableX+10,rowY-21,tableW-20,42,'#e3eee4',6,C.teal,(1.6+.5*focus*Math.sin((motionTime-7.7)*Math.PI))*select);
   const drawValue=(state,cx,cy,size)=>{
    if(state.missing)line({x:cx-size*.24,y:cy},{x:cx+size*.24,y:cy},'#a4b5aa',2);
    else if(state.zero)rect(cx-size*.22,cy-size*.22,size*.44,size*.44,null,1,C.teal,1.7);
@@ -122,7 +134,7 @@ export async function createFilm(canvas){
   const reveal=phase(t,8.2,9.35);if(reveal>0){ctx.save();ctx.beginPath();ctx.rect(main.x-main.size/2,main.y-main.size/2,main.size*reveal,main.size);ctx.clip();ctx.drawImage(images[4],main.x-main.size/2,main.y-main.size/2,main.size,main.size);ctx.restore()}
  }
  function grid(cx,cy,size,t,{masked=false,variant=0,neutralTargets=false,prediction=0}={}){for(const g of genes){const p=gridPose(g,cx,cy,size),hidden=neutralTargets&&g.hidden||masked&&rand(Math.floor(g.col/5)+variant,Math.floor(g.row/4))<.38,revealed=neutralTargets&&g.hidden&&prediction>rand(g.id,31);rect(p.x-p.size/2,p.y-p.size/2,p.size,p.size,hidden?(revealed?C.coral:'#dfe9df'):g.color,1);if(revealed)rect(p.x-p.size/2,p.y-p.size/2,p.size,p.size,null,1,C.coral,1.1)}}
- function modelLayers(x,y,scale,t,{closing=false}={}){ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);for(let k=0;k<4;k++){const dx=-105+k*34,dy=-170-k*15;shadow(()=>rect(dx,dy,175,340,'#f1f6ef',9,'#c9dbcf',1.5));for(let r=0;r<6;r++)for(let c=0;c<3;c++){const pulse=.6+.4*Math.sin((t-r*.125-k*.25)*Math.PI*2);rect(dx+25+c*43,dy+40+r*44,20,12+20*pulse,palette[(c+r+k)%6],2)}}ctx.restore();if(!closing)text('CellNet',x+32*scale,y+240*scale,32,{align:'center',color:C.teal,max:300})}
+ function modelLayers(x,y,scale,t,{closing=false}={}){ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);for(let k=0;k<4;k++){const dx=-105+k*34,dy=-170-k*15;shadow(()=>rect(dx,dy,175,340,'#f1f6ef',9,'#c9dbcf',1.5));for(let r=0;r<6;r++)for(let c=0;c<3;c++){const pulse=.6+.4*Math.sin((motionTime-r*.125-k*.25)*Math.PI*2);rect(dx+25+c*43,dy+40+r*44,20,12+20*pulse,palette[(c+r+k)%6],2)}}ctx.restore();if(!closing)text('CellNet',x+32*scale,y+240*scale,32,{align:'center',color:C.teal,max:300})}
  function patchGroups(cx,cy,size,t,start){
   // These schematic patch outlines group existing gene pixels into a bounded grid.
   // They never crop the panorama or reveal values beneath a masked input slot.
@@ -133,7 +145,7 @@ export async function createFilm(canvas){
  }
  function learning(t){if(t<13.5||t>=18)return;const enter=phase(t,13.5,14.5),exit=phase(t,17,18),cx=1338,cy=600;modelLayers(cx,cy,enter*(1-exit*.5),t);
   // Equal-sized, aligned full-image views converge together; masking keeps the full extent.
-  const fold=phase(t,16.5,17.7);
+  const fold=phase(t,17,17.7);
   for(let i=0;i<3;i++){
    const start=15+i*.5,show=phase(t,start,start+.3),size=lerp(184,18,fold)*show,x=lerp(980,cx,fold),y=lerp(390+i*210,cy,fold);
    if(fold<1){
@@ -162,7 +174,7 @@ export async function createFilm(canvas){
  }
  function modulePosition(g,t){const group=g.id%3,n=Math.floor(g.id/3),centers=[{x:1110,y:430},{x:1530,y:610},{x:1110,y:823}],center=centers[group],r=25+Math.sqrt(n/240)*(group===1?155:136),a=n*2.39996;return blend(gridPose(g,1518,640,480),{x:center.x+Math.cos(a)*r,y:center.y+Math.sin(a)*r,size:g.id%5===0?9:3},phase(t,26,27.5))}
  function programmes(t){if(t<26||t>=30.7)return;const enter=phase(t,26,27),leave=phase(t,29.8,30.7);ctx.save();ctx.translate(0,-1100*leave);const query={x:400,y:663};circle(query.x,query.y,56*enter,'#e2eee5',C.teal,1.5);for(let j=0;j<5;j++)rect(query.x-32+j*14,query.y-17,8,34*enter,j%2?C.coral:C.teal,2);
-  for(let group=0;group<3;group++){const center=[{x:1110,y:430},{x:1530,y:610},{x:1110,y:823}][group],grow=phase(t,26.5+group*.5,27.5+group*.5),points=[{x:456,y:663},{x:740,y:663},{x:790,y:center.y},{x:center.x-95,y:center.y}];path(points,'#b3cdbd',2,grow);const q=frac((t-26)*.5+group/3);if(q<grow){const p=pathPoint(points,q);rect(p.x-4,p.y-4,8,8,C.teal,2)}}
+  for(let group=0;group<3;group++){const center=[{x:1110,y:430},{x:1530,y:610},{x:1110,y:823}][group],grow=phase(t,26.5+group*.5,27.5+group*.5),points=[{x:456,y:663},{x:740,y:663},{x:790,y:center.y},{x:center.x-95,y:center.y}];path(points,'#b3cdbd',2,grow);const q=frac((motionTime-26)*.5+group/3);if(q<grow){const p=pathPoint(points,q);rect(p.x-4,p.y-4,8,8,C.teal,2)}}
   for(let i=0;i<genes.length;i+=15){const a=modulePosition(genes[i],t),b=modulePosition(genes[(i+45)%genes.length],t),grow=phase(t,27+Math.floor((i%90)/30)*.5,28+Math.floor((i%90)/30)*.5);line(a,{x:lerp(a.x,b.x,grow),y:lerp(a.y,b.y,grow)},'#c5d9ca',1.3)}for(const g of genes){const p=modulePosition(g,t);rect(p.x-p.size/2,p.y-p.size/2,p.size,p.size,g.color,2)}
   if(t>=27){text('ncRNA query',query.x,query.y+119,32,{color:C.teal,align:'center',max:450});text('Development',1110,245,30,{color:C.muted,align:'center',max:400});text('Neural programmes',1518,838,30,{color:C.muted,align:'center',max:430})}ctx.restore();
  }
@@ -181,7 +193,7 @@ export async function createFilm(canvas){
  }
  function label(value,x,y,size,t,start,end,{color=C.ink,serif=false,max=1720}={}){const p=phase(t,start,start+.28),q=phase(t,end-.2,end);ctx.save();ctx.beginPath();ctx.rect(x-4,y-size*1.12,max+8,size*1.36);ctx.clip();text(value,x+24*(1-p),y+size*1.35*(1-p)-size*1.35*q,size,{color,serif,max});ctx.restore()}
  function titles(t){
-  if(t<4){label('CellNet',96,264,147,t,-1,4,{max:930});label('Panoramic',102,422,113,t,-1,4,{color:C.teal,serif:true,max:870});label('transcriptome modelling',103,512,65,t,-1,4,{max:900});label('Panoramic by design.',105,725,39,t,1,4,{color:C.muted,max:800})}
+  if(t<4){label('CellNet',96,264,147,t,-1,4,{max:930});label('Panoramic',102,422,113,t,-1,4,{color:C.teal,serif:true,max:870});label('transcriptome modelling,',103,512,65,t,-1,4,{max:900});label('at scale.',104,626,82,t,1,4,{color:C.teal,serif:true,max:800})}
   if(t>=4&&t<8){label('DNA unlocks',96,272,111,t,4,8,{max:900});label('the gene vocabulary.',96,402,96,t,4.5,8,{color:C.teal,serif:true,max:850});label('Coding and non-coding genes.',104,478,31,t,4.5,8,{color:C.muted,max:820});label('scRNA-seq',104,562,34,t,4,8,{color:C.teal,max:700});label('DNA-defined gene positions',1010,242,32,t,4.5,8,{color:C.muted,max:690});label('One cell. One image.',1010,978,32,t,5,8,{color:C.teal,max:690})}
   if(t>=8&&t<14){label('Image Atlas',98,220,54,t,8,14,{color:C.teal,max:650});label('An atlas for',96,382,101,t,8,14,{max:710});label('what comes',96,497,101,t,8.5,14,{max:710});label('next.',96,633,129,t,9,14,{color:C.teal,serif:true,max:710});label('Large-scale. Cross-species.',102,798,31,t,10,14,{color:C.muted,max:690});label('Open for discovery.',102,851,31,t,10.5,14,{color:C.teal,max:690})}
   if(t>=14&&t<18){label('Foundation Model',98,220,48,t,14,18,{color:C.teal,max:740});label('Panoramic',96,380,108,t,14,18,{max:760});label('biology.',96,506,110,t,14.5,18,{max:760});label('Practical compute.',96,631,88,t,15,18,{color:C.teal,serif:true,max:765});label('Many genes per patch.',102,794,32,t,15.5,18,{color:C.muted,max:740});label('One cellular context.',102,847,32,t,16,18,{color:C.teal,max:740})}
@@ -190,7 +202,7 @@ export async function createFilm(canvas){
   if(t>=26&&t<30){label('Non-coding RNA.',96,296,96,t,26,30,{max:850});label('Functional',96,430,108,t,26.5,30,{max:850});label('connections.',96,562,118,t,27,30,{color:C.teal,serif:true,max:870});label('Retrieve associated gene programmes.',102,925,31,t,27.5,30,{color:C.muted,max:820})}
   if(t>=30){label('Panoramic transcriptome',955,122,54,t,30,38,{max:865});label('modelling, at scale.',955,186,54,t,30.5,38,{color:C.teal,max:865});label('A new foundation for biological discovery.',103,1006,45,t,32,38,{max:1710})}
  }
- function render(time,_language='en'){time=clamp(Number.isFinite(time)?time:0,0,DURATION);let index=SCENES.findIndex(s=>time>=s.start&&time<s.end);if(index<0)index=SCENES.length-1;ctx.save();ctx.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);background();panorama(time);conversion(time);atlas(time);learning(time);cellScene(time);selectedPanorama(time);prediction(time);programmes(time);closing(time);titles(time);ctx.restore();return{time,scene:SCENES[index].id,index,beat:Math.min(72,Math.floor(time*2))}}
+ function render(time,_language='en'){time=clamp(Number.isFinite(time)?time:0,0,DURATION);motionTime=time;const visual=visualTime(time);let index=SCENES.findIndex(s=>time>=s.start&&time<s.end);if(index<0)index=SCENES.length-1;ctx.save();ctx.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);background();panorama(visual);conversion(visual);atlas(visual);learning(visual);cellScene(visual);selectedPanorama(visual);prediction(visual);programmes(visual);closing(visual);titles(visual);ctx.restore();return{time,scene:SCENES[index].id,index,beat:Math.min(88,Math.floor(time*2))}}
  // Decode and rasterize reusable card shadows once, before the playback clock starts.
  // Offscreen surfaces stay internal; no additional asset or DOM elements are required.
  function surface(width,height){if(typeof OffscreenCanvas!=='undefined')return new OffscreenCanvas(width,height);const out=canvas.ownerDocument.createElement('canvas');out.width=width;out.height=height;return out}

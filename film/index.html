@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fafbf8">
   <title>CellNet — A panoramic view of the cell · The film</title>
-  <meta name="description" content="A 36-second music-led film. DNA unlocks the gene vocabulary. Images make panoramic modelling practical. Explore unmeasured genes and the functional programmes associated with non-coding RNA.">
+  <meta name="description" content="A 44-second music-led film. DNA unlocks the gene vocabulary. Images make panoramic modelling practical. Explore unmeasured genes and the functional programmes associated with non-coding RNA.">
   <link rel="canonical" href="https://daydayup-xq.github.io/CellNet/film/">
   <meta property="og:title" content="CellNet: A panoramic view of the cell — The film">
   <meta property="og:type" content="video.other">
-  <meta property="og:image" content="https://daydayup-xq.github.io/CellNet/film/poster.jpg?v=5">
+  <meta property="og:image" content="https://daydayup-xq.github.io/CellNet/film/poster.jpg?v=6">
   <link rel="icon" href="../assets/cellnet-logo.png">
-  <link rel="stylesheet" href="film.css?v=5">
-  <script type="module" src="player.js?v=5"></script>
+  <link rel="stylesheet" href="film.css?v=6">
+  <script type="module" src="player.js?v=6"></script>
 </head>
 <body>
   <a class="skip" href="#film">Skip to film</a>
@@ -21,19 +21,19 @@
     <a class="back" href="../">← Back to the research</a>
   </header>
   <main>
-    <div class="film-intro"><p class="eyebrow">THE CELLNET FILM · 36 SECONDS</p><h1>Panoramic transcriptome modelling</h1></div>
+    <div class="film-intro"><p class="eyebrow">THE CELLNET FILM · 44 SECONDS</p><h1>Panoramic transcriptome modelling</h1></div>
     <audio id="soundtrack" preload="metadata"></audio>
     <section class="player" id="film" aria-label="CellNet research film">
       <div class="screen" id="screen" tabindex="0" role="group" aria-label="Film canvas. Space to play or pause; left and right arrows to seek.">
         <canvas id="film-canvas" width="1920" height="1080" role="img" aria-label="CellNet research film. An accessible description of each chapter is available below."></canvas>
         <div class="loading" id="loading" role="status">Preparing the film…</div>
-        <button class="start" id="start" type="button" aria-label="Play the film" hidden><span class="play-symbol" aria-hidden="true">▶</span><span>Play with sound</span><small>00:36</small></button>
+        <button class="start" id="start" type="button" aria-label="Play the film" hidden><span class="play-symbol" aria-hidden="true">▶</span><span>Play with sound</span><small>00:44</small></button>
       </div>
       <div class="controls" id="controls">
         <button class="control play" id="play" type="button" disabled aria-label="Play"><span id="play-icon" aria-hidden="true">▶</span></button>
         <button class="control replay" id="replay" type="button" disabled aria-label="Replay"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg></button>
-        <output id="time" class="time" aria-label="Playback time">00:00 / 00:36</output>
-        <label class="seek-label" for="seek"><span class="sr-only">Film position in seconds</span><input id="seek" type="range" min="0" max="36" step="0.1" value="0" disabled aria-valuetext="0 seconds of 36 seconds"></label>
+        <output id="time" class="time" aria-label="Playback time">00:00 / 00:44</output>
+        <label class="seek-label" for="seek"><span class="sr-only">Film position in seconds</span><input id="seek" type="range" min="0" max="44" step="0.1" value="0" disabled aria-valuetext="0 seconds of 44 seconds"></label>
         <button class="control" id="sound" type="button" aria-label="Mute" aria-pressed="false" disabled><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 4 5 8H2v8h3l5 4Z"/><path id="sound-waves" d="M14 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path id="sound-off" style="display:none" d="m15 9 6 6m0-6-6 6"/></svg></button>
         <span class="chapter-label" id="chapter-label"></span>
         <button class="control" id="fullscreen" type="button" aria-label="Enter fullscreen"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 9V4h5m6 0h5v5m0 6v5h-5m-6 0H4v-5"/></svg></button>
@@ -41,7 +41,7 @@
       <p class="sr-only" id="scene-announcement" aria-live="polite"></p>
     </section>
     <p id="audio-status" class="audio-status" role="status" hidden></p>
-    <div class="film-meta"><span>Two foundations. Discovery at scale.</span><a id="video-download" href="cellnet-film-en.mp4?v=5" download>Download film · MP4 ↓</a></div>
+    <div class="film-meta"><span>Two foundations. Discovery at scale.</span><a id="video-download" href="cellnet-film-en.mp4?v=6" download>Download film · MP4 ↓</a></div>
     <nav class="chapters" id="chapters" aria-label="Film chapters"></nav>
     <section class="discovery" aria-labelledby="discovery-title">
       <p class="eyebrow">THE BIOLOGICAL POSSIBILITY</p>
@@ -62,7 +62,7 @@
     </section>
     <details class="transcript" id="transcript"><summary><span>Inside the film</span><span aria-hidden="true">+</span></summary><ol id="transcript-list"></ol></details>
     <footer class="film-footer"><p>Explore the work behind the film.</p><div><a href="../#method">The method ↗</a><a href="../#gallery">Image Atlas ↗</a><a href="https://github.com/daydayup-xq/CellNet" target="_blank" rel="noopener noreferrer">Code & model ↗</a></div></footer>
-    <noscript><p>This film uses JavaScript for playback. <a href="cellnet-film-en.mp4?v=5">Watch the MP4 version</a>.</p></noscript>
+    <noscript><p>This film uses JavaScript for playback. <a href="cellnet-film-en.mp4?v=6">Watch the MP4 version</a>.</p></noscript>
   </main>
 </body>
 </html>

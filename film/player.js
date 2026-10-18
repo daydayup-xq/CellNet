@@ -1,4 +1,4 @@
-import { createFilm, DURATION, SCENES } from './film-renderer.js?v=5';
+import { createFilm, DURATION, SCENES } from './film-renderer.js?v=6';
 const $ = id => document.getElementById(id);
 const params = new URLSearchParams(location.search), exporting = params.get('export') === '1';
 if (exporting) document.documentElement.classList.add('export');
@@ -96,7 +96,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
 const ready=(async()=>{
   await Promise.all([document.fonts.load('400 36px "DM Sans"'),document.fonts.load('700 100px "DM Sans"'),document.fonts.load('400 78px "Instrument Serif"'),document.fonts.load('italic 78px "Instrument Serif"')]);
   await document.fonts.ready;renderer=await createFilm(canvas);$('loading').hidden=true;
-  if(!exporting){soundtrack.src='audio/score-v3.m4a';soundtrack.load();}
+  if(!exporting){soundtrack.src='audio/score-v6.m4a';soundtrack.load();}
   chapters();['play','replay','seek','sound'].forEach(id=>{$(id).disabled=false;});draw();
   if(params.get('autoplay')==='1'&&!reduced.matches&&!exporting)await play();return true;
 })();
