@@ -1,4 +1,4 @@
-import { createFilm, DURATION, SCENES } from './film-renderer.js?v=3';
+import { createFilm, DURATION, SCENES } from './film-renderer.js?v=4';
 const $ = id => document.getElementById(id);
 const params = new URLSearchParams(location.search), exporting = params.get('export') === '1';
 if (exporting) document.documentElement.classList.add('export');
@@ -9,7 +9,7 @@ const canvas=$('film-canvas'), soundtrack=$('soundtrack'), reduced=matchMedia('(
 const format=value=>String(Math.floor(value/60)).padStart(2,'0')+':'+String(Math.floor(value%60)).padStart(2,'0');
 const sceneAt=value=>Math.max(0,SCENES.findIndex(s=>value>=s.start&&(value<s.end||s.end===DURATION)));
 const english=value=>typeof value==='string'?value:value.en;
-const chapterNames=['Panoramic modelling','Every gene, a place','Image Atlas','Foundation Model','Cell identities & states','Beyond the observed','Biological programmes','Two foundations'];
+const chapterNames=['Panoramic modelling','A wider gene vocabulary','Image Atlas','Practical panoramic learning','Cell identities & states','A wider gene space','Non-coding programmes','Two foundations'];
 function updateControls(){
   $('time').value=format(time)+' / '+format(DURATION);
   $('seek').value=String(time);

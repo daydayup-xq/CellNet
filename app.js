@@ -14,7 +14,7 @@
   function applyLanguage() {
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
     document.querySelectorAll('[data-en][data-zh]').forEach(el => { el.textContent = el.dataset[language]; });
-    document.querySelectorAll('[data-film-link]').forEach(el => { el.href = 'film/?autoplay=1&v=3'; });
+    document.querySelectorAll('[data-film-link]').forEach(el => { el.href = 'film/?autoplay=1&v=4'; });
     const button = document.getElementById('language-button');
     button.textContent = language === 'zh' ? 'EN' : '中文';
     button.setAttribute('aria-label',language === 'zh' ? 'Switch to English' : '切换至中文');
