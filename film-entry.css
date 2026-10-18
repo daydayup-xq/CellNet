@@ -1,3 +1,18 @@
 @font-face{font-family:'Noto Sans SC Film';font-style:normal;font-weight:100 900;font-display:swap;src:url('assets/fonts/noto-sans-sc-film.woff2') format('woff2')}
-.film-entry{padding-top:28px;font-family:'DM Sans','Noto Sans SC Film',sans-serif}.film-entry-link{display:flex;align-items:center;gap:25px;border:1px solid var(--line);border-radius:6px;padding:16px 26px 16px 16px;background:#f1f5ef;transition:border-color .2s}.film-entry-link:hover{border-color:#8eb9a8}.film-entry-preview{width:152px;aspect-ratio:16/9;flex:none;position:relative;border:1px solid var(--line);overflow:hidden;border-radius:3px}.film-entry-preview img{width:100%;height:100%;object-fit:cover}.film-entry-preview>span{position:absolute;right:8px;bottom:8px;background:var(--ink);color:white;border-radius:50%;width:26px;height:26px;display:grid;place-items:center;font-size:8px;padding-left:1px}.film-entry-kicker{font-size:8px;letter-spacing:1.2px;color:var(--teal)}.film-entry-copy h2{font-size:21px;line-height:1.35;letter-spacing:-.5px;font-weight:450;margin-top:6px}.film-entry-action{margin-left:auto;display:flex;align-items:center;gap:23px;font-size:11px;white-space:nowrap;color:var(--teal)}
-@media(max-width:700px){.film-entry-link{gap:15px;padding:12px;flex-wrap:wrap}.film-entry-preview{width:100px}.film-entry-copy{flex:1;min-width:120px}.film-entry-copy h2{font-size:17px}.film-entry-kicker{font-size:7px;letter-spacing:.6px}.film-entry-action{width:100%;justify-content:space-between;border-top:1px solid var(--line);padding:10px 2px 0}.film-entry{padding-top:22px}}
+@font-face{font-family:'Noto Sans SC Film';font-style:normal;font-weight:100 900;font-display:swap;src:url('assets/fonts/noto-sans-sc-film-label.woff2') format('woff2');unicode-range:U+4F20,U+5BA3}
+.film-entry{margin-top:28px;max-width:420px;font-family:'DM Sans','Noto Sans SC Film',sans-serif}
+.film-entry-link{display:grid;grid-template-columns:156px minmax(0,1fr);align-items:center;gap:22px;padding:8px;border:1px solid var(--line);border-radius:6px;background:#f1f5ef;transition:border-color .2s,background-color .2s}
+.film-entry-link:hover{border-color:#8eb9a8;background:#ebf2ea}
+.film-entry-link:focus-visible{outline:2px solid var(--teal);outline-offset:4px}
+.film-entry-preview{aspect-ratio:16/9;position:relative;min-width:0;border:1px solid var(--line);overflow:hidden;border-radius:3px}
+.film-entry-preview img{width:100%;height:100%;object-fit:cover}
+.film-entry-preview>span{position:absolute;right:8px;bottom:8px;background:var(--ink);color:white;border-radius:50%;width:28px;height:28px;display:grid;place-items:center;font-size:8px;padding-left:1px}
+.film-entry-copy{min-width:0;padding-right:14px}
+.film-entry-title{font-size:19px;line-height:1.35;letter-spacing:-.4px;font-weight:550;color:var(--ink);margin:0}
+.film-entry-action{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;font-size:11px;line-height:1.5;color:var(--teal)}
+.film-entry-action>span:last-child{font-size:16px}
+@media(min-width:621px) and (max-width:1150px){.film-entry{margin-top:24px}.film-entry-link{grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:14px}.film-entry-copy{padding-right:6px}.film-entry-title{font-size:17px}.film-entry-action{font-size:10px;gap:6px}}
+@media(min-width:621px) and (max-width:760px){.film-entry-link{gap:10px;padding:6px}.film-entry-copy{padding-right:1px}.film-entry-title{font-size:14px;letter-spacing:-.2px}.film-entry-action{font-size:9px;gap:4px;margin-top:6px}.film-entry-action>span:last-child{font-size:12px}.film-entry-preview>span{width:22px;height:22px;right:5px;bottom:5px;font-size:6px}}
+@media(max-width:620px){.film-entry{max-width:420px;margin-top:24px}.film-entry-link{grid-template-columns:minmax(0,.95fr) minmax(0,1fr);gap:18px}.film-entry-copy{padding-right:8px}.film-entry-title{font-size:18px}.film-entry-action{font-size:10px}}
+@media(max-width:360px){.film-entry-link{gap:12px}.film-entry-title{font-size:16px}.film-entry-action{font-size:9px;gap:7px}}
+@media(prefers-reduced-motion:reduce){.film-entry-link{transition:none}}
