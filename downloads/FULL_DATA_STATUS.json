@@ -1,12 +1,16 @@
 {
-  "name": "Image atlas",
-  "status": "coming_soon",
-  "availability": "Coming soon / 敬请期待",
+  "name": "Image Atlas",
+  "status": "available",
+  "availability": "Available / 已开放",
   "completeness_verified": false,
   "downloadable_samples_verified": null,
   "source_manifest_samples": 231190557,
   "source_manifest_datasets": 26467,
   "source_manifest_genes": 1015163,
   "source_vocabulary_species": 40,
-  "population_note": "Source-manifest totals describe the atlas population; the full collection is not yet available for download."
+  "population_note": "Source-manifest totals describe the pretraining collection.",
+  "availability_basis": "owner_declared",
+  "availability_updated": "2026-10-18",
+  "download_url": "https://pan.baidu.com/s/1J9rDKjT3yEqelqt3kaSIeQ?pwd=xabe",
+  "extraction_code": "xabe"
 }

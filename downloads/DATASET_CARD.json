@@ -1,5 +1,5 @@
 {
-  "name": "CellNet Image atlas",
+  "name": "CellNet Image Atlas",
   "release_date": "2026-10-16",
   "example": {
     "status": "available",
@@ -20,17 +20,22 @@
     "normalization": "Stored float16 normalized expression in [0,1]; do not normalize again"
   },
   "full_data": {
-    "name": "Image atlas",
-    "status": "coming_soon",
-    "availability": "Coming soon / 敬请期待",
+    "name": "Image Atlas",
+    "status": "available",
+    "availability": "Available / 已开放",
     "completeness_verified": false,
     "downloadable_samples_verified": null,
     "source_manifest_samples": 231190557,
     "source_manifest_datasets": 26467,
     "source_manifest_genes": 1015163,
     "source_vocabulary_species": 40,
-    "population_note": "Source-manifest totals describe the atlas population; the full collection is not yet available for download."
+    "population_note": "Source-manifest totals describe the pretraining collection.",
+    "availability_basis": "owner_declared",
+    "availability_updated": "2026-10-18",
+    "download_url": "https://pan.baidu.com/s/1J9rDKjT3yEqelqt3kaSIeQ?pwd=xabe",
+    "extraction_code": "xabe"
   },
   "terms": "Original datasets retain their respective terms and attribution. Apache-2.0 covers software only. Per-source data license verification remains pending, as documented in the source repository.",
-  "scope": "The 24 real pretraining examples support exploring the CellNet data format, transcriptome images and data-reading workflow."
+  "scope": "Website download bundle: 24 real pretraining examples, format and reading resources, and access information for the full Image Atlas.",
+  "metadata_updated": "2026-10-18"
 }

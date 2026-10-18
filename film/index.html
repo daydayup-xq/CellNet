@@ -5,36 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fafbf8">
   <title>CellNet — A panoramic view of the cell · The film</title>
-  <meta name="description" content="A 40-second narrated research film introducing CellNet: DNA-informed transcriptome images, panoramic learning, and cellular and molecular capabilities.">
+  <meta name="description" content="A 36-second music-led film. A large-scale Image Atlas and a panoramic foundation model connect cellular diversity with molecular discovery.">
   <link rel="canonical" href="https://daydayup-xq.github.io/CellNet/film/">
   <meta property="og:title" content="CellNet: A panoramic view of the cell — The film">
   <meta property="og:type" content="video.other">
   <meta property="og:image" content="https://daydayup-xq.github.io/CellNet/film/poster.jpg">
   <link rel="icon" href="../assets/cellnet-logo.png">
-  <link rel="stylesheet" href="film.css">
-  <script type="module" src="player.js"></script>
+  <link rel="stylesheet" href="film.css?v=3">
+  <script type="module" src="player.js?v=3"></script>
 </head>
 <body>
-  <a class="skip" href="#film" data-en="Skip to film" data-zh="跳至短片">Skip to film</a>
+  <a class="skip" href="#film">Skip to film</a>
   <header class="film-header">
     <a class="brand" href="../" aria-label="CellNet home"><img src="../assets/cellnet-logo.png" alt="CellNet" width="1942" height="809"></a>
-    <a class="back" href="../" data-en="← Back to the research" data-zh="← 返回研究主页">← Back to the research</a>
-    <button class="language" id="language" type="button" aria-label="Switch to Chinese">中文</button>
+    <a class="back" href="../">← Back to the research</a>
   </header>
   <main>
-    <div class="film-intro"><p class="eyebrow" data-en="A RESEARCH FILM · 40 SECONDS" data-zh="研究短片 · 40 秒">A RESEARCH FILM · 40 SECONDS</p><h1 data-en="Panoramic transcriptome modelling" data-zh="转录组的全景建模">Panoramic transcriptome modelling</h1></div>
+    <div class="film-intro"><p class="eyebrow">THE CELLNET FILM · 36 SECONDS</p><h1>Panoramic transcriptome modelling</h1></div>
     <audio id="soundtrack" preload="metadata"></audio>
     <section class="player" id="film" aria-label="CellNet research film">
       <div class="screen" id="screen" tabindex="0" role="group" aria-label="Film canvas. Space to play or pause; left and right arrows to seek.">
-        <canvas id="film-canvas" width="1920" height="1080" role="img" aria-label="CellNet research film. A full text transcript is available below."></canvas>
-        <div class="loading" id="loading" role="status" data-en="Preparing the film…" data-zh="正在加载短片…">Preparing the film…</div>
-        <button class="start" id="start" type="button" aria-label="Play the film" hidden><span class="play-symbol" aria-hidden="true">▶</span><span data-en="Play with sound" data-zh="有声播放">Play with sound</span><small>00:40</small></button>
+        <canvas id="film-canvas" width="1920" height="1080" role="img" aria-label="CellNet research film. An accessible description of each chapter is available below."></canvas>
+        <div class="loading" id="loading" role="status">Preparing the film…</div>
+        <button class="start" id="start" type="button" aria-label="Play the film" hidden><span class="play-symbol" aria-hidden="true">▶</span><span>Play with sound</span><small>00:36</small></button>
       </div>
       <div class="controls" id="controls">
         <button class="control play" id="play" type="button" disabled aria-label="Play"><span id="play-icon" aria-hidden="true">▶</span></button>
         <button class="control replay" id="replay" type="button" disabled aria-label="Replay"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg></button>
-        <output id="time" class="time" aria-label="Playback time">00:00 / 00:40</output>
-        <label class="seek-label" for="seek"><span class="sr-only" data-en="Film position in seconds" data-zh="短片进度（秒）">Film position in seconds</span><input id="seek" type="range" min="0" max="40" step="0.1" value="0" disabled aria-valuetext="0 seconds of 40 seconds"></label>
+        <output id="time" class="time" aria-label="Playback time">00:00 / 00:36</output>
+        <label class="seek-label" for="seek"><span class="sr-only">Film position in seconds</span><input id="seek" type="range" min="0" max="36" step="0.1" value="0" disabled aria-valuetext="0 seconds of 36 seconds"></label>
         <button class="control" id="sound" type="button" aria-label="Mute" aria-pressed="false" disabled><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 4 5 8H2v8h3l5 4Z"/><path id="sound-waves" d="M14 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path id="sound-off" style="display:none" d="m15 9 6 6m0-6-6 6"/></svg></button>
         <span class="chapter-label" id="chapter-label"></span>
         <button class="control" id="fullscreen" type="button" aria-label="Enter fullscreen"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 9V4h5m6 0h5v5m0 6v5h-5m-6 0H4v-5"/></svg></button>
@@ -42,10 +41,23 @@
       <p class="sr-only" id="scene-announcement" aria-live="polite"></p>
     </section>
     <p id="audio-status" class="audio-status" role="status" hidden></p>
-    <div class="film-meta"><span data-en="DNA-informed images. Cellular context. Molecular detail." data-zh="DNA 引导的图像，细胞全景，分子细节。">DNA-informed images. Cellular context. Molecular detail.</span><a id="video-download" href="cellnet-film-en.mp4" download data-en="Download film · MP4 ↓" data-zh="下载短片 · MP4 ↓">Download film · MP4 ↓</a></div>
+    <div class="film-meta"><span>Two foundations. A wider field of discovery.</span><a id="video-download" href="cellnet-film-en.mp4" download>Download film · MP4 ↓</a></div>
     <nav class="chapters" id="chapters" aria-label="Film chapters"></nav>
-    <details class="transcript" id="transcript"><summary><span data-en="Read the story" data-zh="阅读完整解说">Read the story</span><span aria-hidden="true">+</span></summary><ol id="transcript-list"></ol></details>
-    <footer class="film-footer"><p data-en="Explore the work behind the film." data-zh="继续探索短片背后的研究。">Explore the work behind the film.</p><div><a href="../#method" data-en="The method ↗" data-zh="方法 ↗">The method ↗</a><a href="../#gallery">Image Atlas ↗</a><a href="https://github.com/daydayup-xq/CellNet" target="_blank" rel="noopener noreferrer" data-en="Code & model ↗" data-zh="代码与模型 ↗">Code & model ↗</a></div></footer>
+    <section class="discovery" aria-labelledby="discovery-title">
+      <p class="eyebrow">THE BIOLOGICAL POSSIBILITY</p>
+      <h2 id="discovery-title">From cellular diversity<br>to <em>molecular discovery.</em></h2>
+      <div class="value-rows">
+        <a class="value-row" href="../#research"><span class="value-number">01</span><div><h3>See the rare. Resolve the state.</h3><p>Distinguish rare cell populations and condition-associated states. Connect cellular identity to the biology of tissues.</p></div><span aria-hidden="true">↗</span></a>
+        <a class="value-row" href="../assets/figures/figure-3.pdf" target="_blank" rel="noopener noreferrer"><span class="value-number">02</span><div><h3>Beyond the observed.</h3><p>Predict gene expression from cellular context. Extend molecular readouts across species and spatial measurements.</p></div><span aria-hidden="true">↗</span></a>
+        <a class="value-row" href="../#research"><span class="value-number">03</span><div><h3>From RNA to biological programmes.</h3><p>Connect coding and non-coding RNA to molecular modules, developmental programmes and neural biology.</p></div><span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="resource-duo">
+        <a href="../#image-atlas"><span class="eyebrow">OPEN FOR DISCOVERY</span><h3>Image Atlas <span aria-hidden="true">↗</span></h3><p>An open, large-scale image collection. Explore cellular diversity and build on a shared visual foundation.</p></a>
+        <a href="https://github.com/daydayup-xq/CellNet" target="_blank" rel="noopener noreferrer"><span class="eyebrow">A MODEL FOR DISCOVERY</span><h3>Foundation Model <span aria-hidden="true">↗</span></h3><p>DNA-informed identity. Panoramic cellular context. One framework, from cell states to gene-level discovery.</p></a>
+      </div>
+    </section>
+    <details class="transcript" id="transcript"><summary><span>Inside the film</span><span aria-hidden="true">+</span></summary><ol id="transcript-list"></ol></details>
+    <footer class="film-footer"><p>Explore the work behind the film.</p><div><a href="../#method">The method ↗</a><a href="../#gallery">Image Atlas ↗</a><a href="https://github.com/daydayup-xq/CellNet" target="_blank" rel="noopener noreferrer">Code & model ↗</a></div></footer>
     <noscript><p>This film uses JavaScript for playback. <a href="cellnet-film-en.mp4">Watch the MP4 version</a>.</p></noscript>
   </main>
 </body>
