@@ -5,7 +5,17 @@
 export const DURATION=44;
 export const BPM=120;
 export const BEAT_MARKERS=Array.from({length:89},(_,i)=>i/2);
-const scene=(id,start,end,title,subtitle)=>({id,start,end,title:{en:title,zh:title},subtitle:{en:subtitle,zh:subtitle}});
+const sectionCopy={
+ panorama:['Key idea','DNA identity meets panoramic transcriptome modelling.'],
+ representation:['Key idea','Turn single-cell expression into a DNA-informed image.'],
+ atlas:['Open Image Atlas','A shared resource of transcriptome images.'],
+ learning:['How the model learns','Image patches make panoramic modelling practical.'],
+ cells:['Model capabilities','Resolve cell identities and states.'],
+ prediction:['Model capabilities','Explore gene expression beyond measured panels.'],
+ programmes:['Model capabilities','Connect non-coding RNA with associated gene programmes.'],
+ closing:['What we release','Image Atlas and Foundation Model.'],
+};
+const scene=(id,start,end,title,subtitle)=>({id,start,end,title:{en:title,zh:title},subtitle:{en:subtitle,zh:subtitle},section:{en:sectionCopy[id][0],zh:sectionCopy[id][0]},sectionDetail:{en:sectionCopy[id][1],zh:sectionCopy[id][1]}});
 export const SCENES=[
  scene('panorama',0,4,'Panoramic transcriptome modelling, at scale.','CellNet brings coding and non-coding RNA into one panoramic cellular context.'),
  scene('representation',4,10,'DNA unlocks the gene vocabulary.','DNA-derived identities bring coding and non-coding genes into a fixed, species-specific expression image. One selected scRNA-seq cell row supplies the expression values; measured zeros and unmeasured genes remain distinct.'),
@@ -189,7 +199,7 @@ export async function createFilm(canvas){
    imageCard(10+i,inputX,yy,inputSize,false);
    if(t>31){const endX=modelX-105*.82-6;flow([{x:inputX+inputSize/2,y:yy},{x:1278,y:yy},{x:1370,y:yy},{x:endX,y:yy}],t,{count:2,size:5})}
   }
-  ctx.save();ctx.globalCompositeOperation='multiply';ctx.drawImage(assets.logo,96,45,488,488*assets.logo.height/assets.logo.width);ctx.restore();if(t>=31){text('Image Atlas',130,866,75,{max:780});text('Foundation Model',1038,866,75,{max:780});text('Open for discovery.',134,925,30,{color:C.teal,max:760});text('Built for discovery.',1042,925,30,{color:C.teal,max:760})}
+  ctx.save();ctx.globalCompositeOperation='multiply';ctx.drawImage(assets.logo,96,108,488,488*assets.logo.height/assets.logo.width);ctx.restore();if(t>=31){text('Image Atlas',130,866,75,{max:780});text('Foundation Model',1038,866,75,{max:780});text('Open for discovery.',134,925,30,{color:C.teal,max:760});text('Built for discovery.',1042,925,30,{color:C.teal,max:760})}
  }
  function label(value,x,y,size,t,start,end,{color=C.ink,serif=false,max=1720}={}){const p=phase(t,start,start+.28),q=phase(t,end-.2,end);ctx.save();ctx.beginPath();ctx.rect(x-4,y-size*1.12,max+8,size*1.36);ctx.clip();text(value,x+24*(1-p),y+size*1.35*(1-p)-size*1.35*q,size,{color,serif,max});ctx.restore()}
  function titles(t){
@@ -202,7 +212,12 @@ export async function createFilm(canvas){
   if(t>=26&&t<30){label('Non-coding RNA.',96,296,96,t,26,30,{max:850});label('Functional',96,430,108,t,26.5,30,{max:850});label('connections.',96,562,118,t,27,30,{color:C.teal,serif:true,max:870});label('Retrieve associated gene programmes.',102,925,31,t,27.5,30,{color:C.muted,max:820})}
   if(t>=30){label('Panoramic transcriptome',955,122,54,t,30,38,{max:865});label('modelling, at scale.',955,186,54,t,30.5,38,{color:C.teal,max:865});label('A new foundation for biological discovery.',103,1006,45,t,32,38,{max:1710})}
  }
- function render(time,_language='en'){time=clamp(Number.isFinite(time)?time:0,0,DURATION);motionTime=time;const visual=visualTime(time);let index=SCENES.findIndex(s=>time>=s.start&&time<s.end);if(index<0)index=SCENES.length-1;ctx.save();ctx.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);background();panorama(visual);conversion(visual);atlas(visual);learning(visual);cellScene(visual);selectedPanorama(visual);prediction(visual);programmes(visual);closing(visual);titles(visual);ctx.restore();return{time,scene:SCENES[index].id,index,beat:Math.min(88,Math.floor(time*2))}}
+ function sectionLabel(section){
+  // This label is part of the film canvas, so it remains visible in exported video.
+  ctx.save();ctx.font='500 28px "DM Sans", Arial, sans-serif';const width=Math.ceil(ctx.measureText(section).width)+36;
+  rect(96,31,width,46,'#e8f0e9',6,'#d5e2d9',1.2);text(section,114,63,28,{color:C.teal,max:640});ctx.restore();
+ }
+ function render(time,_language='en'){time=clamp(Number.isFinite(time)?time:0,0,DURATION);motionTime=time;const visual=visualTime(time);let index=SCENES.findIndex(s=>time>=s.start&&time<s.end);if(index<0)index=SCENES.length-1;ctx.save();ctx.setTransform(canvas.width/W,0,0,canvas.height/H,0,0);background();panorama(visual);conversion(visual);atlas(visual);learning(visual);cellScene(visual);selectedPanorama(visual);prediction(visual);programmes(visual);closing(visual);titles(visual);sectionLabel(SCENES[index].section.en);ctx.restore();return{time,scene:SCENES[index].id,index,beat:Math.min(88,Math.floor(time*2))}}
  // Decode and rasterize reusable card shadows once, before the playback clock starts.
  // Offscreen surfaces stay internal; no additional asset or DOM elements are required.
  function surface(width,height){if(typeof OffscreenCanvas!=='undefined')return new OffscreenCanvas(width,height);const out=canvas.ownerDocument.createElement('canvas');out.width=width;out.height=height;return out}

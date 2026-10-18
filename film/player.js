@@ -1,4 +1,4 @@
-import { createFilm, DURATION, SCENES } from './film-renderer.js?v=6';
+import { createFilm, DURATION, SCENES } from './film-renderer.js?v=7';
 const $ = id => document.getElementById(id);
 const params = new URLSearchParams(location.search), exporting = params.get('export') === '1';
 if (exporting) document.documentElement.classList.add('export');
@@ -22,8 +22,8 @@ function updateControls(){
   $('sound-waves').style.display=soundtrack.muted?'none':'';
   $('sound-off').style.display=soundtrack.muted?'':'none';
   const next=sceneAt(time);
-  if(next!==sceneIndex){sceneIndex=next;document.querySelectorAll('.chapter').forEach((el,i)=>el.setAttribute('aria-current',String(i===next)));$('chapter-label').textContent=chapterNames[next];$('scene-announcement').textContent=english(SCENES[next].title);}
-  canvas.setAttribute('aria-label',english(SCENES[next].title)+'. '+english(SCENES[next].subtitle));
+  if(next!==sceneIndex){sceneIndex=next;document.querySelectorAll('.chapter').forEach((el,i)=>el.setAttribute('aria-current',String(i===next)));$('chapter-label').textContent=chapterNames[next];$('scene-announcement').textContent=english(SCENES[next].section)+'. '+english(SCENES[next].title);$('chapter-label').title=english(SCENES[next].section); }
+  canvas.setAttribute('aria-label',english(SCENES[next].section)+'. '+english(SCENES[next].title)+'. '+english(SCENES[next].subtitle));
 }
 function draw(){renderer?.render(time,'en');updateControls();}
 function pause(){
@@ -64,9 +64,10 @@ function chapters(){
     const button=document.createElement('button');button.type='button';button.className='chapter';
     const stamp=document.createElement('span');stamp.textContent=format(scene.start);
     const name=document.createElement('strong');name.textContent=chapterNames[index];button.append(stamp,name);
+    button.setAttribute('aria-label',english(scene.section)+': '+chapterNames[index]+'. Seek to '+format(scene.start));button.title=english(scene.sectionDetail);
     button.addEventListener('click',()=>{pause();seek(scene.start);});buttons.append(button);
     const item=document.createElement('li'),jump=document.createElement('button'),copy=document.createElement('div'),heading=document.createElement('h2'),paragraph=document.createElement('p');
-    jump.type='button';jump.textContent=format(scene.start);jump.setAttribute('aria-label','Seek to '+english(scene.title));
+    jump.type='button';jump.textContent=format(scene.start);jump.setAttribute('aria-label','Seek to '+english(scene.section)+': '+english(scene.title));
     jump.addEventListener('click',()=>{pause();seek(scene.start);$('screen').focus();});
     heading.textContent=english(scene.title);paragraph.textContent=english(scene.subtitle);
     copy.append(heading,paragraph);item.append(jump,copy);story.append(item);
