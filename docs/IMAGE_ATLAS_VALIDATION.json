@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-20",
+  "native_reader_contract_tests": 14,
+  "bundled_real_example_tests": 4,
+  "native_format": "dense_npy float16; compact_species_injective; compressed tar records",
+  "download_directory": "datasets/pretraining/full",
+  "default_directory_selection_verified": true,
+  "real_smoke": {
+    "cells": 2,
+    "species": "Mouse",
+    "measured_genes_per_cell": [
+      13585,
+      13585
+    ],
+    "batch_image_shape": [
+      2,
+      2,
+      2,
+      384,
+      384
+    ],
+    "batch_gene_ids_shape": [
+      2,
+      2,
+      384,
+      384
+    ],
+    "fitted_native_species_layouts_checked": 40,
+    "downstream_expression_images_exact": true,
+    "downstream_gene_ids_exact": true,
+    "native_conversion_uses_projection_constructor": false,
+    "pretraining_cpu_forward_finite": true,
+    "downstream_h5ad_cli_embedding_shape": [
+      2,
+      768
+    ],
+    "downstream_h5ad_cli_embeddings_finite": true
+  },
+  "identity_table": {
+    "rows_with_padding": 1015164,
+    "dimensions": 256,
+    "requires_grad": false,
+    "source": "weights/cellnet.pt"
+  },
+  "validation_scope": "Software contracts and bounded real-cell CPU smoke; training weights and fitted mapping assets were unchanged.",
+  "source_ownership": {
+    "format": "cellnet-image-atlas-ownership-v1",
+    "file": "cell_sources.json.gz",
+    "sha256": "c871a5854cb3d759e7a35e2adc866d01536a5a42f4a383c7849b943f21075394",
+    "datasets": 189,
+    "samples": 44489429,
+    "storage_buckets": 491,
+    "intervals": 3782,
+    "original_cell_qc_recovered_exactly": true,
+    "all_materialized_bucket_counts_match": true,
+    "unknown_or_uncovered_sources_rejected": true,
+    "index_hash_checked_before_reading": true,
+    "bounded_boundary_validation": {
+      "records": 8,
+      "source_datasets": 4,
+      "storage_class": "class_1351",
+      "source_rendered_float16_images_exact": true,
+      "all_four_source_measurement_masks_exact": true,
+      "report_sha256": "31f65c79a0e98045ad2d524811e66cc850de6b579cfeb3b51ae93eb7965e378c",
+      "scope": "First/last records and three dataset boundaries in one storage class. Two interior datasets have identical content, so their UUID ordering is supported by the deterministic manifest rather than independently distinguished by pixels; both boundaries between distinct content groups match exactly."
+    }
+  },
+  "merged_source_smoke": {
+    "species": "Human",
+    "cells": 2,
+    "stored_dataset_id": 26278,
+    "resolved_dataset_id": 26279,
+    "measured_genes_per_cell": [
+      24322,
+      24322
+    ],
+    "native_images_and_views_finite": true,
+    "masked_gene_ids_exact": true,
+    "npz_export_roundtrip": {
+      "expression_and_mask_exact": true,
+      "gene_ids_exact": true,
+      "source_uuids_exact": true
+    }
+  }
+}

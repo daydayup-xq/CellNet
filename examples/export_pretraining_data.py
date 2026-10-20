@@ -6,24 +6,8 @@ import csv
 import hashlib
 import io
 import json
-import tarfile
 import numpy as np
-
-
-def records(path):
-    with tarfile.open(path, "r|gz") as archive:
-        key, fields = None, {}
-        for member in archive:
-            if not member.isfile():
-                continue
-            current, field = member.name.rsplit(".", 1)
-            if key is not None and current != key:
-                yield fields
-                fields = {}
-            key = current
-            fields[field] = archive.extractfile(member).read()
-        if key is not None:
-            yield fields
+from cellnet.pretraining_data import _NativeAssets, _native_records
 
 
 def main():
@@ -41,7 +25,7 @@ def main():
         raise ValueError("shard-size and per-class must be positive")
     if args.output.exists():
         raise FileExistsError(args.output)
-    source = args.source
+    source = args.source.resolve()
     buckets = source / "class_shards"
     if not buckets.is_dir():
         raise FileNotFoundError("Native DataBank class_shards directory is absent")
@@ -54,35 +38,14 @@ def main():
         raise ValueError(
             "Storage class must name a direct directory under class_shards"
         )
-    index = json.loads((source / "masks/dataset_index.json").read_text())
-    datasets = {int(i): name for name, i in index.items()}
-    masks = np.load(source / "masks/gene_masks.npy", mmap_mode="r", allow_pickle=False)
-    labels = json.loads((source / "cell_type_vocab.json").read_text())["names"]
-    if isinstance(labels, dict):
-        labels = {int(k): v for k, v in labels.items()}
-    # A mismatched vocabulary would assign the wrong model identities.
-    if json.loads((source / "gene_vocab.json").read_text()) != json.loads(
-        (args.release / "assets/gene_vocab.json").read_text()
-    ):
-        raise ValueError("Source and release vocabularies differ")
+    assets = _NativeAssets(
+        source, json.loads((source / "metadata.json").read_text()), args.release
+    )
     args.output.mkdir(parents=True)
     (args.output / "shards").mkdir()
     pending, layouts, shards = [], {}, []
     total_samples = 0
     species_seen = []
-    checked_species = set()
-    with np.load(
-        args.release / "assets/species_layouts.npz", allow_pickle=False
-    ) as data:
-        names = data["species"].tolist()
-        native = {
-            s: (data[f"ids_{i}"].copy(), data[f"pixels_{i}"].copy())
-            for i, s in enumerate(names)
-        }
-    source_maps = np.load(
-        source / "pixel_maps/gene_to_flat_pixel.npy", mmap_mode="r", allow_pickle=False
-    )
-    source_species = json.loads((source / "pixel_maps/dataset_index.json").read_text())
 
     def flush():
         if not pending:
@@ -122,7 +85,7 @@ def main():
         for bucket in chosen:
             accepted = 0
             for path in sorted(bucket.glob("*.tar*")):
-                for fields in records(path):
+                for record_key, fields in _native_records(path):
                     if args.per_class is not None and accepted >= args.per_class:
                         break
                     if (
@@ -131,28 +94,19 @@ def main():
                     ):
                         raise ValueError("Incomplete native sample")
                     species = fields["species"].decode()
-                    dataset_id = int(fields["dataset_id"])
-                    dataset = datasets[dataset_id]
-                    ids, pixels = native[species]
-                    if species not in checked_species:
-                        if not np.array_equal(
-                            source_maps[source_species[species], ids - 1], pixels
-                        ):
-                            raise ValueError("Source and release native layouts differ")
-                        checked_species.add(species)
+                    dataset_id = assets.source_dataset(
+                        int(fields["dataset_id"]), record_key, path.relative_to(source)
+                    )
+                    dataset = assets.datasets[dataset_id]
                     image = np.load(io.BytesIO(fields["npy"]), allow_pickle=False)
                     if image.shape != (384, 384) or image.dtype != np.float16:
                         raise ValueError("Expected native 384x384 float16 images")
                     key = (species, dataset_id)
                     if key not in layouts:
-                        selected = masks[dataset_id, ids - 1].astype(bool)
-                        visible = np.zeros(384 * 384, bool)
-                        visible[pixels[selected]] = True
-                        gene_ids = np.zeros(384 * 384, np.int32)
-                        gene_ids[pixels[selected]] = ids[selected]
+                        visible, gene_ids = assets.layout(species, dataset_id)
                         layouts[key] = (
-                            visible.reshape(384, 384),
-                            gene_ids.reshape(384, 384),
+                            visible,
+                            gene_ids.astype(np.int32),
                         )
                     visible, gene_ids = layouts[key]
                     if (
@@ -166,7 +120,7 @@ def main():
                         )
                     layout_index = list(layouts).index(key)
                     sample_id = f"pretrain_{total_samples:04d}"
-                    label = labels[int(fields["cell_type"])].split("::", 1)[-1]
+                    label = assets.labels[int(fields["cell_type"])].split("::", 1)[-1]
                     writer.writerow(
                         {
                             "sample_id": sample_id,

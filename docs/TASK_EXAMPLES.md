@@ -1,10 +1,17 @@
 # Runnable representative tasks
 
-Install from the release directory with `pip install -e '.[examples]'`, then run:
+Set the absolute clone path and install the model assets and task dependencies:
 
 ```bash
-python examples/run_all_tasks.py --device cpu --batch-size 2 --output example_outputs
+export CELLNET_RELEASE="/absolute/path/to/CellNet"
+git -C "$CELLNET_RELEASE" lfs pull
+python -m pip install -e "${CELLNET_RELEASE}[examples]"
+python "$CELLNET_RELEASE/examples/run_all_tasks.py" \
+  --release "$CELLNET_RELEASE" --device cpu --batch-size 2 \
+  --output "/path/to/example_outputs"
 ```
+
+The supplied tasks and H5AD converter read `weights/` and the fitted mapping in `assets/` from `--release`. Keep the release vocabulary and `species_layouts.npz` together with its weights. For native species, gene identities and pixel positions are selected automatically from these fixed assets. Downloading the full Image Atlas is a separate step for workflows using pretraining cells; its [download directory guide](../datasets/pretraining/README.md) explains that setup.
 
 Inputs are actual Tabula Sapiens and TotalX PBMC cells. [Figure protocols](FIGURE_PROTOCOLS.md) specify model readouts, downstream hyperparameters and the reduced-cohort boundaries. [Dataset sources](../README.md) lists original studies and official links.
 
@@ -20,15 +27,16 @@ Inputs are actual Tabula Sapiens and TotalX PBMC cells. [Figure protocols](FIGUR
 All commands accept `--release`, `--data`, `--output`, `--device`, and `--batch-size`. `--data` selects a directory following the included file/schema layout. The default paths are relative to the script location, and examples use the CellNet package. For arbitrary expression files, `embed_h5ad.py` accepts an H5AD path, species, input scale, layer and stable-ID column. For example:
 
 ```bash
-python examples/embed_h5ad.py --release . --input cells.h5ad \
-  --output native_features.npy --species Human --input-scale log1p \
+python "$CELLNET_RELEASE/examples/embed_h5ad.py" \
+  --release "$CELLNET_RELEASE" --input "/path/to/cells.h5ad" \
+  --output "/path/to/native_features.npy" --species Human --input-scale counts \
   --gene-column standard_gene_id --layer native --batch-size 2
 ```
 
-Use stable IDs matching the selected species. A source `ensembl_id` column may include version suffixes; the Tabula example uses its existing unversioned `standard_gene_id` column. Unknown IDs fail by default, and no gene-symbol-to-ID guessing occurs.
+Use stable IDs matching the exact species namespace, such as `Human` or `Mouse`. A source `ensembl_id` column may include version suffixes; the Tabula example uses its existing unversioned `standard_gene_id` column. Omit `--gene-column` when `var_names` already contains stable IDs. Use `--input-scale counts` for counts, or `--input-scale log1p` for values already normalized to the model's 10,000-library-size, log1p scale. `--layer-key counts` selects a stored counts layer when needed. Unknown IDs fail by default, and no gene-symbol-to-ID guessing occurs.
 
 The five-fold completion queries contain only permitted observed counts. Each target fold is absent before normalization and inference. The scorer alone reads separate target truth, normalized using the full supported measured-gene library.
 
 `examples/expected/` contains tested CPU outputs. Validation results and scope are recorded in `docs/FIGURE_PROTOCOL_VALIDATION.json`.
 
-The small denoising example did not outperform its noisy-input baseline. Contextual gene similarity is undirected and does not establish causality. These examples validate implementation and data loading, not full-cohort biological performance.
+The small denoising example did not outperform its noisy-input baseline. The validation report records the cohorts and metrics for these runnable examples.

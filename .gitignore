@@ -19,3 +19,8 @@ dist/
 !datasets/pretraining/**/*.npz
 !datasets/pretraining/figures/*.png
 !datasets/pretraining/figures/*.svg
+
+# Download the full Image atlas locally; retain only its small repository guide.
+datasets/pretraining/full/*
+!datasets/pretraining/full/README.md
+!datasets/pretraining/full/metadata.json

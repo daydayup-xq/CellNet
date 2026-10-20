@@ -16,7 +16,7 @@ The project provides pretrained models, fitted gene-to-image converters, pretrai
 | `weights/config.json` | Active model dimensions and input/readout parameters |
 | `assets/` | Stable gene vocabulary, native species layouts and frozen new-gene projection assets |
 | `examples/` | Runnable downstream tasks, real pretraining batch preparation and visualization |
-| `datasets/pretraining/` | 24 real training examples, data schema, visualizations and a reserved full-data location |
+| `datasets/pretraining/` | Image Atlas download location, 24 real training examples, data schema and visualizations |
 | `tests/` | Inference, preprocessing and gradient checks |
 
 ## Installation
@@ -48,9 +48,23 @@ python examples/run_all_tasks.py --device cpu --batch-size 2 --output example_ou
 
 Read [the data provenance](examples/data/README.md) and [the task validation report](docs/FIGURE_PROTOCOL_VALIDATION.json) for exact input scales, splits and validation scope. The examples are small demonstrations, not full publication benchmarks.
 
-## Pretraining dataset examples
+## Download the Image Atlas and retain the fitted mapping
 
-[Pretraining data](datasets/pretraining/README.md) includes 24 real Mouse, Zebrafish and Fruit_fly cells from the existing 100,000-cell training sample, with original expression, measured-gene masks and native gene IDs. It also provides a data reader, independent masked-view batch preparation, PNG/SVG visualizations and an explicit empty location for the future full dataset. Full pretraining samples are not included.
+Download the **[Image Atlas](https://pan.baidu.com/s/1FuoHnEJN9FRvOBio5uutYQ?pwd=xabe)** (extraction code: `xabe`) and place its contents in `datasets/pretraining/full/`. The downloaded `metadata.json` must be directly inside `full/`, alongside `class_shards/`, `masks/`, `pixel_maps/` and `gene_vocab.json`. Keep the published directory structure when downloading or extracting; see the [download and directory guide](datasets/pretraining/README.md) for the complete tree and integrity checks.
+
+Keep the supplied `cell_sources.json.gz` with the atlas. The reader uses this compact per-cell source index automatically to select the correct dataset-specific measurement mask for the merged CellxGene cohort; see [source ownership](datasets/pretraining/README.md#source-ownership-in-this-release).
+
+The model and its fitted gene-to-image mapping come from this GitHub release via `git lfs pull`. Keep `assets/` and `weights/` together and pass their parent directory as `--release`. Both the pretraining reader and downstream converter use these fixed assets automatically, without refitting. DNA-derived gene identity vectors are included in `weights/cellnet.pt`; the vocabulary and pixel maps connect those frozen identities to the expression images. The full Image Atlas is used for pretraining; embedding your own H5AD uses the release assets directly.
+
+```bash
+# Set once to the absolute path of your clone; subsequent commands work from any directory.
+export CELLNET_RELEASE="/absolute/path/to/CellNet"
+git -C "$CELLNET_RELEASE" lfs pull
+python "$CELLNET_RELEASE/examples/verify_image_atlas.py" \
+  --release "$CELLNET_RELEASE" --data "$CELLNET_RELEASE/datasets/pretraining/full"
+```
+
+The repository also includes [24 real Mouse, Zebrafish and Fruit_fly cells](datasets/pretraining/README.md) with stored expression, measured-gene masks, native gene IDs and visualizations. `prepare_pretraining_batch.py` selects the downloaded Image Atlas when present and otherwise uses these examples. Select either directory explicitly with `--data` when needed.
 
 ## Quick start
 
@@ -109,8 +123,9 @@ The raw 1,920-D vectors must come from the same feature space and preprocessing 
 ## Cell embeddings and readouts
 
 ```bash
-python examples/embed_h5ad.py \
-  --release . --input cells.h5ad --output embeddings.npy \
+python "$CELLNET_RELEASE/examples/embed_h5ad.py" \
+  --release "$CELLNET_RELEASE" --input "/path/to/cells.h5ad" \
+  --output "/path/to/embeddings.npy" \
   --species Human --input-scale counts --batch-size 8 --device cpu
 ```
 
@@ -138,10 +153,11 @@ pip install -e '.[pretraining]'
 hf auth login
 hf download facebook/dinov3-vitb16-pretrain-lvd1689m model.safetensors \
   --local-dir ../pretrained_models/dinov3-vitb16
-python examples/prepare_pretraining_batch.py --output prepared_views.pt
-python examples/pretrain.py --release . --init dinov3 \
+python "$CELLNET_RELEASE/examples/prepare_pretraining_batch.py" \
+  --release "$CELLNET_RELEASE" --output "$CELLNET_RELEASE/prepared_views.pt"
+python "$CELLNET_RELEASE/examples/pretrain.py" --release "$CELLNET_RELEASE" --init dinov3 \
   --dinov3-weights ../pretrained_models/dinov3-vitb16/model.safetensors \
-  --batch prepared_views.pt --steps 1 --device cpu --output trained_weights
+  --batch "$CELLNET_RELEASE/prepared_views.pt" --steps 1 --device cpu --output trained_weights
 ```
 
 Request access on the model page before downloading. See [the pretraining guide](docs/PRETRAINING.md) for the compatible timm download, initialization details, batch format and continued-training command. DINOv3 weights are external training inputs; inference uses `weights/cellnet.pt`.

@@ -1,76 +1,177 @@
-# Pretraining data
+# Image Atlas: download and use
 
-This directory reserves a clear place for the full CellNet pretraining dataset and includes a small real format demonstration. **The full dataset is not included.**
+Download the full collection from **[Image Atlas](https://pan.baidu.com/s/1FuoHnEJN9FRvOBio5uutYQ?pwd=xabe)**. Place the downloaded contents in `CellNet/datasets/pretraining/full/`, with `metadata.json` directly inside `full/`. Download the release's complete file set and keep its relative paths. The share extraction code is `xabe`. The `.tar.gz` files in `class_shards/` remain compressed: the reader streams their cell records directly.
 
-| Path | Status / contents |
-| --- | --- |
-| `example/` | Available: 24 real cells extracted from the existing 100,000-cell training sample, with expression, measured-gene masks, gene IDs and anonymous sample IDs |
-| `full/` | Reserved: empty shard list and zero published samples; add the full data here later |
-| `figures/` | Rendered real expression/mask examples, cohort diagnostics, SVG copies and plotting source data |
-| `FORMAT.md` | Array schema and instructions for adding future shards |
-| `dataset_card.json` | Data scope, provenance, terms and limitations |
+The repository includes a separate 24-cell example for trying the pipeline. The full Image Atlas remains a separately downloaded dataset; its large data files are ignored by Git.
 
-The examples contain eight cells each from Mouse, Zebrafish and Fruit_fly: two source cell annotations per species, four cells per annotation. Selection uses fixed source classes and record order, before inspecting model outputs. This is a tiny technical example, not a representative sample of the full pretraining distribution. Source annotations are retained without independent biological reannotation.
+## Source ownership in this release
 
-The original float16 expression arrays are preserved bitwise. Dataset-specific measured-gene masks and native gene IDs are materialized for six layouts. The package uses a compact NPZ format rather than copying the large original global mask table or embedding machine-specific paths. Existing `assets/` contains the shared vocabulary and fitted species layouts; no soft links are required.
+Keep `cell_sources.json.gz` with the downloaded atlas. This compact index identifies the original source dataset for each of the 44,489,429 merged CellxGene cells, so the reader selects the correct measurement mask automatically. It covers 189 source datasets and was reconstructed from the frozen dataset order, exact original cell-QC rules and deterministic remapping order. Every recovered storage-bucket count matches the materialized shards.
 
-## Read the data
+The reader verifies the index's published SHA256, validates dataset UUIDs and mask rows, and checks that each selected cell is covered. Existing images, fitted gene positions and model weights are reused. A missing or inconsistent index produces an explicit error. Downstream conversion of your own H5AD uses its measured gene panel and the release's fixed assets independently.
 
-After installing CellNet, run from the release directory:
+## Directory layout
+
+```text
+CellNet/                         <-- --release points here
+├── assets/
+│   ├── gene_vocab.json          # Fixed gene order / identity indices
+│   ├── species_layouts.npz      # Fitted native gene-to-pixel layouts
+│   ├── layout_projection.json  # Optional new-gene projection settings
+│   ├── layout_projection.npz   # Optional fitted projection arrays
+│   ├── layout_neighbors.ann    # Optional fitted nearest-neighbor index
+│   └── identity_projection.npz # Optional fitted identity projection
+├── weights/
+│   ├── config.json
+│   ├── cellnet.pt
+│   └── projector.pt
+└── datasets/pretraining/
+    ├── example/                # Included 24-cell portable NPZ example
+    ├── full/                   # Download the Image Atlas contents here
+    │   ├── metadata.json
+    │   ├── release_manifest.json
+    │   ├── shards_manifest.json.gz
+    │   ├── cell_sources.json.gz # Per-cell source ownership for merged data
+    │   ├── gene_vocab.json
+    │   ├── cell_type_vocab.json
+    │   ├── class_shards/
+    │   │   └── class_*/
+    │   │       └── *.tar.gz
+    │   ├── masks/
+    │   │   ├── dataset_index.json
+    │   │   └── gene_masks.npy
+    │   └── pixel_maps/
+    │       ├── dataset_index.json
+    │       └── gene_to_flat_pixel.npy
+    ├── figures/
+    └── FORMAT.md
+```
+
+The download also supplies its file inventory, available integrity digests, data card and source information at the atlas root. Keep these files with the data. A common placement error is `full/Image_atlas/metadata.json`; move the contents of that extra wrapper directory up so the path is `full/metadata.json`.
+
+## Download the model assets and check the atlas
+
+Install the repository following [README.md](../../README.md), including `git lfs pull`. Set the absolute clone path once; the commands below work from any current directory, including paths containing spaces:
+
+```bash
+export CELLNET_RELEASE="/absolute/path/to/CellNet"
+git -C "$CELLNET_RELEASE" lfs pull
+
+python "$CELLNET_RELEASE/examples/verify_image_atlas.py" \
+  --release "$CELLNET_RELEASE" \
+  --data "$CELLNET_RELEASE/datasets/pretraining/full"
+```
+
+The default check reads `release_manifest.json` and its referenced compressed shard inventory, then checks every selected file's presence and size, the vocabulary and native layouts against the release assets, and a small number of real cell records. A full check inspects the filesystem entry for every shard; partial-download selections check only the selected shards plus shared assets. Add `--checksums` to read and hash every catalogued data file after the download. The report separates comparisons against published SHA256 or independently verified MD5 values from hashes computed without a trusted reference. Hashing the full collection reads the entire dataset:
+
+```bash
+python "$CELLNET_RELEASE/examples/verify_image_atlas.py" \
+  --release "$CELLNET_RELEASE" \
+  --data "$CELLNET_RELEASE/datasets/pretraining/full" --checksums \
+  --output "$CELLNET_RELEASE/atlas_verification.json"
+```
+
+Use the same release directory for verification, batch preparation and model loading. The atlas vocabulary fixes the indices into the model's gene-identity table. Its native pixel maps must match `assets/species_layouts.npz`. The reader checks that identity and rebuilds each cell's measurement mask from its source dataset, retaining the fitted pixel positions.
+
+## Partial downloads
+
+Always download all shared root files, including both vocabularies, `cell_sources.json.gz`, `release_manifest.json` and `shards_manifest.json.gz`, plus the complete `masks/` and `pixel_maps/` directories. For a smaller shard selection, keep the original `class_shards/` paths and select the files explicitly in verification and batch preparation:
+
+```bash
+python "$CELLNET_RELEASE/examples/verify_image_atlas.py" \
+  --release "$CELLNET_RELEASE" --storage-classes class_536
+
+python "$CELLNET_RELEASE/examples/prepare_pretraining_batch.py" \
+  --release "$CELLNET_RELEASE" --storage-classes class_536 \
+  --output "$CELLNET_RELEASE/selected_views.pt" --cells 2 --views 2
+```
+
+Replace `class_536` with a class in your downloaded release. Use `--shards class_shards/class_536/shard-00000.tar.gz` for individual files, replacing the example with an exact path from the shard inventory referenced by `release_manifest.json`. Select either classes or shards. The verification report records when only a selected download was checked.
+
+## Prepare a pretraining batch
+
+```bash
+python "$CELLNET_RELEASE/examples/prepare_pretraining_batch.py" \
+  --release "$CELLNET_RELEASE" \
+  --data "$CELLNET_RELEASE/datasets/pretraining/full" \
+  --output "$CELLNET_RELEASE/prepared_views.pt" \
+  --cells 2 --views 2 --keep-fraction 0.75 --seed 20261015
+
+python "$CELLNET_RELEASE/examples/pretrain.py" \
+  --release "$CELLNET_RELEASE" --init cellnet \
+  --batch "$CELLNET_RELEASE/prepared_views.pt" \
+  --n-global 2 --steps 1 --device cpu \
+  --output "$CELLNET_RELEASE/continued_weights"
+```
+
+Omitting `--data` selects an available `datasets/pretraining/full/` under `--release`, otherwise the bundled `example/`. To explicitly try the 24-cell example, use `--data "$CELLNET_RELEASE/datasets/pretraining/example"`. Select new output paths for subsequent runs.
+
+Stored atlas expression is already normalized to [0,1] and stored as float16. The reader returns float32 images with expression and measurement-mask channels, together with integer gene IDs. Measured zero expression retains mask=1 and a positive gene ID. Unmeasured pixels have expression=0, mask=0 and ID=0. Each prepared view independently masks measured genes while keeping expression, masks and IDs aligned for the same cell.
+
+The command above demonstrates one model update on a prepared batch. For training, stream independent batches and select an appropriate GPU and schedule; see [PRETRAINING.md](../../docs/PRETRAINING.md).
+
+## Read cells directly
+
+The same reader supports native Image Atlas shards and the portable NPZ example:
 
 ```python
+import os
+from pathlib import Path
+from itertools import islice
 from cellnet.pretraining_data import iter_pretraining_cells
 
-for sample in iter_pretraining_cells('datasets/pretraining/example'):
+release = Path(os.environ['CELLNET_RELEASE'])
+cells = iter_pretraining_cells(
+    release / 'datasets/pretraining/full', release=release,
+)
+for sample in islice(cells, 2):
     print(sample['metadata']['sample_id'], sample['metadata']['species'])
     print(sample['image'].shape, sample['gene_ids'].shape)
-    # image: float32 [2, 384, 384], channels expression and measurement mask
-    # gene_ids: int64 [384, 384], zero only at unmeasured pixels
+    # image: float32 [2, 384, 384]; gene_ids: int64 [384, 384]
 ```
 
-Stored expression is already normalized to [0,1]. Do not apply counts normalization or log1p again. Measured zero expression retains mask=1 and a positive gene ID. Unmeasured pixels have expression=0, mask=0 and ID=0. The reader validates shard SHA256, shapes, dtypes, masks, IDs and sample metadata.
+## DNA identities and fitted mapping
 
-## Make a real multi-view batch
+These assets have different roles:
+
+| Asset | Role | Loaded from |
+| --- | --- | --- |
+| DNA-derived gene identities | Frozen 256-dimensional identity vectors used by the model | `weights/cellnet.pt` |
+| Gene vocabulary | Stable ordering that connects gene names to identity rows | `assets/gene_vocab.json`, matched against the atlas copy |
+| Fitted gene-to-pixel layout | Exact image position of each native gene | `assets/species_layouts.npz`, matched against atlas `pixel_maps/` |
+| Measurement masks | Which genes were measured in each source dataset | Atlas `masks/` |
+
+Normal pretraining and downstream use load the stored DNA-derived identities and fitted positions automatically. They do not fit a new mapping, recompute DNA embeddings, or require a separate DNA-model download. Raw 1,920-dimensional DNA feature vectors are different from the frozen 256-dimensional model identity table; compatible raw vectors are needed only when explicitly registering new genes through the optional projection workflow.
+
+## Use your own H5AD for downstream applications
+
+Keep the model and `assets/` from `git lfs pull`. The converter reads the fitted native mapping from `--release`, aligns stable gene IDs to its vocabulary, and converts the measured expression panel automatically. The full Image Atlas is needed only when your workflow reads the pretraining collection.
 
 ```bash
-python examples/prepare_pretraining_batch.py --output prepared_views.pt \
-  --cells 2 --views 2 --keep-fraction 0.75 --seed 20261015
-python examples/pretrain.py --release . --batch prepared_views.pt \
-  --n-global 2 --steps 1 --device cpu --output continued_weights
+python "$CELLNET_RELEASE/examples/embed_h5ad.py" \
+  --release "$CELLNET_RELEASE" \
+  --input "/path/to/cells.h5ad" --output "/path/to/embeddings.npy" \
+  --species Human --input-scale counts --batch-size 8 --device cpu
 ```
 
-Each view independently masks measured genes while keeping image/mask/ID aligned. View index refers to the same cell. This demonstrates independent masked-view preparation for CellNet pretraining. The preparation command alone does not train the model. Full-size model optimization needs substantial memory and compute; choose the appropriate device for actual training. See [the minimal training documentation](../../docs/PRETRAINING.md).
+Set `--species` to the exact fitted namespace, such as `Human`, `Mouse`, `Zebrafish` or `Fruit_fly`. Use `--input-scale counts` for nonnegative counts; use `log1p` for expression already normalized to the model's 10,000-library-size, log1p scale. The default gene IDs come from `var_names`; `--gene-column` selects a stable-ID column, and `--layer-key` selects the expression layer. See [task examples](../../docs/TASK_EXAMPLES.md) for annotation, reference mapping, completion and other applications.
 
-## Recreate the figures
+For the released vocabulary, the native layout and frozen identities are loaded directly. The larger `layout_neighbors.ann` and related projection assets support registering compatible embeddings for new genes through `CellNetImageConverter.from_embeddings`; that is a separate optional workflow described in the [main README](../../README.md#apply-the-fitted-converter-to-new-genes-or-species).
+
+## Bundled example and figures
+
+`example/` contains eight cells each from Mouse, Zebrafish and Fruit_fly, extracted from an existing 100,000-cell training sample. It retains original float16 expression, six dataset-specific measured-gene layouts and source annotations. [FORMAT.md](FORMAT.md) documents both data formats; `dataset_card.json` and `example/cells.csv` describe the example's scope and provenance.
 
 ```bash
-pip install -e '.[visualization]'
-python examples/visualize_pretraining_data.py --output pretraining_figures
+python -m pip install -e "$CELLNET_RELEASE[visualization]"
+python "$CELLNET_RELEASE/examples/visualize_pretraining_data.py" \
+  --output "/path/to/pretraining_figures"
 ```
 
 ![Real stored expression images and measurement masks](figures/expression_and_masks.png)
 
-![Small example cohort diagnostics](figures/sample_summary.png)
+![Example cohort diagnostics](figures/sample_summary.png)
 
-The images show native pixel layouts, not microscopy. Gray expression pixels are unmeasured; measured zero is black. The plots use the stored normalized scale and do not infer raw counts or make model-performance claims. Measured/detected-gene counts refer only to genes represented in the model layout.
+The figures show transcriptome expression in native pixel layouts. Gray pixels are unmeasured; black measured pixels have zero expression. Counts of measured or detected genes refer to the represented layout.
 
-## Export native training shards
-
-The portable exporter accepts a native DataBank with the matching vocabulary/layouts, reads its large mask tables through memory mapping, and writes bounded NPZ shards plus streamed CSV metadata. It never modifies source files and refuses to overwrite an output directory. A manifest is written only after successful export.
-
-To reproduce the bundled cell selection from your existing 100,000-cell sample:
-
-```bash
-python examples/export_pretraining_data.py --source /path/to/100k_databank \
-  --output exported_examples --storage-classes \
-  class_536 class_537 class_1020 class_1035 class_146 class_170 \
-  --per-class 4 --shard-size 8
-```
-
-This produces the same 24 images/masks/IDs in three shards; per-shard layout indices differ from the single bundled shard. All 24 were checked for exact equality after loading. To export a future full matching DataBank, omit the class and per-class limits, choose a new output directory, and use e.g. `--shard-size 256`. After checking source provenance/terms and output integrity, its actual files can populate `full/`. Do not change the placeholder's status until the data are present and verified.
-
-## Full-data placeholder and upstream terms
-
-`full/metadata.json` deliberately has `status: not_included`, `samples: 0`, and `shards: []`; the loader raises an explicit error if asked to read it. Fill `full/shards/`, `full/cells.csv` and the manifest following [FORMAT.md](FORMAT.md) when the actual data are available.
-
-Original dataset identifiers are recorded in `example/cells.csv`. The 100,000-cell source pool and the 24-cell extraction are distinct datasets. No full-pretraining availability or accession is implied. Upstream datasets retain their own terms and attribution; the software Apache-2.0 license does not relicense these measurements. Individual dataset licenses have not yet been verified, so that check remains necessary before external distribution of third-party data.
+Upstream datasets retain their original terms and attribution. Consult the atlas's source information and the bundled example's dataset card when reusing data; the software license applies to CellNet code.

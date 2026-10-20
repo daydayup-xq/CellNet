@@ -27,11 +27,23 @@ python examples/run_all_tasks.py --device cpu --batch-size 2 --output example_ou
 
 构图时将表达值存为 float16，再转换为 float32 模型输入。五折补全输入中整折目标基因列均物理缺失，归一化只看可见计数，真值单独保存。
 
-## 预训练数据示例与完整数据预留位置
+## Image Atlas 下载目录与已拟合映射
 
-[预训练数据目录](datasets/pretraining/README.md) 已包含从 10 万采样库提取的 24 个真实细胞：小鼠、斑马鱼、果蝇各 8 个。表达数组逐值保留原始 float16 数值，附测量掩码、基因 ID、独立多视图批次生成代码与可视化 PNG/SVG。
+从 **[Image Atlas 下载入口](https://pan.baidu.com/s/1FuoHnEJN9FRvOBio5uutYQ?pwd=xabe)**（提取码：`xabe`）下载数据，将内容放入 `datasets/pretraining/full/`。下载后的 `metadata.json` 应直接位于 `full/` 下，与 `class_shards/`、`masks/`、`pixel_maps/` 和 `gene_vocab.json` 同级。保留发布包的相对目录结构，完整树形目录和校验方法见[下载说明](datasets/pretraining/README.md)。
 
-完整数据将放在 `datasets/pretraining/full/`，当前明确标记为尚未包含。示例位于 `example/`，两者使用相同格式和读取接口；来源、第三方许可核验状态与格式说明均随附。
+请保留下载包中的 `cell_sources.json.gz`。读取器会自动使用这份逐细胞来源索引，为合并的 CellxGene 数据选择正确的数据集测量掩码；无需修改原图或重新拟合基因映射。详情见[来源归属说明](datasets/pretraining/README.md#source-ownership-in-this-release)。
+
+模型权重和已拟合的基因到图像映射通过本仓库的 `git lfs pull` 下载。将 `assets/` 和 `weights/` 保存在同一发布目录中，并通过 `--release` 指定该目录；预训练读取器和下游转换器会自动复用这些固定资产，无需重新拟合映射。DNA 来源的冻结基因身份向量已包含在 `weights/cellnet.pt` 中；词表和像素映射负责将这些身份与表达图像对应起来。完整 Image Atlas 用于预训练，处理用户自己的 H5AD 时直接使用模型与映射资产即可。
+
+```bash
+# 改为本机克隆目录的绝对路径；后续命令可从任意工作目录执行。
+export CELLNET_RELEASE="/absolute/path/to/CellNet"
+git -C "$CELLNET_RELEASE" lfs pull
+python "$CELLNET_RELEASE/examples/verify_image_atlas.py" \
+  --release "$CELLNET_RELEASE" --data "$CELLNET_RELEASE/datasets/pretraining/full"
+```
+
+仓库还包含从 10 万采样库提取的 24 个真实细胞：小鼠、斑马鱼、果蝇各 8 个。示例位于 `datasets/pretraining/example/`，逐值保留原始 float16 表达，附测量掩码、基因 ID、独立多视图批次生成代码与可视化。`prepare_pretraining_batch.py` 优先使用已下载的 Image Atlas，否则使用这 24 个示例；也可用 `--data` 显式选择目录。
 
 ## 安装与使用
 
@@ -43,12 +55,13 @@ git clone https://github.com/daydayup-xq/CellNet.git
 cd CellNet
 git lfs pull
 pip install -e '.[h5ad]'
-python examples/embed_h5ad.py \
-  --release . --input cells.h5ad --output embeddings.npy \
+python "$CELLNET_RELEASE/examples/embed_h5ad.py" \
+  --release "$CELLNET_RELEASE" --input "/path/to/cells.h5ad" \
+  --output "/path/to/embeddings.npy" \
   --species Human --input-scale counts --device cpu
 ```
 
-基因标识使用物种对应的稳定 ID。已知物种直接应用原生布局，不需要重新拟合。`counts` 会按总量 10,000 归一化、取 `log1p`，再裁剪到 [0,6] 并除以 6。已完成相同归一化的数据使用 `log1p`。
+基因标识使用物种对应的稳定 ID，并通过 `--species` 指定确切物种名，如 `Human`、`Mouse`。转换器从 `--release` 下的 `assets/species_layouts.npz` 自动读取已拟合布局，从 `assets/gene_vocab.json` 对齐权重中的基因身份。`counts` 会按总量 10,000 归一化、取 `log1p`，再裁剪到 [0,6] 并除以 6。已完成相同归一化的数据使用 `log1p`。
 
 测到的零表达基因保留测量掩码和基因身份；未测量基因同时去掉表达、测量掩码和身份。基因补全时，应先移除隐藏目标再做输入归一化，并将真值单独保管；否则总量归一化本身也可能泄露隐藏目标的信息。
 
@@ -69,10 +82,11 @@ pip install -e '.[pretraining]'
 hf auth login
 hf download facebook/dinov3-vitb16-pretrain-lvd1689m model.safetensors \
   --local-dir ../pretrained_models/dinov3-vitb16
-python examples/prepare_pretraining_batch.py --output prepared_views.pt
-python examples/pretrain.py --release . --init dinov3 \
+python "$CELLNET_RELEASE/examples/prepare_pretraining_batch.py" \
+  --release "$CELLNET_RELEASE" --output "$CELLNET_RELEASE/prepared_views.pt"
+python "$CELLNET_RELEASE/examples/pretrain.py" --release "$CELLNET_RELEASE" --init dinov3 \
   --dinov3-weights ../pretrained_models/dinov3-vitb16/model.safetensors \
-  --batch prepared_views.pt --steps 1 --device cpu --output trained_weights
+  --batch "$CELLNET_RELEASE/prepared_views.pt" --steps 1 --device cpu --output trained_weights
 ```
 
 DINOv3 文件由用户单独下载，项目中不附带该权重。加载时迁移 Transformer 骨干、CLS 和 register tokens，重新初始化 CellNet 输入层、解码器及投影头，并使用项目提供的冻结基因身份表。已有 CellNet 模型的推理不需要另外下载 DINOv3。完整参数、兼容的 timm 权重入口和继续训练方法见[预训练说明](docs/PRETRAINING.md)。

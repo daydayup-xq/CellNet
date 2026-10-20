@@ -1,14 +1,9 @@
 {
-  "format": "cellnet-pretraining-npz-v1",
+  "format": "cellnet-image-atlas-native-v1",
   "status": "not_included",
-  "samples": 0,
   "image_size": [
     384,
     384
   ],
-  "shards": [],
-  "cells": "cells.csv",
-  "shared_vocabulary": "../../../assets/gene_vocab.json",
-  "shared_layouts": "../../../assets/species_layouts.npz",
-  "note": "Reserved for a future full pretraining data release. No full training samples are included."
+  "note": "Installation marker only. Replace this file with the downloaded Image Atlas metadata.json; see README.md."
 }
