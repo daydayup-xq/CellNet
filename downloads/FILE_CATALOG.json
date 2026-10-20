@@ -56,24 +56,25 @@
     },
     {
       "path": "DATASET_CARD.json",
-      "bytes": 1676,
-      "sha256": "e97ed85a2c2440600294d20e35fc93b2e88b2f5485fd35e121fa30274834a6e7"
+      "bytes": 2459,
+      "sha256": "3bacecbb19126f07a92a670c45ff388dcf0f5c80cd2de3aafa053a71a00aa86c"
     },
     {
       "path": "FULL_DATA_STATUS.json",
-      "bytes": 592,
-      "sha256": "dc4847da738b15fabbca9cd3bde7bfb5554fbe67bc414f9f3f44840d1b237521"
+      "bytes": 1363,
+      "sha256": "674edce60fecc902510ec9aca87096ba41ab1488afb8cba1aac71705752ad00b"
     },
     {
       "path": "README.md",
-      "bytes": 2166,
-      "sha256": "4a9c491631546f0ce1e3754c42bea4cc09b0d4c7ed3fb5943faa75b32d0805f2"
+      "bytes": 7810,
+      "sha256": "2433690b8fa650696d97d9c269ef76b572da60ec01e58d7598d30b57f703642a"
     },
     {
       "path": "README.zh-CN.md",
-      "bytes": 1940,
-      "sha256": "b54103e5373b93f6198dd0253b4212bc71ebd330a55a30c2e2cbdc887a07e3ea"
+      "bytes": 7289,
+      "sha256": "2729f8db0047caf7093c2681b6c396d3b14608aeca2f433bdad623ea804bdc31"
     }
   ],
-  "metadata_updated": "2026-10-18"
+  "metadata_updated": "2026-10-20",
+  "full_atlas_download_url": "https://pan.baidu.com/s/1FuoHnEJN9FRvOBio5uutYQ?pwd=xabe"
 }
