@@ -1,5 +1,13 @@
 # CellNet
 
+<p align="center">
+  <a href="https://daydayup-xq.github.io/CellNet/film/?v=7">
+    <img src="docs/assets/cellnet-overview.gif" alt="CellNet film: panoramic transcriptome modelling, at scale." width="800" />
+  </a>
+  <br />
+  <sub>CellNet in 31 seconds · <a href="https://daydayup-xq.github.io/CellNet/film/?v=7">Watch the full film ↗</a></sub>
+</p>
+
 [中文说明](README.zh-CN.md)
 
 Comprehensively characterizing cellular diversity is critical for understanding tissue development, identifying disease-associated populations and investigating gene programmes linked to specialized functions. Advances in single-cell profiling reveal additional cell-specific transcripts and molecular associations, yet many foundation models represent only a restricted portion of this increasingly rich molecular information. Here we present CellNet, which enables panoramic modelling of single-cell transcriptomes by integrating DNA-derived gene identities and measured RNA expression in a shared image representation. Pretrained on 231 million cell profiles spanning 40 species, CellNet improves rare-population and condition-associated state recognition in evaluated cohorts while retaining competitive general cell representations. It predicts withheld coding-gene expression and selected non-coding targets in total-RNA data, and recovers lineage-specific expression patterns in spatial measurements. Prediction also extends across species, including to targets without expression-pretraining exposure. Its gene representations retrieve known non-coding modules and developmental or neural programmes, including from sparsely detected RNA queries. Together, these results establish CellNet as a scalable framework for interpreting cellular diversity through increasingly comprehensive transcriptomic measurements.
