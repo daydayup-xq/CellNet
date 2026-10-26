@@ -1,5 +1,7 @@
 # CellNet
 
+[Project website](https://cellnet.top/) · [Paper (arXiv)](https://arxiv.org/abs/2610.21943)
+
 <p align="center">
   <a href="https://daydayup-xq.github.io/CellNet/film/?v=7">
     <img src="docs/assets/cellnet-overview.gif" alt="CellNet film: panoramic transcriptome modelling, at scale." width="800" />

@@ -1,5 +1,7 @@
 # CellNet
 
+[项目网站](https://cellnet.top/) · [论文（arXiv）](https://arxiv.org/abs/2610.21943)
+
 <p align="center">
   <a href="https://daydayup-xq.github.io/CellNet/film/?v=7">
     <img src="docs/assets/cellnet-overview.gif" alt="CellNet 宣传片：大规模转录组全景建模。" width="800" />
