@@ -24,11 +24,11 @@
 }
   </script>
   <link rel="icon" href="assets/cellnet-logo.png" type="image/png">
-  <link rel="preload" as="image" href="assets/illustrations/image-atlas-v3.webp">
+  <link rel="preload" as="image" href="assets/illustrations/hero-panorama-v1.webp">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="hero-resources.css">
+  <link rel="stylesheet" href="hero-resources.css?v=panorama-1">
   <link rel="stylesheet" href="film-entry.css?v=hero-film-1">
-  <script src="app.js?v=7" defer></script>
+  <script src="app.js?v=8" defer></script>
   <title>CellNet | Single-cell transcriptome foundation model</title>
 </head>
 <body>
@@ -52,6 +52,8 @@
   </header>
 
   <main id="main">
+    <div class="panorama-intro">
+      <div class="hero-background" aria-hidden="true"><img src="assets/illustrations/hero-panorama-v1.webp" width="1672" height="941" alt="" fetchpriority="high" decoding="async"></div>
     <section class="hero section-shell">
       <div class="hero-copy">
         <div class="eyebrow"><span class="status-dot"></span><span data-en="A foundation model for single-cell biology" data-zh="面向单细胞生物学的基础模型">A foundation model for single-cell biology</span></div>
@@ -67,6 +69,17 @@
           </a>
         </div>
       </div>
+    </section>
+
+    <section class="scale-band section-shell" aria-label="Pretraining collection">
+      <p class="scale-intro"><span data-en="Built for" data-zh="面向">Built for</span><br><strong data-en="biology at scale." data-zh="大规模生物学探索。">biology at scale.</strong><small data-en="Pretraining collection" data-zh="预训练数据规模">Pretraining collection</small></p>
+      <div class="scale-stat"><strong>231<span>M</span></strong><span data-en="cell profiles" data-zh="细胞表达谱">cell profiles</span></div>
+      <div class="scale-stat"><strong>40</strong><span data-en="species" data-zh="物种">species</span></div>
+      <div class="scale-stat"><strong>1.01<span>M</span></strong><span data-en="gene identities" data-zh="基因身份">gene identities</span></div>
+    </section>
+    </div>
+
+    <section class="resource-overview section-shell" aria-label="Image Atlas and Foundation Model">
       <div class="hero-resource-stack" aria-label="Image Atlas and Foundation Model resources">
         <article class="hero-resource atlas-resource" aria-labelledby="hero-atlas-title">
           <div class="hero-resource-copy">
@@ -76,7 +89,7 @@
             <a class="hero-resource-link" href="#gallery"><span data-en="Explore real images" data-zh="探索真实图像">Explore real images</span><span aria-hidden="true">↗</span></a>
             <a class="hero-resource-secondary" href="#image-atlas" data-en="Full Image Atlas · available" data-zh="完整图谱 · 已开放">Full Image Atlas · available</a>
           </div>
-          <a class="hero-resource-figure" href="assets/illustrations/image-atlas-v3.webp" target="_blank" rel="noopener noreferrer" aria-label="Open Image Atlas conceptual illustration"><img src="assets/illustrations/image-atlas-v3.webp" width="1672" height="941" fetchpriority="high" alt="Conceptual Image Atlas illustration of organized gene-image tiles"></a>
+          <a class="hero-resource-figure" href="assets/illustrations/image-atlas-v3.webp" target="_blank" rel="noopener noreferrer" aria-label="Open Image Atlas conceptual illustration"><img src="assets/illustrations/image-atlas-v3.webp" width="1672" height="941" loading="lazy" decoding="async" alt="Conceptual Image Atlas illustration of organized gene-image tiles"></a>
         </article>
         <article class="hero-resource model-resource" aria-labelledby="hero-model-title">
           <div class="hero-resource-copy">
@@ -85,17 +98,10 @@
             <p data-en="DNA-informed coding and non-coding genes, in one panoramic cell context." data-zh="DNA 来源的基因身份，让编码与非编码基因共享全景细胞上下文。">DNA-informed coding and non-coding genes, in one panoramic cell context.</p>
             <a class="hero-resource-link" href="https://github.com/daydayup-xq/CellNet/tree/main/weights" target="_blank" rel="noopener noreferrer"><span data-en="Model & weights" data-zh="模型与权重">Model & weights</span><span aria-hidden="true">↗</span></a>
           </div>
-          <a class="hero-resource-figure" href="assets/illustrations/foundation-model-v4.webp" target="_blank" rel="noopener noreferrer" aria-label="Open CellNet Foundation Model conceptual illustration"><img src="assets/illustrations/foundation-model-v4.webp" width="1672" height="941" alt="CellNet conceptual schematic: DNA-derived gene identity and coding/non-coding expression form a panoramic gene image, which feeds a contextual encoder and gene-conditioned prediction"></a>
+          <a class="hero-resource-figure" href="assets/illustrations/foundation-model-v4.webp" target="_blank" rel="noopener noreferrer" aria-label="Open CellNet Foundation Model conceptual illustration"><img src="assets/illustrations/foundation-model-v4.webp" width="1672" height="941" loading="lazy" decoding="async" alt="CellNet conceptual schematic: DNA-derived gene identity and coding/non-coding expression form a panoramic gene image, which feeds a contextual encoder and gene-conditioned prediction"></a>
         </article>
         <span class="hero-illustration-note" data-en="Conceptual illustrations" data-zh="概念示意图">Conceptual illustrations</span>
       </div>
-    </section>
-
-    <section class="scale-band section-shell" aria-label="Pretraining collection">
-      <p class="scale-intro"><span data-en="Built for" data-zh="面向">Built for</span><br><strong data-en="biology at scale." data-zh="大规模生物学探索。">biology at scale.</strong><small data-en="Pretraining collection" data-zh="预训练数据规模">Pretraining collection</small></p>
-      <div class="scale-stat"><strong>231<span>M</span></strong><span data-en="cell profiles" data-zh="细胞表达谱">cell profiles</span></div>
-      <div class="scale-stat"><strong>40</strong><span data-en="species" data-zh="物种">species</span></div>
-      <div class="scale-stat"><strong>1.01<span>M</span></strong><span data-en="gene identities" data-zh="基因身份">gene identities</span></div>
     </section>
 
     <section class="method-section section-shell" id="method">
