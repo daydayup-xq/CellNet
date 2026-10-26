@@ -76,9 +76,9 @@
   border-radius: 8px;
   background: #edf4ee;
 }
-.hero-resource-copy { min-width: 0; padding: 28px 0 28px 26px; position: relative; z-index: 1; }
+.hero-resource-copy { align-self: stretch; min-width: 0; padding: 28px 0 28px 26px; position: relative; z-index: 1; }
 .hero-resource-index { display: block; color: #6d8b7e; font-size: 8px; line-height: 1.5; letter-spacing: 1.1px; margin-bottom: 16px; }
-.hero-resource h2 { font-size: 28px; font-weight: 500; line-height: 1.16; letter-spacing: -.8px; margin: 0 0 15px; }
+.hero-resource h2 { font-size: 26px; font-weight: 500; line-height: 1.16; letter-spacing: -.8px; margin: 0 0 15px; }
 .hero-resource h2 a:hover { color: var(--teal); }
 .hero-resource h2 a > span { font-size: 13px; font-weight: 400; vertical-align: middle; margin-left: 4px; }
 .hero-resource-copy > p { color: #627a70; font-size: 12px; line-height: 1.8; margin-bottom: 22px; max-width: 260px; }
