@@ -13,6 +13,9 @@
   padding-bottom: 32px;
 }
 .hero-background {
+  --hero-fade-top: 110px;
+  --hero-fade-bottom: clamp(190px, 19vw, 280px);
+  --hero-fade-side: clamp(42px, 6vw, 110px);
   position: absolute;
   inset: -90px 0 0;
   z-index: -1;
@@ -25,8 +28,12 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgb(250 251 248 / 58%), rgb(250 251 248 / 22%) 36%, transparent 58%),
-    linear-gradient(0deg, #fafbf8, rgb(250 251 248 / 5%) 34%, transparent 70%);
+  background:
+    linear-gradient(180deg, var(--paper) 0%, rgb(250 251 248 / 90%) 20%, rgb(250 251 248 / 50%) 48%, rgb(250 251 248 / 12%) 76%, rgb(250 251 248 / 0%) 100%) top / 100% var(--hero-fade-top) no-repeat,
+    linear-gradient(0deg, var(--paper) 0%, rgb(250 251 248 / 98%) 18%, rgb(250 251 248 / 76%) 40%, rgb(250 251 248 / 32%) 65%, rgb(250 251 248 / 6%) 86%, rgb(250 251 248 / 0%) 100%) bottom / 100% var(--hero-fade-bottom) no-repeat,
+    linear-gradient(90deg, var(--paper) 0%, rgb(250 251 248 / 75%) 25%, rgb(250 251 248 / 22%) 65%, rgb(250 251 248 / 0%) 100%) left / var(--hero-fade-side) 100% no-repeat,
+    linear-gradient(270deg, var(--paper) 0%, rgb(250 251 248 / 75%) 25%, rgb(250 251 248 / 22%) 65%, rgb(250 251 248 / 0%) 100%) right / var(--hero-fade-side) 100% no-repeat;
+  box-shadow: inset 0 -2px 0 var(--paper);
 }
 .hero {
   display: flex;
@@ -53,7 +60,7 @@
   z-index: 1;
   padding-block: 24px 26px;
   border-color: rgb(20 51 59 / 14%);
-  background: rgb(250 251 248 / 28%);
+  background: rgb(250 251 248 / 90%);
 }
 .panorama-intro .scale-stat strong { font-size: 44px; }
 .resource-overview { padding-top: 42px; }
@@ -100,7 +107,6 @@ html[lang="zh-CN"] .hero h1 { font-size: clamp(44px, 4.4vw, 70px); line-height: 
   .hero h1 { font-size: clamp(43px, 5.3vw, 57px); }
   .hero-description { font-size: 14px; }
   .hero .eyebrow { font-size: 8px; letter-spacing: 1px; }
-  .hero-background::after { background: linear-gradient(90deg, rgb(250 251 248 / 85%), rgb(250 251 248 / 35%) 47%, transparent 78%), linear-gradient(0deg, #fafbf8, transparent 45%); }
   .hero-resource { grid-template-columns: 1fr; grid-template-rows: 1fr auto; min-height: 0; align-items: stretch; }
   .hero-resource-copy { padding: 26px 26px 0; }
   .hero-resource-copy > p { max-width: none; }
@@ -117,9 +123,14 @@ html[lang="zh-CN"] .hero h1 { font-size: clamp(44px, 4.4vw, 70px); line-height: 
   .hero-description { max-width: 490px; font-size: 14px; }
   .hero .eyebrow { font-size: 7px; letter-spacing: 1px; }
   .hero .film-entry { margin-top: 28px; max-width: 440px; }
-  .hero-background { inset: 360px 0 0; }
-  .hero-background img { object-fit: cover; object-position: 69% center; }
-  .hero-background::after { background: linear-gradient(180deg, #fafbf8, rgb(250 251 248 / 5%) 33%, rgb(250 251 248 / 5%) 53%, #fafbf8 96%); }
+  .hero .film-entry-link { background: rgb(250 251 248 / 94%); }
+  .hero-background {
+    --hero-fade-top: 150px;
+    --hero-fade-bottom: 145px;
+    --hero-fade-side: 28px;
+    inset: 360px 0 0;
+  }
+  .hero-background img { object-fit: cover; object-position: 78% center; }
   .panorama-intro { padding-bottom: 24px; }
   .panorama-intro .scale-band { padding-block: 20px; }
   .panorama-intro .scale-stat strong { font-size: 36px; }

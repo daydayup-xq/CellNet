@@ -23,10 +23,10 @@
   "description": "Panoramic modelling of single-cell transcriptomes with DNA-derived gene identities and measured RNA expression."
 }
   </script>
-  <link rel="icon" href="assets/cellnet-logo.png" type="image/png">
-  <link rel="preload" as="image" href="assets/illustrations/hero-panorama-v3.webp">
+  <link rel="icon" href="assets/cellnet-logo-transparent.png" type="image/png">
+  <link rel="preload" as="image" href="assets/illustrations/hero-panorama-v7.webp">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="hero-resources.css?v=panorama-4">
+  <link rel="stylesheet" href="hero-resources.css?v=panorama-8">
   <link rel="stylesheet" href="film-entry.css?v=hero-film-1">
   <script src="app.js?v=8" defer></script>
   <title>CellNet | Single-cell transcriptome foundation model</title>
@@ -34,7 +34,7 @@
 <body>
   <a class="skip-link" href="#main" data-en="Skip to content" data-zh="跳至正文">Skip to content</a>
   <header class="site-header">
-    <a class="brand" href="#" aria-label="CellNet home"><img src="assets/cellnet-logo.png" width="1942" height="809" alt="CellNet"></a>
+    <a class="brand" href="#" aria-label="CellNet home"><img src="assets/cellnet-logo-transparent.png" width="1944" height="809" alt="CellNet"></a>
     <nav class="desktop-nav" aria-label="Main navigation">
       <a href="#method" data-en="The method" data-zh="方法">The method</a>
       <a href="#gallery" data-en="Image Atlas" data-zh="图像画廊">Image Atlas</a>
@@ -53,7 +53,7 @@
 
   <main id="main">
     <div class="panorama-intro">
-      <div class="hero-background" aria-hidden="true"><img src="assets/illustrations/hero-panorama-v3.webp" width="1672" height="941" alt="" fetchpriority="high" decoding="async"></div>
+      <div class="hero-background" aria-hidden="true"><img src="assets/illustrations/hero-panorama-v7.webp" width="1672" height="941" alt="" fetchpriority="high" decoding="async"></div>
     <section class="hero section-shell">
       <div class="hero-copy">
         <div class="eyebrow"><span class="status-dot"></span><span data-en="A foundation model for single-cell biology" data-zh="面向单细胞生物学的基础模型">A foundation model for single-cell biology</span></div>
@@ -161,7 +161,7 @@ pip install -e '.[h5ad]'</code></pre></div></div>
     <section class="paper-section section-shell"><div><span class="eyebrow" data-en="THE WORK BEHIND THE MODEL" data-zh="模型背后的研究">THE WORK BEHIND THE MODEL</span><h2 data-en="Panoramic modelling of single-cell transcriptomes at scale with CellNet" data-zh="CellNet：大规模单细胞转录组的全景建模">Panoramic modelling of single-cell transcriptomes at scale with CellNet</h2><p class="authors">Xiaoqing Lian*, Pei Liu*, Jiahui Tan, Luoda Tan, Chaoyi Li, Quan Zou, Chen Lin, Xiangxiang Zeng</p><p class="paper-note" data-en="* Equal contribution · arXiv:2610.21943" data-zh="* 同等贡献 · arXiv:2610.21943">* Equal contribution · arXiv:2610.21943</p></div><div class="paper-links"><a class="button primary" href="paper/"><span data-en="Read the paper" data-zh="阅读论文">Read the paper</span> ↗</a><a class="text-link" href="https://arxiv.org/abs/2610.21943" target="_blank" rel="noopener noreferrer">arXiv preprint ↗</a><a class="button outline" href="assets/figures/figure-1.pdf" target="_blank" rel="noopener noreferrer"><span data-en="View the method figure" data-zh="查看方法总览图">View the method figure</span> ↗</a><a class="text-link" href="https://github.com/daydayup-xq/CellNet/blob/main/docs/FIGURE_PROTOCOLS.md" target="_blank" rel="noopener noreferrer"><span data-en="Methods & evaluation" data-zh="方法与评测说明">Methods & evaluation</span> ↗</a></div></section>
     <div class="institutions section-shell"><span>Hunan University</span><span>University of Electronic Science and Technology of China</span><span>Xiamen University</span><span>Yuelushan Laboratory</span></div>
   </main>
-  <footer class="site-footer section-shell"><a class="brand footer-brand" href="#" aria-label="CellNet home"><img src="assets/cellnet-logo.png" alt="CellNet" width="1942" height="809" loading="lazy"></a><span data-en="Panoramic transcriptome modelling." data-zh="转录组的全景建模。">Panoramic transcriptome modelling.</span><div><a href="https://github.com/daydayup-xq/CellNet" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="downloads/README.md" target="_blank" data-en="Data guide ↗" data-zh="数据指南 ↗">Data guide ↗</a><span>© 2026 CellNet</span></div></footer>
+  <footer class="site-footer section-shell"><a class="brand footer-brand" href="#" aria-label="CellNet home"><img src="assets/cellnet-logo-transparent.png" alt="CellNet" width="1944" height="809" loading="lazy"></a><span data-en="Panoramic transcriptome modelling." data-zh="转录组的全景建模。">Panoramic transcriptome modelling.</span><div><a href="https://github.com/daydayup-xq/CellNet" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="downloads/README.md" target="_blank" data-en="Data guide ↗" data-zh="数据指南 ↗">Data guide ↗</a><span>© 2026 CellNet</span></div></footer>
   <dialog id="cell-dialog" class="cell-dialog" aria-labelledby="dialog-title"><div class="dialog-header"><div><span class="mini-label" data-en="REAL TRANSCRIPTOME IMAGE" data-zh="真实转录组图像">REAL TRANSCRIPTOME IMAGE</span><h2 id="dialog-title"></h2></div><button type="button" id="dialog-close" class="dialog-close" aria-label="Close image details">×</button></div><div class="dialog-images"><figure><img id="dialog-expression" alt="Selected cell expression image" width="384" height="384"><figcaption data-en="Expression · native gene layout" data-zh="表达量 · 原始基因布局">Expression · native gene layout</figcaption></figure><figure><img id="dialog-mask" alt="Selected cell measurement mask" width="384" height="384"><figcaption data-en="Measurement mask · measured genes in gold" data-zh="测量掩码 · 金色代表已测量基因">Measurement mask · measured genes in gold</figcaption></figure></div><div id="dialog-metadata" class="dialog-metadata"></div><div class="dialog-controls"><label><input type="checkbox" id="linear-toggle"><span data-en="Original linear display (gamma 1)" data-zh="原始线性显示（伽马 1）">Original linear display (gamma 1)</span></label><a id="dialog-download" download data-en="Download displayed image ↓" data-zh="下载当前图像 ↓">Download displayed image ↓</a></div><p class="dialog-note" data-en="Saved transcriptome images use the native gene layout. Switch between the expression display (gamma 0.25) and original linear display (gamma 1)." data-zh="转录组图像使用原始基因布局。表达图的显示伽马为 0.25，可切换至原始线性显示（伽马 1）。">Saved transcriptome images use the native gene layout. Switch between the expression display (gamma 0.25) and original linear display (gamma 1).</p></dialog>
   <div class="toast" id="toast" role="status" hidden></div>
 </body>
