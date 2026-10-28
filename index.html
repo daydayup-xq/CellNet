@@ -9,7 +9,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="CellNet | Single-cell transcriptome foundation model">
   <meta property="og:site_name" content="CellNet">
-  <meta property="og:description" content="DNA-informed images. Panoramic transcriptome modelling. Explore CellNet and its open research resources.">
+  <meta property="og:description" content="CellNet is a foundation model for panoramic single-cell transcriptome modelling, pretrained on 231 million cell profiles across 40 species.">
   <meta property="og:image" content="https://cellnet.top/assets/cellnet-logo.png">
   <meta property="og:url" content="https://cellnet.top/">
   <meta name="twitter:card" content="summary_large_image">
@@ -20,15 +20,32 @@
   "@id": "https://cellnet.top/#website",
   "url": "https://cellnet.top/",
   "name": "CellNet",
-  "description": "Panoramic modelling of single-cell transcriptomes with DNA-derived gene identities and measured RNA expression."
+  "alternateName": "cellnet.top",
+  "description": "CellNet is a foundation model for panoramic single-cell transcriptome modelling with DNA-derived gene identities and measured RNA expression.",
+  "about": {
+    "@type": "SoftwareSourceCode",
+    "@id": "https://cellnet.top/#cellnet",
+    "name": "CellNet",
+    "description": "A foundation model for panoramic single-cell transcriptome modelling, pretrained on 231 million cell profiles across 40 species.",
+    "codeRepository": "https://github.com/daydayup-xq/CellNet",
+    "programmingLanguage": "Python",
+    "license": "https://github.com/daydayup-xq/CellNet/blob/main/LICENSE",
+    "subjectOf": {
+      "@type": "ScholarlyArticle",
+      "@id": "https://cellnet.top/paper/#article",
+      "headline": "Panoramic modelling of single-cell transcriptomes at scale with CellNet",
+      "url": "https://cellnet.top/paper/",
+      "sameAs": "https://arxiv.org/abs/2610.21943"
+    }
+  }
 }
   </script>
   <link rel="icon" href="assets/cellnet-logo-transparent.png" type="image/png">
   <link rel="preload" as="image" href="assets/illustrations/hero-panorama-v7.webp">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="hero-resources.css?v=panorama-8">
+  <link rel="stylesheet" href="hero-resources.css?v=research-entry-1">
   <link rel="stylesheet" href="film-entry.css?v=hero-film-1">
-  <script src="app.js?v=8" defer></script>
+  <script src="app.js?v=9" defer></script>
   <title>CellNet | Single-cell transcriptome foundation model</title>
 </head>
 <body>
@@ -36,6 +53,7 @@
   <header class="site-header">
     <a class="brand" href="#" aria-label="CellNet home"><img src="assets/cellnet-logo-transparent.png" width="1944" height="809" alt="CellNet"></a>
     <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="paper/" data-en="Paper" data-zh="论文">Paper</a>
       <a href="#method" data-en="The method" data-zh="方法">The method</a>
       <a href="#gallery" data-en="Image Atlas" data-zh="图像画廊">Image Atlas</a>
       <a href="#research" data-en="Research" data-zh="研究">Research</a>
@@ -47,6 +65,7 @@
       <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation"><span></span><span></span></button>
     </div>
     <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
+      <a href="paper/" data-en="Paper" data-zh="论文">Paper</a>
       <a href="#method" data-en="The method" data-zh="方法">The method</a><a href="#gallery" data-en="Image Atlas" data-zh="图像画廊">Image Atlas</a><a href="#research" data-en="Research" data-zh="研究">Research</a><a href="#resources" data-en="Resources" data-zh="资源">Resources</a>
     </nav>
   </header>
@@ -58,7 +77,11 @@
       <div class="hero-copy">
         <div class="eyebrow"><span class="status-dot"></span><span data-en="A foundation model for single-cell biology" data-zh="面向单细胞生物学的基础模型">A foundation model for single-cell biology</span></div>
         <h1><span class="hero-model-name">CellNet:</span> <span data-en="A panoramic view" data-zh="以全景视角，">A panoramic view</span><br><em data-en="of the cell" data-zh="看见细胞。">of the cell</em></h1>
-        <p class="hero-description" data-en="DNA-informed images. Panoramic transcriptome modelling. CellNet brings gene identity and RNA expression together to connect cellular diversity with molecular detail." data-zh="以 DNA 为引，以图像为窗。CellNet 将基因身份与 RNA 表达融入统一表征，连接细胞多样性与分子细节。">DNA-informed images. Panoramic transcriptome modelling. CellNet brings gene identity and RNA expression together to connect cellular diversity with molecular detail.</p>
+        <p class="hero-description" data-en="CellNet is a foundation model for panoramic single-cell transcriptome modelling. It brings DNA-derived gene identities and measured RNA expression into one cellular context." data-zh="CellNet 是面向全景单细胞转录组建模的基础模型，将 DNA 来源的基因身份与实测 RNA 表达融入统一表征，连接细胞多样性与分子细节。">CellNet is a foundation model for panoramic single-cell transcriptome modelling. It brings DNA-derived gene identities and measured RNA expression into one cellular context.</p>
+        <div class="hero-ctas">
+          <a class="button primary" href="paper/"><span data-en="Read the paper" data-zh="阅读论文">Read the paper</span><span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://github.com/daydayup-xq/CellNet" target="_blank" rel="noopener noreferrer"><span data-en="Code & model" data-zh="代码与模型">Code &amp; model</span><span aria-hidden="true">↗</span></a>
+        </div>
         <div class="film-entry">
           <a class="film-entry-link" href="film/?autoplay=1&amp;v=7" data-film-link>
             <div class="film-entry-preview"><img src="film/poster.jpg?v=7" width="1920" height="1080" alt="CellNet research film"><span aria-hidden="true">▶</span></div>

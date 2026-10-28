@@ -20,7 +20,7 @@
     button.setAttribute('aria-label',language === 'zh' ? 'Switch to English' : '切换至中文');
     document.getElementById('menu-button').setAttribute('aria-label', t('Toggle navigation','展开或收起导航'));
     document.getElementById('dialog-close').setAttribute('aria-label', t('Close image details','关闭图像详情'));
-    document.title = t('CellNet | Single-cell transcriptome foundation model','CellNet: 单细胞转录组的全景视角');
+    document.title = t('CellNet | Single-cell transcriptome foundation model','CellNet | 单细胞转录组基础模型');
     if(cells.length) renderGallery();
     if(currentCell) updateDialog();
   }

@@ -51,8 +51,11 @@
 }
 .hero-model-name { display: block; line-height: 1.08; margin-bottom: 8px; font-weight: 550; }
 .hero-description { max-width: 460px; line-height: 1.85; color: #5b7278; }
+.hero .hero-ctas { margin-top: 22px; gap: 24px; flex-wrap: wrap; }
+.hero .hero-ctas .button { gap: 18px; }
+.hero .hero-ctas .text-link { gap: 12px; }
 .hero .eyebrow { font-size: 9px; letter-spacing: 1.7px; }
-.hero .film-entry { max-width: 470px; margin-top: 34px; }
+.hero .film-entry { max-width: 470px; margin-top: 24px; }
 .hero .film-entry-link { background: rgb(250 251 248 / 64%); backdrop-filter: none; border-color: #cfdfdc; }
 .hero .film-entry-link:hover { background: rgb(244 250 246 / 90%); border-color: #89b7ab; }
 .panorama-intro .scale-band {
